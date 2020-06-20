@@ -2,3 +2,7 @@
 
 /genetic
 /spatial
+
+## ignore files
+.DS_Store
+.Rhistory

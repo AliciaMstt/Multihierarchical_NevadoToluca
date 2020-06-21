@@ -129,7 +129,16 @@ Ppoints<-read.delim("../spatial/surveyed_mountainNevadoToluca.csv", header = TRU
 
 #plot
 plot(x, col=c("grey"),  legend=FALSE, xaxt='n', yaxt='n')
-points(Ppoints[,5], Ppoints[,6], col="black", cex=0.3)
+points(Ppoints[,5], Ppoints[,6], col="darkgreen", cex=0.3)
+
+## pseudo legend
+x<- rep(1,8)
+y<- seq(.1,8)
+plot(x,y, pch=22, cex=8, main= "Conductance",
+     bg= c("white", "grey90", "grey80", "grey70", "grey50", "grey30", "grey10", "black"),
+     xaxt='n', yaxt='n', xlab='', ylab='', bty='n')
+text(x=1.1, y=y, cex=2,
+     labels=c("0", "0.1", "0.2", "0.3", "0.5", "0.7", "0.9", "1"))
 
 
 

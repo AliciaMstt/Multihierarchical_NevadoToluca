@@ -59,7 +59,7 @@ xa
 plot(xa)
 plot(xa, col=c("grey", "black"), legend=FALSE, xaxt='n', yaxt='n')
 
-writeRaster(xa, filename="../spatial/Elevation/rcl_Alt_A.tif", format="GTiff", overwrite=TRUE)
+# save new raster
 writeRaster(xa, filename="../spatial/Elevation/rcl_Alt_A.asc", format="ascii", overwrite=TRUE)
 
 
@@ -80,7 +80,7 @@ plot(xb)
 plot(xb, col=c("grey", "black"), legend=FALSE, xaxt='n', yaxt='n')
 
 
-writeRaster(xb, filename="../spatial/Elevation/rcl_Alt_B.tif", format="GTiff", overwrite=TRUE)
+# save new raster
 writeRaster(xb, filename="../spatial/Elevation/rcl_Alt_B.asc", format="ascii", overwrite=TRUE)
 
 
@@ -104,7 +104,8 @@ rcl_S_A
 x_SA<-reclassify(myrasterS,  rcl=rcl_S_A, include.lowest=FALSE, right=FALSE)
 x_SA
 plot(x_SA)
-writeRaster(x_SA, filename="../spatial/Slope/rcl_S_A.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(x_SA, filename="../spatial/Slope/rcl_S_A.asc", format="ascii", overwrite=TRUE)
 
 
@@ -120,7 +121,8 @@ rcl_S_B
 x_SB<-reclassify(myrasterS,  rcl=rcl_S_B, include.lowest=FALSE, right=FALSE)
 x_SB
 plot(x_SB)
-writeRaster(x_SB, filename="../spatial/Slope/rcl_S_B.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(x_SB, filename="../spatial/Slope/rcl_S_B.asc", format="ascii", overwrite=TRUE)
 
 #############Raster Slope Hipotesis "C"######################
@@ -135,7 +137,8 @@ rcl_S_C
 x_SC<-reclassify(myrasterS,  rcl=rcl_S_C, include.lowest=FALSE, right=FALSE)
 x_SC
 plot(x_SC)
-writeRaster(x_SC, filename="../spatial/Slope/rcl_S_C.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(x_SC, filename="../spatial/Slope/rcl_S_C.asc", format="ascii", overwrite=TRUE)
 
 ##############3Raster Slope Hipotesis "D"#######################
@@ -150,7 +153,8 @@ rcl_S_D
 x_SD<-reclassify(myrasterS,  rcl=rcl_S_D, include.lowest=FALSE, right=FALSE)
 x_SD
 plot(x_SD)
-writeRaster(x_SD, filename="../spatial/Slope/rcl_S_D.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(x_SD, filename="../spatial/Slope/rcl_S_D.asc", format="ascii", overwrite=TRUE)
 
 ######################################################################
@@ -177,7 +181,8 @@ rclA
 xVA<-reclassify(myrasterVT,  rcl=rclA, include.lowest=FALSE, right=FALSE)
 xVA
 plot(xVA)
-writeRaster(xVA, filename="../spatial/VegetationType/rcl_A_G_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVA, filename="../spatial/VegetationType/rcl_A_G_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -194,7 +199,8 @@ rclB
 xVB<-reclassify(myrasterVT,  rcl=rclB, include.lowest=FALSE, right=FALSE)
 xVB
 plot(xVB)
-writeRaster(xVB, filename="../spatial/VegetationType/rcl_B_D_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVB, filename="../spatial/VegetationType/rcl_B_D_3.asc", format="ascii", overwrite=TRUE)
 
 ###########Vegetation Hipotesis "C"##########
@@ -211,7 +217,8 @@ rclC
 xVC<-reclassify(myrasterVT,  rcl=rclC, include.lowest=FALSE, right=FALSE)
 xVC
 plot(xVC)
-writeRaster(xVC, filename="../spatial/VegetationType/rcl_C_C_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVC, filename="../spatial/VegetationType/rcl_C_C_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -229,7 +236,8 @@ rclD
 xVD<-reclassify(myrasterVT,  rcl=rclD, include.lowest=FALSE, right=FALSE)
 xVD
 plot(xVD)
-writeRaster(xVD, filename="../spatial/VegetationType/rcl_D_A_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVD, filename="../spatial/VegetationType/rcl_D_A_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -247,7 +255,8 @@ rclE
 xVE<-reclassify(myrasterVT,  rcl=rclE, include.lowest=FALSE, right=FALSE)
 xVE
 plot(xVE)
-writeRaster(xVE, filename="../spatial/VegetationType/rcl_E_B_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVE, filename="../spatial/VegetationType/rcl_E_B_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -264,7 +273,8 @@ rclF
 xVF<-reclassify(myrasterVT,  rcl=rclF, include.lowest=FALSE, right=FALSE)
 xVF
 plot(xVF)
-writeRaster(xVF, filename="../spatial/VegetationType/rcl_F_E_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVF, filename="../spatial/VegetationType/rcl_F_E_3.asc", format="ascii", overwrite=TRUE)
 
 ###########Vegetation Hipotesis "G"##########
@@ -281,7 +291,8 @@ rclG
 xVG<-reclassify(myrasterVT,  rcl=rclG, include.lowest=FALSE, right=FALSE)
 xVG
 plot(xVG)
-writeRaster(xVG, filename="../spatial/VegetationType/rcl_G_F_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVG, filename="../spatial/VegetationType/rcl_G_F_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -299,7 +310,8 @@ rclH
 xVH<-reclassify(myrasterVT,  rcl=rclH, include.lowest=FALSE, right=FALSE)
 xVH
 plot(xVH)
-writeRaster(xVH, filename="../spatial/VegetationType/rcl_H_H_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVH, filename="../spatial/VegetationType/rcl_H_H_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -317,7 +329,8 @@ rclI
 xVI<-reclassify(myrasterVT,  rcl=rclI, include.lowest=FALSE, right=FALSE)
 xVI
 plot(xVI)
-writeRaster(xVI, filename="../spatial/VegetationType/rcl_I_I_3.tif", format="GTiff", overwrite=TRUE)
+
+# save new raster
 writeRaster(xVI, filename="../spatial/VegetationType/rcl_I_I_3.asc", format="ascii", overwrite=TRUE)
 
 

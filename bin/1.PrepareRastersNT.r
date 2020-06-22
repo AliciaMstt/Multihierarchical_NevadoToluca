@@ -8,14 +8,14 @@ library(rgdal)
 
 
 ##### Create "flat" landscape #####
-source("../bin/create_Flat.R")
+source("create_Flat.R")
 
 create_Flat(inraster="../spatial/Elevation/NevTol_Alt.tif",
             outname="../spatial/Elevation/NevTol_Alt_flat.asc")
 
 ##### Reclassify models  #####
 # so that non suitable habitat is set to NotS and suitable habitat to 1
-source("../bin/reclass4circuit.R")
+source("reclass4circuit.R")
 datafolder="../spatial/SDM/out"
 
 
@@ -27,7 +27,7 @@ datafolder="../spatial/Elevation"
 
 # define in data and function
 inraster=paste0(datafolder, "/NevTol_Alt.tif")
-source("../bin/reclassElev4circuit.R")
+source("reclassElev4circuit.R")
 
 ## Do reclassification for several elevations
 

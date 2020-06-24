@@ -60,6 +60,7 @@ plot(xa)
 plot(xa, col=c("grey", "black"), legend=FALSE, xaxt='n', yaxt='n')
 
 # save new raster
+writeRaster(xa, filename="../spatial/Elevation/rcl_Alt_A.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xa, filename="../spatial/Elevation/rcl_Alt_A.asc", format="ascii", overwrite=TRUE)
 
 
@@ -81,6 +82,7 @@ plot(xb, col=c("grey", "black"), legend=FALSE, xaxt='n', yaxt='n')
 
 
 # save new raster
+writeRaster(xb, filename="../spatial/Elevation/rcl_Alt_B.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xb, filename="../spatial/Elevation/rcl_Alt_B.asc", format="ascii", overwrite=TRUE)
 
 
@@ -106,6 +108,7 @@ x_SA
 plot(x_SA)
 
 # save new raster
+writeRaster(x_SA, filename="../spatial/Slope/rcl_S_A.tif", format="GTiff", overwrite=TRUE)
 writeRaster(x_SA, filename="../spatial/Slope/rcl_S_A.asc", format="ascii", overwrite=TRUE)
 
 
@@ -123,6 +126,7 @@ x_SB
 plot(x_SB)
 
 # save new raster
+writeRaster(x_SB, filename="../spatial/Slope/rcl_S_B.tif", format="GTiff", overwrite=TRUE)
 writeRaster(x_SB, filename="../spatial/Slope/rcl_S_B.asc", format="ascii", overwrite=TRUE)
 
 #############Raster Slope Hipotesis "C"######################
@@ -139,6 +143,7 @@ x_SC
 plot(x_SC)
 
 # save new raster
+writeRaster(x_SC, filename="../spatial/Slope/rcl_S_C.tif", format="GTiff", overwrite=TRUE)
 writeRaster(x_SC, filename="../spatial/Slope/rcl_S_C.asc", format="ascii", overwrite=TRUE)
 
 ##############3Raster Slope Hipotesis "D"#######################
@@ -155,6 +160,7 @@ x_SD
 plot(x_SD)
 
 # save new raster
+writeRaster(x_SD, filename="../spatial/Slope/rcl_S_D.tif", format="GTiff", overwrite=TRUE)
 writeRaster(x_SD, filename="../spatial/Slope/rcl_S_D.asc", format="ascii", overwrite=TRUE)
 
 ######################################################################
@@ -183,6 +189,7 @@ xVA
 plot(xVA)
 
 # save new raster
+writeRaster(xVA, filename="../spatial/VegetationType/rcl_A_G_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVA, filename="../spatial/VegetationType/rcl_A_G_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -201,6 +208,7 @@ xVB
 plot(xVB)
 
 # save new raster
+writeRaster(xVB, filename="../spatial/VegetationType/rcl_B_D_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVB, filename="../spatial/VegetationType/rcl_B_D_3.asc", format="ascii", overwrite=TRUE)
 
 ###########Vegetation Hipotesis "C"##########
@@ -219,6 +227,7 @@ xVC
 plot(xVC)
 
 # save new raster
+writeRaster(xVC, filename="../spatial/VegetationType/rcl_C_C_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVC, filename="../spatial/VegetationType/rcl_C_C_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -238,6 +247,7 @@ xVD
 plot(xVD)
 
 # save new raster
+writeRaster(xVD, filename="../spatial/VegetationType/rcl_D_A_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVD, filename="../spatial/VegetationType/rcl_D_A_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -257,6 +267,7 @@ xVE
 plot(xVE)
 
 # save new raster
+writeRaster(xVE, filename="../spatial/VegetationType/rcl_E_B_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVE, filename="../spatial/VegetationType/rcl_E_B_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -275,6 +286,7 @@ xVF
 plot(xVF)
 
 # save new raster
+writeRaster(xVF, filename="../spatial/VegetationType/rcl_F_E_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVF, filename="../spatial/VegetationType/rcl_F_E_3.asc", format="ascii", overwrite=TRUE)
 
 ###########Vegetation Hipotesis "G"##########
@@ -293,6 +305,7 @@ xVG
 plot(xVG)
 
 # save new raster
+writeRaster(xVG, filename="../spatial/VegetationType/rcl_G_F_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVG, filename="../spatial/VegetationType/rcl_G_F_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -312,6 +325,7 @@ xVH
 plot(xVH)
 
 # save new raster
+writeRaster(xVH, filename="../spatial/VegetationType/rcl_H_H_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVH, filename="../spatial/VegetationType/rcl_H_H_3.asc", format="ascii", overwrite=TRUE)
 
 
@@ -331,6 +345,26 @@ xVI
 plot(xVI)
 
 # save new raster
+writeRaster(xVI, filename="../spatial/VegetationType/rcl_I_I_3.tif", format="GTiff", overwrite=TRUE)
 writeRaster(xVI, filename="../spatial/VegetationType/rcl_I_I_3.asc", format="ascii", overwrite=TRUE)
 
+###########Vegetation Hipotesis "J"##########
+#read reclasification matrix
 
+rclJ <- read.table("../spatial/VegetationType/RasterValue_J.txt",sep = ",", header=F)
+dim(rclJ)
+class(rclJ)
+rclJ<- as.matrix(rclJ) 
+class(rclJ)
+rclJ
+
+# reclasify input raster 
+xVJ<-reclassify(myrasterVT,  rcl=rclJ, include.lowest=FALSE, right=FALSE)
+xVJ
+plot(xVJ)
+
+# save new raster
+writeRaster(xVJ, filename="../spatial/VegetationType/rcl_I_I_3.tif", format="GTiff", overwrite=TRUE)
+writeRaster(xVJ, filename="../spatial/VegetationType/rcl_I_I_3.asc", format="ascii", overwrite=TRUE)
+
+##############################################

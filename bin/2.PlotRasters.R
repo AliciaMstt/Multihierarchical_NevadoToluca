@@ -28,7 +28,7 @@ for (i in c(2000, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500, 3600, 37
 
 # altitude A conductaces 0, .1, .2, .3, 1 
 x<-raster("../spatial/Elevation/rcl_Alt_A.asc")
-plot(x, col=c("white", "grey90", "grey80", "grey70" , "black"), 
+plot(x, col=c("white", "grey90", "grey80", "grey70", "black"), 
      breaks=c(0, .09, .19, .29, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Alt. A", x=-100.09, y=19.03, adj=0, cex=1.2)
@@ -42,17 +42,17 @@ text(label="Alt. B", x=-100.09, y=19.03, adj=0, cex=1.2)
 
 
 ## Slope
-# Slope A .2, .5. 1
+# Slope A .2, .5, 1
 x<-raster("../spatial/Slope/rcl_S_A.asc")
 plot(x, col=c("grey80", "grey50", "black"), 
-     breaks=c(.19, .49, .99,  1), # add breakpoints so colors correspond to conductances
+     breaks=c(.19, .49, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Slo. A", x=-100.09, y=19.03, adj=0, cex=1.2)
 
 # Slope B .2, .7, 1
 x<-raster("../spatial/Slope/rcl_S_B.asc")
 plot(x, col=c("grey80", "grey30", "black"), 
-     breaks=c(.19, .69, .99,  1), # add breakpoints so colors correspond to conductances
+     breaks=c(.19, .69, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Slo. B", x=-100.09, y=19.03, adj=0, cex=1.2)
 
@@ -65,75 +65,75 @@ for (i in c("C", "D")){
 
  
 # Vegetation type
-# A  0 .1 .7 1
+# A  0, .1, .7, 1
 x<-raster("../spatial/VegetationType/rcl_A_G_3.asc")
 plot(x,  col=c("white", "grey90", "grey30", "black"), 
      breaks=c(0, .09, .69, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. A", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# B 0 .1 .5 1
+# B 0, .1, .5, 1
 x<-raster("../spatial/VegetationType/rcl_B_D_3.asc")
 plot(x,  col=c("white", "grey90", "grey50", "black"), 
      breaks=c(0, .09, .49, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. B", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# C 0 .1 .2 1
+# C 0, .1, .2, 1
 x<-raster("../spatial/VegetationType/rcl_C_C_3.asc")
 plot(x,  col=c("white", "grey90", "grey80", "black"), 
      breaks=c(0, .09, .19, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. C", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# D 0 .1 .2 .9 1 
+# D 0, .1, .2, .9, 1 
 x<-raster("../spatial/VegetationType/rcl_D_A_3.asc")
 plot(x,  col=c("white", "grey90", "grey80", "grey10", "black"), 
      breaks=c(0, .09, .19, .89, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. D", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# E 0 .1 .2 .7 1
+# E 0, .1, .2, .7, 1
 x<-raster("../spatial/VegetationType/rcl_E_B_3.asc")
 plot(x,  col=c("white", "grey90", "grey80", "grey30", "black"), 
      breaks=c(0, .09, .19, .69, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. E", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# F 0 .1 .2 .5 1
+# F 0, .1, .2, .5, 1
 x<-raster("../spatial/VegetationType/rcl_F_E_3.asc")
 plot(x,  col=c("white", "grey90", "grey80", "grey50", "black"), 
      breaks=c(0, .09, .19, .49, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. F", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# G 0 .1 .2 1
+# G 0, .1, .2, 1
 x<-raster("../spatial/VegetationType/rcl_G_F_3.asc")
 plot(x,  col=c("white", "grey90", "grey80", "black"), 
      breaks=c(0, .09, .19, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. G", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# H 0 .1 .2 .7 1
+# H 0, .1, .2, .7, 1
 x<-raster("../spatial/VegetationType/rcl_H_H_3.asc")
 plot(x,  col=c("white", "grey90", "grey80", "grey30", "black"), 
      breaks=c(0, .09, .19, .69, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. H", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# I 0 .1 .2 1
+# I 0, .1, .2, 1
 x<-raster("../spatial/VegetationType/rcl_I_I_3.asc")
-plot(x,  col=c("white", "grey90", "grey80", "black"), 
+plot(x, col=c("white", "grey90", "grey80", "black"), 
      breaks=c(0, .09, .19, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Veg. I", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-# J 0 .1 .5 .7 1 ### Raster is missing, complete file name and comment when raster is ready
-#x<-raster("../spatial/VegetationType/rcl_XXXXXX_3.asc")
-#plot(x,  col=c("white", "grey90", "grey50", "grey30", "black"), 
-#     breaks=c(0, .09, .49, .69, .99, 1), # add breakpoints so colors correspond to conductances
-#     legend=FALSE, xaxt='n', yaxt='n')
-# text(label="Veg. J", x=-100.09, y=19.03, adj=0, cex=1.2)
+# J 0, .1, .5, .7, 1 
+x<-raster("../spatial/VegetationType/rcl_I_I_3.asc")
+plot(x,  col=c("white", "grey90", "grey50", "grey30", "black"), 
+     breaks=c(0, .09, .49, .69, .99, 1), # add breakpoints so colors correspond to conductances
+     legend=FALSE, xaxt='n', yaxt='n')
+ text(label="Veg. J", x=-100.09, y=19.03, adj=0, cex=1.2)
 
 ## Flat
 x<-raster("../spatial/Elevation/NevTol_Alt_flat.asc")
@@ -163,3 +163,4 @@ text(x=.8, y=4.5, labels="Conductances", adj=0, cex=1.5)
 
 ## close plotting device
 dev.off() #needed because we used png in line 7
+

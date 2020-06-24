@@ -1,13 +1,15 @@
+
 ## script to reclassify altitude output rasters to desired values and to create a flat lanscape
 # plot rasters afterwards
+
+####################################################
 
 rm(list = ls())
 library(sp)
 library(raster)
 library(rgdal)
 
-
-##### Create "flat" landscape #####
+########### Create "flat" landscape ################
 source("create_Flat.R")
 
 create_Flat(inraster="../spatial/Elevation/NevTol_Alt.tif",

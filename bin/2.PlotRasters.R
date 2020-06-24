@@ -2,7 +2,7 @@
 
 library(raster)
 
-########### plots Resistance rasters #########
+################ plots Resistance rasters #####################
 
 png(filename="../figures/PlotRasters.png", width=920 , height=1536, units="px") # set size of the file to plot 
 par(mfrow=c(8,4)) #the number of rows and columns the figure would have
@@ -18,7 +18,7 @@ par(mfrow=c(8,4)) #the number of rows and columns the figure would have
 # .9 = "grey10"
 # 1 ="black·
 
-## Elevation
+######Elevation
 # crude altitdes conductances .2, 1
 for (i in c(2000, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700)) {
   x<-raster(paste0("../spatial/Elevation/NevTol_Alt_", i, "_reclass.asc"))

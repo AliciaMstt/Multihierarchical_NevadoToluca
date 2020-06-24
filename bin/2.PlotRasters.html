@@ -384,14 +384,14 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">2.PlotRasters.R</h1>
 <h4 class="author"><em>ngalvez</em></h4>
-<h4 class="date"><em>Wed Jun 24 00:43:32 2020</em></h4>
+<h4 class="date"><em>Wed Jun 24 02:32:17 2020</em></h4>
 
 </div>
 
 
 <pre class="r"><code>library(raster)</code></pre>
 <pre><code>## Loading required package: sp</code></pre>
-<pre class="r"><code>########### plots Resistance rasters #########
+<pre class="r"><code>################ plots Resistance rasters #####################
 
 png(filename=&quot;../figures/PlotRasters.png&quot;, width=920 , height=1536, units=&quot;px&quot;) # set size of the file to plot 
 par(mfrow=c(8,4)) #the number of rows and columns the figure would have
@@ -407,7 +407,7 @@ par(mfrow=c(8,4)) #the number of rows and columns the figure would have
 # .9 = &quot;grey10&quot;
 # 1 =&quot;black·
 
-## Elevation
+######Elevation
 # crude altitdes conductances .2, 1
 for (i in c(2000, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700)) {
   x&lt;-raster(paste0(&quot;../spatial/Elevation/NevTol_Alt_&quot;, i, &quot;_reclass.asc&quot;))

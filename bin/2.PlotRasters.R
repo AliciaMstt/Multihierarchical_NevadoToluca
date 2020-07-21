@@ -40,6 +40,13 @@ plot(x, col=c("white", "grey80", "grey70" , "black"),
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Alt. B", x=-100.09, y=19.03, adj=0, cex=1.2)
 
+# altitude C conductaces 0, .2, 1
+x<-raster("../spatial/Elevation/rcl_Alt_C.asc")
+plot(x, col=c("white", "grey80", "black"), 
+     breaks=c(0, .19, .99, 1), # add breakpoints so colors correspond to conductances
+     legend=FALSE, xaxt='n', yaxt='n')
+text(label="Alt. C", x=-100.09, y=19.03, adj=0, cex=1.2)
+
 
 ## Slope
 # Slope A .2, .5, 1

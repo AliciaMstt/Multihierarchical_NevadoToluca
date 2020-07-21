@@ -384,7 +384,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">2.PlotRasters.R</h1>
 <h4 class="author"><em>ngalvez</em></h4>
-<h4 class="date"><em>Wed Jun 24 02:32:17 2020</em></h4>
+<h4 class="date"><em>Mon Jul 20 19:59:01 2020</em></h4>
 
 </div>
 
@@ -428,6 +428,13 @@ plot(x, col=c(&quot;white&quot;, &quot;grey80&quot;, &quot;grey70&quot; , &quot;
      breaks=c(0, .19, .29, .99, 1), # add breakpoints so colors correspond to conductances
      legend=FALSE, xaxt='n', yaxt='n')
 text(label=&quot;Alt. B&quot;, x=-100.09, y=19.03, adj=0, cex=1.2)
+
+# altitude C conductaces 0, .2, 1
+x&lt;-raster(&quot;../spatial/Elevation/rcl_Alt_C.asc&quot;)
+plot(x, col=c(&quot;white&quot;, &quot;grey80&quot;, &quot;black&quot;), 
+     breaks=c(0, .19, .99, 1), # add breakpoints so colors correspond to conductances
+     legend=FALSE, xaxt='n', yaxt='n')
+text(label=&quot;Alt. C&quot;, x=-100.09, y=19.03, adj=0, cex=1.2)
 
 
 ## Slope

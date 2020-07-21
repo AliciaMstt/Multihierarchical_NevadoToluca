@@ -41,6 +41,8 @@ source("reclassElev4circuit.R")
 #    }
 
 
+
+#################ELEVATION################### 
 ##### Raster Elevation Hipotesis "A"######### 
 myraster<-raster("../spatial/Elevation/NevTol_Alt.tif")
 myraster
@@ -88,15 +90,37 @@ writeRaster(xb, filename="../spatial/Elevation/rcl_Alt_B.tif", format="GTiff", o
 writeRaster(xb, filename="../spatial/Elevation/rcl_Alt_B.asc", format="ascii", overwrite=TRUE)
 
 
-##################SLOPE#############################
+###### Raster Altitude Hipotesis "C"############ 
+# reclassify the values into three groups 
 
+rcl_Alt_C_reclass <- read.table("../spatial/Elevation/RasterAltitude_C.txt",sep = ",", header=F)
+dim(rcl_Alt_C_reclass)
+class(rcl_Alt_C_reclass)
+rcl_Alt_C_reclass<- as.matrix(rcl_Alt_C_reclass) 
+class(rcl_Alt_C_reclass)
+rcl_Alt_C_reclass
+
+# reclasify input raster 
+xc<-reclassify(myraster,  rcl=rcl_Alt_C_reclass, include.lowest=FALSE, right=FALSE)
+xc
+plot(xc)
+plot(xc, col=c("grey", "black"), legend=FALSE, xaxt='n', yaxt='n')
+
+
+# save new raster
+writeRaster(xc, filename="../spatial/Elevation/rcl_Alt_C.tif", format="GTiff", overwrite=TRUE)
+writeRaster(xc, filename="../spatial/Elevation/rcl_Alt_C.asc", format="ascii", overwrite=TRUE)
+
+
+
+####################SLOPE####################### 
 
 #Raster Slope Nevado de Toluca
 myrasterS<-raster("../spatial/Slope/NevTol_Pen.tif")
 myrasterS
 plot(myrasterS)
 
-#######Raster Slope hipotesis "A"#####################
+###########Raster Slope hipotesis "A"###########
 rcl_S_A <- read.table("../spatial/Slope/RasterValue_SlopeA.txt",sep = ",", header=F)
 dim(rcl_S_A)
 class(rcl_S_A)

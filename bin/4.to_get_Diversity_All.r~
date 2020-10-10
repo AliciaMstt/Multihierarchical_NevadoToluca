@@ -1,0 +1,71 @@
+#############################################################################################
+
+#This script gets all scripts of diversity using 8 arthropods order at multi-hierarchical levels 
+#We used 8 groups: Arachnda, Coleoptera, Collembola, Diptera, Hemiptera, Hymenoptera, Lepidoptera, and Myriapoda. 
+
+library(stats)
+library(base)
+library(dplyr)
+library(dplyr)
+library(tidyr)
+library (knitr)
+library(PMCMR)
+library(vegan)
+library(betapart) 
+library(stringr)
+library(permute) #Me pide que carge permute y lattice en el Rstudio que estoy usando
+library(lattice)
+
+# path to scripts Arachnida and data
+
+#We get the diversity analysis at haplotypes, CL 3%, and CL 5% in Arachnida
+source("Arachnida/3Com_matrixes_data_exploration_Arachnida_h_Site.R") 
+source("Arachnida/3Com_matrixes_data_exploration_Arachnida_3P_Site.R") 
+source("Arachnida/3Com_matrixes_data_exploration_Arachnida_5P_Site.R")
+
+# path to scripts Coleoptera and data
+
+source("Coleoptera/Com_matrixes_data_exploration_Coleoptera_h_Site.R") 
+source("Coleoptera/Com_matrixes_data_exploration_Coleoptera_3P_Site.R") 
+source("Coleoptera/Com_matrixes_data_exploration_Coleoptera_5P_Site.R") 
+
+# path to scripts Collembola and data
+
+source("Collembola/Com_matrixes_data_exploration_Collembola_h_Site.R") 
+source("Collembola/Com_matrixes_data_exploration_Collembola_3P_Site.R") 
+source("Collembola/Com_matrixes_data_exploration_Collembola_5P_Site.R") 
+
+# path to scripts Diptera and data
+
+source("Diptera/Com_matrixes_data_exploration_Diptera_h_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Diptera_3P_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Diptera_5P_Site.R") 
+
+# path to scripts Hemiptera and data
+
+source("Diptera/Com_matrixes_data_exploration_Hemiptera_h_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Hemiptera_3P_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Hemiptera_5P_Site.R") 
+
+# path to scripts Hymenoptera and data
+
+source("Diptera/Com_matrixes_data_exploration_Hymenoptera_h_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Hymenoptera_3P_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Hymenoptera_5P_Site.R") 
+
+# path to scripts Lepidoptera and data
+
+source("Diptera/Com_matrixes_data_exploration_Lepidoptera_h_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Lepidoptera_3P_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Lepidoptera_5P_Site.R") 
+
+# path to scripts Myriapoda and data
+
+source("Diptera/Com_matrixes_data_exploration_Myriapoda_h_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Myriapoda_3P_Site.R") 
+source("Diptera/Com_matrixes_data_exploration_Myriapoda_5P_Site.R")
+
+####################################END######################################################################
+
+
+

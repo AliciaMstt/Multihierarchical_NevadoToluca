@@ -1,0 +1,227 @@
+#'**INITIAL STEPS**'#
+
+#'**Community diversity and composition at the 3% Clustering level of the Coleoptera order**'#
+
+#'In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
+
+#'**TABLES AND COMMUNITY MATRIXES**'# 
+################################################################################################################################################################################
+###########'open table with names including Region and habitat parameters
+s2_raw_all <- read.table("../genetic/Data_in/Coleoptera/s2_raw_all_Coleoptera_threshold.txt", header=TRUE)
+dim(s2_raw_all)
+
+###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+s2_raw_all[,c(1:64,66)]->s2_raw
+dim(s2_raw) #'49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
+colnames(s2_raw)
+
+###########'Applying the conservative threshold (this is a binary column)
+s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
+s2_raw_threshold [,1:64]->s2_raw_threshold #'remove threshold col
+dim(s2_raw_threshold)
+colnames(s2_raw_threshold)
+
+################################################################################################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'
+#'*Coleoptera*
+unique (s2_raw_threshold$limite0.03)->levels_limite0.03
+
+data.frame()->s2_raw_Coleoptera_limite0.03
+
+for (i in 1:length(unique (s2_raw_threshold$limite0.03)))
+{
+  levels_limite0.03[i]->level0.03
+  s2_raw_threshold[which(s2_raw_threshold$limite0.03==level0.03),]->subcom_level0.03_names
+  subcom_level0.03_names[,c(2:50)]->subcom_level0.03  #delete names, level and also the negative column
+  colSums(subcom_level0.03)->sum0.03
+  as.data.frame(sum0.03)->sum0.03
+  t(sum0.03)->sum0.03
+  row.names(sum0.03)<-subcom_level0.03_names[1,1] #keep the name of the first haplotype
+  rbind(s2_raw_Coleoptera_limite0.03,sum0.03)->s2_raw_Coleoptera_limite0.03
+}
+
+#'transform in present/absence table
+s2_raw_Coleoptera_limite0.03->s2_raw_Coleoptera_limite0.03
+s2_raw_Coleoptera_limite0.03[s2_raw_Coleoptera_limite0.03>1]<-1 #'transform in present/absence table 
+
+#'checking if there is any row with no presence
+s2_raw_Coleoptera_limite0.03[,1:49]->data0.03
+rowSums(data0.03)
+length(which(rowSums(data0.03)!=0))
+length(which(rowSums(data0.03)==0))
+
+#'Community matrixes (samples in rows and h in cols). 
+#'*Coleoptera*
+t(s2_raw_Coleoptera_limite0.03)->t_s2_f4_Coleoptera_limite0.03 #'trasp
+t_s2_f4_Coleoptera_limite0.03[1:49,]->community_Coleoptera_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
+colnames(t_s2_f4_Coleoptera_limite0.03)<-community_Coleoptera_limite0.03[1,] 
+as.data.frame(community_Coleoptera_limite0.03)->community_Coleoptera0.03 #'trasp including col and row names
+#community_Acari[-49,]->community_Coleoptera #'removing neg
+dim(community_Coleoptera0.03)
+community_Coleoptera0.03[order(row.names(community_Coleoptera0.03)),]->community_Coleoptera0.03 #'order samples
+write.table (community_Coleoptera0.03, file="../genetic/Data_out/Coleoptera/Coleoptera3P/community_Coleoptera0.03.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Coleoptera/Coleoptera3P/community_Coleoptera0.03.txt")->community_Coleoptera0.03
+
+#'submatrixes by SITE in Nevado Toluca.
+dim(community_Coleoptera0.03)
+community_Coleoptera0.03[which(str_extract (row.names(community_Coleoptera0.03), "_NTO_") %in% "_NTO_"),]->community_Coleoptera_Site0.03
+dim(community_Coleoptera_Site0.03)
+community_Coleoptera_Site0.03[,which(colSums(community_Coleoptera_Site0.03)!=0)]->community_Coleoptera_Site0.03 #'to remove no data colums
+dim(community_Coleoptera_Site0.03)
+
+####################################################
+#'Generating a general table with names and habitat parameters.
+#BY SITE
+#'Generating a general table with names and habitat parameters
+row.names(community_Coleoptera_Site0.03)->sample_names_Mountain1_0.03
+as.data.frame(sample_names_Mountain1_0.03)->sample_names_Mountain1_0.03
+sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->general_sample_Mountain1Site0.03
+general_sample_Mountain1Site0.03
+general_sample_Mountain1Site0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site0.03 #'generating a variable combining layer and habitat
+general_sample_Mountain1Site0.03
+write.table(general_sample_Mountain1Site0.03, file="../genetic/Data_out/Coleoptera/Coleoptera3P/general_sample_Mountain1Site0.03.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
+
+####################################################
+####################################################
+#'**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES**'# 
+#'*Coleoptera*
+as.matrix(community_Coleoptera_Site0.03)->community_Coleoptera_Site0.03
+row.names(community_Coleoptera_Site0.03)->sample_names_Site0.03
+dim(community_Coleoptera_Site0.03)->dims_Site0.03
+dims_Site0.03
+.rowSums (community_Coleoptera_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->sample_richness_Site #'summatory by rows
+rbind(sample_names_Site0.03,sample_richness_Site)->richness_Site
+t(richness_Site)->richness_Site
+colnames(richness_Site)<-c("sample_names_Site0.03","sample_richness_Site")
+richness_Site
+as.data.frame(richness_Site)->richness_Site
+
+##'Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio. 
+richness_Site %>% separate(sample_names_Site0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_Site
+richness_Site
+richness_Site %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site #'generating a variable combining layer and habitat
+richness_Site
+
+#BY SITE
+write.table(richness_Site, file="../genetic/Data_out/Coleoptera/Coleoptera3P/richness_Site_Coleoptera0.03.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera3P/richness_Site_Coleoptera0.03.txt",header=TRUE)->richness_Site
+
+##'General plot of richness by sample in SITE
+barplot(richness_Site$sample_richness_Site,col=richness_Site$Mountain1Site,names.arg= richness_Site$sample_names_Site0.03,las=2,cex.names=0.5, ylab="richness_Site", main="H richness_Site Coleoptera_0.03")
+richness_Site %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site))
+
+##'Global richness by SITE.  
+plot(richness_Site$Mountain1Site,richness_Site$sample_richness_Site,ylab="richness_Site", ylim=c(0,16), cex=1.4, cex.axis=2.3, lwd=2.5, main="H richness_Site Coleoptera_0.03")
+kruskal.test(sample_richness_Site ~ Mountain1Site, data = richness_Site)
+posthoc.kruskal.nemenyi.test(x=richness_Site$sample_richness_Site, g=richness_Site$Mountain1Site, method="Bonferroni")
+# Comparison of each group against. 
+text(x=c(1,2,3,4), y=(15.7), labels=c("a","b","ab","b"), cex=1.4)
+text(x=4.5, y=15.7, labels="**", cex=2)
+
+####################################################
+####################################################
+#'**HAPLOTYPE OCURRENCE TABLES AND SINGLETONS by SITE**'
+#'*Coleoptera*
+#'General
+##'Singletons by SITE
+#'summatory by rows
+colnames(community_Coleoptera_Site0.03)->h_names_Site
+dim (community_Coleoptera_Site0.03)->dims_Site0.03
+.colSums (community_Coleoptera_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->h_ocurrence_Site #'summatory by cols
+
+rbind(h_names_Site,h_ocurrence_Site)->h_ocurrence_Site
+t(h_ocurrence_Site)->h_ocurrence_Site
+colnames(h_ocurrence_Site)<-c("h_names_Site","h_ocurrence_Site")
+dim(h_ocurrence_Site)
+write.table(h_ocurrence_Site, file="../genetic/Data_out/Coleoptera/Coleoptera3P/h_ocurrence_Site_Coleoptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera3P/h_ocurrence_Site_Coleoptera.txt",header=TRUE)->h_ocurrence_Site
+
+#' percentege of singletons by sample
+h_ocurrence_Site
+which(h_ocurrence_Site$h_ocurrence_Site==1)->singletons_Site
+length(singletons_Site)
+length(singletons_Site)/length(h_ocurrence_Site$h_ocurrence_Site)*100
+
+#' percentege of h in more than 2 samples
+which(h_ocurrence_Site$h_ocurrence_Site>2)->more2_Site
+more2_Site
+length(more2_Site)
+length(more2_Site)/length(h_ocurrence_Site$h_ocurrence_Site)*100
+
+#'number of singletons by SITE
+#community_Coleoptera_Site0.03
+#singletons
+community_Coleoptera_Site0.03[,singletons_Site]->community_Coleoptera_singletons_Site0.03
+row.names(community_Coleoptera_singletons_Site0.03)->sample_names_Site0.03
+dim (community_Coleoptera_singletons_Site0.03)->dims_Site0.03
+dims_Site0.03
+.rowSums (community_Coleoptera_singletons_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->sample_richness_singletons_Site0.03 #'summatory by rows
+rbind(sample_names_Site0.03,sample_richness_singletons_Site0.03)->richness_singletons_Site0.03
+t(richness_singletons_Site0.03)->richness_singletons_Site0.03
+colnames(richness_singletons_Site0.03)<-c("sample_names_Site0.03","sample_richness_singletons_Site0.03")
+richness_singletons_Site0.03
+as.data.frame(richness_singletons_Site0.03)->richness_singletons_Site0.03
+
+####################################################
+####################################################
+#'**ACCUMULATION CURVES AND EXTRAPOLATED RICHNESS by SITE**'#
+#'*Coleoptera* 
+#'General
+specaccum(community_Coleoptera_Site0.03,"random", permutations=1000)->cum_Site0.03
+plot(cum_Site0.03, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,100), main="h_Coleoptera_Site_0.03")
+specpool(community_Coleoptera_Site0.03)->specpool_Site
+specpool_Site$Species/specpool_Site$chao*100
+
+####################################################
+####################################################
+#'**BETADIVERSITY ORDINATIONS by Sites**'# 
+#'*Coleoptera*
+#'beta general
+beta.multi(community_Coleoptera_Site0.03, index.family="sorensen")
+
+#'turnover by pairs, nmds, anosim
+beta.pair(community_Coleoptera_Site0.03, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+metaMDS (beta.pair$beta.sim)->MDSbetasim0.03 #'NMDS
+plot (MDSbetasim0.03, main="Coleoptera_Site_0.03") 
+x<- MDSbetasim0.03$points[,1]
+y<- MDSbetasim0.03$points[,2]
+text(x, y, pos = 1, cex=0.7, labels = row.names (community_Coleoptera_Site0.03))
+
+plot (MDSbetasim0.03, main="Coleoptera_Site_0.03")
+with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, label=T, col="blue"))
+
+############################
+#By SITES quitar 122, 
+#'repeating after removing outlayers from matrix and general habitat table
+community_Coleoptera_Site0.03[-which(row.names(community_Coleoptera_Site0.03) %in% c("CON_NTO_AAB_122ACON12")),]->community_Coleoptera_sinoutlayer0.03
+community_Coleoptera_sinoutlayer0.03[,which(colSums(community_Coleoptera_sinoutlayer0.03)!=0)]->community_Coleoptera_sinoutlayer0.03 #'to remove no data colums
+dim(community_Coleoptera_sinoutlayer0.03)  
+
+general_sample_Mountain1Site0.03[-which(general_sample_Mountain1Site0.03$sample_names %in% c("CON_NTO_AAB_122ACON12")),]->general_sample_sinoutlayer0.03
+
+beta.pair(community_Coleoptera_sinoutlayer0.03, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+metaMDS (beta.pair$beta.sim)->MDSbetasim0.03
+
+plot (MDSbetasim0.03, main="Coleoptera_Site_0.03")
+with(general_sample_sinoutlayer0.03,ordispider(MDSbetasim0.03, Site, label=T, col="blue"))
+plot (MDSbetasim0.03, main="Coleoptera_Site0.03")
+x<- MDSbetasim0.03$points[,1]
+y<- MDSbetasim0.03$points[,2]
+text(x, y, pos = 1, cex=0.7, labels = row.names (community_Coleoptera_sinoutlayer0.03))
+
+plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.5, 0.51), cex.axis=1.4, cex=1.2, cex.lab=1.4, main="Coleoptera_Site0.03")
+with(general_sample_sinoutlayer0.03,ordispider(MDSbetasim0.03, Site, label=T, cex.lab=0.9, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0")))
+
+#Anosim
+anosim(beta.pair$beta.sim, general_sample_sinoutlayer0.03$Site, permutations=999)
+
+plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.5, 0.51), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5, main="Coleoptera_Site0.03")
+with(general_sample_sinoutlayer0.03,ordispider(MDSbetasim0.03, Site, cex.lab=1, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"), lwd=4.5))
+#I put letter "r" in cursive and r2 value
+mylabel = bquote(italic(r)^2)
+text(x=0.25, y=-0.45, labels = mylabel, cex=2)
+text(x=0.56, y=-0.45, labels="=0.360 ***", cex=2)
+
+################################# E N D ###########################################

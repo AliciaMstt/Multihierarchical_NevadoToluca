@@ -1,0 +1,244 @@
+#'**INITIAL STEPS**#
+
+#'**Community diversity and composition at the 5% Clustering level of the Lepidoptera order**#
+
+#'In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
+
+#'**TABLES AND COMMUNITY MATRIXES**'# 
+################################################################################################################################################################################
+###########'open table with names including Region and habitat parameters
+s2_raw_all <- read.table("../genetic/Data_in/Lepidoptera/s2_raw_all_Lepidoptera_threshold.txt", header=TRUE)
+dim(s2_raw_all)
+
+###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+s2_raw_all[,c(1:52,54)]->s2_raw
+dim(s2_raw) #'49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
+colnames(s2_raw)
+
+###########'Applying the conservative threshold (this is a binary column)
+s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
+s2_raw_threshold [,1:52]->s2_raw_threshold #'remove threshold col
+dim(s2_raw_threshold)
+colnames(s2_raw_threshold)
+
+################################################################################################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'
+#'*Lepidoptera*
+unique (s2_raw_threshold$limite0.05)->levels_limite0.05
+
+data.frame()->s2_raw_Lepidoptera_limite0.05
+
+for (i in 1:length(unique (s2_raw_threshold$limite0.05)))
+{
+  levels_limite0.05[i]->level0.05
+  s2_raw_threshold[which(s2_raw_threshold$limite0.05==level0.05),]->subcom_level_names0.05
+  subcom_level_names0.05[,c(2:38)]->subcom_level0.05  #delete names, level and also the negative column
+  colSums(subcom_level0.05)->sum0.05
+  as.data.frame(sum0.05)->sum0.05
+  t(sum0.05)->sum0.05
+  row.names(sum0.05)<-subcom_level_names0.05[1,1] #keep the name of the first haplotype
+  rbind(s2_raw_Lepidoptera_limite0.05,sum0.05)->s2_raw_Lepidoptera_limite0.05
+}
+
+#'transform in present/absence table
+s2_raw_Lepidoptera_limite0.05->s2_raw_Lepidoptera_limite0.05
+s2_raw_Lepidoptera_limite0.05[s2_raw_Lepidoptera_limite0.05>1]<-1 #'transform in present/absence table 
+
+#'checking if there is any row with no presence
+s2_raw_Lepidoptera_limite0.05[,1:37]->data0.05
+rowSums(data0.05)
+length(which(rowSums(data0.05)!=0))
+length(which(rowSums(data0.05)==0))
+
+#'Community matrixes (samples in rows and h in cols)
+#'*Lepidoptera*
+t(s2_raw_Lepidoptera_limite0.05)->t_s2_f4_Lepidoptera_limite0.05 #'trasp
+t_s2_f4_Lepidoptera_limite0.05[1:37,]->community_Lepidoptera_limite0.05 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data0.05".
+colnames(t_s2_f4_Lepidoptera_limite0.05)<-community_Lepidoptera_limite0.05[1,] 
+as.data.frame(community_Lepidoptera_limite0.05)->community_Lepidoptera0.05 #'trasp including col and row names
+#community_Lepidoptera[-49,]->community_Lepidoptera #'removing neg
+dim(community_Lepidoptera0.05)
+community_Lepidoptera0.05[order(row.names(community_Lepidoptera0.05)),]->community_Lepidoptera0.05 #'order samples
+write.table (community_Lepidoptera0.05, file="../genetic/Data_out/Lepidoptera/Lepidoptera5P/community_Lepidoptera0.05.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera5P/community_Lepidoptera0.05.txt")->community_Lepidoptera0.05
+
+#'submatrixes by SITE in Nevado Toluca
+dim(community_Lepidoptera0.05)
+community_Lepidoptera0.05[which(str_extract (row.names(community_Lepidoptera0.05), "_NTO_") %in% "_NTO_"),]->community_Lepidoptera_Site0.05
+dim(community_Lepidoptera_Site0.05)
+community_Lepidoptera_Site0.05[,which(colSums(community_Lepidoptera_Site0.05)!=0)]->community_Lepidoptera_Site0.05 #'to remove no data colums
+dim(community_Lepidoptera_Site0.05)
+
+####################################################
+#'Generating a general table with names and habitat parameters.
+#BY SITE
+#'Generating a general table with names and habitat parameters
+row.names(community_Lepidoptera_Site0.05)->sample_names_Mountain1_0.05
+as.data.frame(sample_names_Mountain1_0.05)->sample_names_Mountain1_0.05
+sample_names_Mountain1_0.05 %>% separate(sample_names_Mountain1_0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->general_sample_Mountain1Site_0.05
+general_sample_Mountain1Site_0.05
+general_sample_Mountain1Site_0.05 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site_0.05 #'generating a variable combining layer and habitat
+general_sample_Mountain1Site_0.05
+write.table(general_sample_Mountain1Site_0.05, file="../genetic/Data_out/Lepidoptera/Lepidoptera5P/general_sample_Mountain1Site_0.05.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Lepidoptera/Lepidoptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
+
+####################################################
+####################################################
+#'**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES**'# 
+#'*Lepidoptera*
+as.matrix(community_Lepidoptera_Site0.05)->community_Lepidoptera_Site0.05
+row.names(community_Lepidoptera_Site0.05)->sample_names_Site0.05
+dim(community_Lepidoptera_Site0.05)->dims_Site0.05
+dims_Site0.05
+.rowSums (community_Lepidoptera_Site0.05,dims_Site0.05[1],dims_Site0.05[2])->sample_richness_Site0.05 #'summatory by rows
+rbind(sample_names_Site0.05,sample_richness_Site0.05)->richness_Site0.05
+t(richness_Site0.05)->richness_Site0.05
+colnames(richness_Site0.05)<-c("sample_names_Site0.05","sample_richness_Site0.05")
+richness_Site0.05
+as.data.frame(richness_Site0.05)->richness_Site0.05
+
+##'Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio. 
+richness_Site0.05 %>% separate(sample_names_Site0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_Site0.05
+richness_Site0.05
+richness_Site0.05 %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.05 #'generating a variable combining layer and habitat
+richness_Site0.05
+
+#BY SITE
+write.table(richness_Site0.05, file="../genetic/Data_out/Lepidoptera/Lepidoptera5P/richness_Site_Lepidoptera0.05.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Lepidoptera/Lepidoptera5P/richness_Site_Lepidoptera0.05.txt",header=TRUE)->richness_Site0.05
+
+##'General plot of richness by sample in SITE
+barplot(richness_Site0.05$sample_richness_Site0.05,col=richness_Site0.05$Mountain1Site,names.arg= richness_Site0.05$sample_names_Site0.05,las=2,cex.names=0.5, ylab="richness_Site0.05", main="H richness_Site Lepidoptera_0.05")
+richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.05))
+
+##'Global richness by SITE.  
+plot(richness_Site0.05$Mountain1Site,richness_Site0.05$sample_richness_Site0.05,ylab="richness_Site0.05", ylim=c(0,8), cex=1.4, cex.axis=2.3, lwd=2.5, main="H richness_Site Lepidoptera_0.05")
+kruskal.test(sample_richness_Site0.05 ~ Mountain1Site, data = richness_Site0.05)
+posthoc.kruskal.nemenyi.test(x=richness_Site0.05$sample_richness_Site0.05, g=richness_Site0.05$Mountain1Site, method="Bonferroni")
+# Comparison of each group against. 
+#text(x=c(1,2,3,4.1), y=(29), labels=c("a","b","a","a"), cex=1.4)
+text(x=4.5, y=7, labels="ns", cex=2)
+
+####################################################
+####################################################
+#'**HAPLOTYPE OCURRENCE TABLES AND SINGLETONS by SITE**'
+#'*Lepidoptera*
+#'General
+#'
+##'Singletons by SITE
+#'summatory by rows
+colnames(community_Lepidoptera_Site0.05)->h_names_Site0.05
+dim (community_Lepidoptera_Site0.05)->dims_Site0.05
+.colSums (community_Lepidoptera_Site0.05,dims_Site0.05[1],dims_Site0.05[2])->h_ocurrence_Site0.05 #'summatory by cols
+
+rbind(h_names_Site0.05,h_ocurrence_Site0.05)->h_ocurrence_Site0.05
+t(h_ocurrence_Site0.05)->h_ocurrence_Site0.05
+colnames(h_ocurrence_Site0.05)<-c("h_names_Site0.05","h_ocurrence_Site0.05")
+dim(h_ocurrence_Site0.05)
+write.table(h_ocurrence_Site0.05, file="../genetic/Data_out/Lepidoptera/Lepidoptera5P/h_ocurrence_Site_Lepidoptera0.05.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Lepidoptera/Lepidoptera5P/h_ocurrence_Site_Lepidoptera0.05.txt",header=TRUE)->h_ocurrence_Site0.05
+
+#' percentege of singletons by sample
+h_ocurrence_Site0.05
+which(h_ocurrence_Site0.05$h_ocurrence_Site0.05==1)->singletons_Site0.05
+length(singletons_Site0.05)
+length(singletons_Site0.05)/length(h_ocurrence_Site0.05$h_ocurrence_Site0.05)*100
+
+#' percentege of h in more than 2 samples
+which(h_ocurrence_Site0.05$h_ocurrence_Site0.05>2)->more2_Site0.05
+more2_Site0.05
+length(more2_Site0.05)
+length(more2_Site0.05)/length(h_ocurrence_Site0.05$h_ocurrence_Site0.05)*100
+
+#'number of singletons by SITE
+#community_Lepidoptera_Site0.05
+#singletons
+community_Lepidoptera_Site0.05[,singletons_Site0.05]->community_Lepidoptera_singletons_Site0.05
+row.names(community_Lepidoptera_singletons_Site0.05)->sample_names_Site0.05
+dim (community_Lepidoptera_singletons_Site0.05)->dims_Site0.05
+dims_Site0.05
+.rowSums (community_Lepidoptera_singletons_Site0.05,dims_Site0.05[1],dims_Site0.05[2])->sample_richness_singletons_Site0.05 #'summatory by rows
+rbind(sample_names_Site0.05,sample_richness_singletons_Site0.05)->richness_singletons_Site0.05
+t(richness_singletons_Site0.05)->richness_singletons_Site0.05
+colnames(richness_singletons_Site0.05)<-c("sample_names_Site0.05","sample_richness_singletons_Site0.05")
+richness_singletons_Site0.05
+as.data.frame(richness_singletons_Site0.05)->richness_singletons_Site0.05
+
+####################################################
+####################################################
+#'**ACCUMULATION CURVES AND EXTRAPOLATED RICHNESS by SITE**'#
+#'
+#'*Lepidoptera* by SITE
+#'General
+specaccum(community_Lepidoptera_Site0.05,"random", permutations=1000)->cum_Site0.05
+plot(cum_Site0.05, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,25), xlim=c(0,40),main="h_Lepidoptera_Site_0.05")
+specpool(community_Lepidoptera_Site0.05)->specpool_Site0.05
+specpool_Site0.05$Species/specpool_Site0.05$chao*100
+
+####################################################
+####################################################
+#'**BETADIVERSITY ORDINATIONS by Sites**'# 
+#'*Lepidoptera*
+#'beta general
+
+beta.multi(community_Lepidoptera_Site0.05, index.family="sorensen")
+
+#'turnover by pairs, nmds, anosim
+beta.pair(community_Lepidoptera_Site0.05, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#metaMDS (beta.pair$beta.sim)->MDSbetasim0.05 #'NMDS
+#plot (MDSbetasim0.05, main="Lepidoptera_Site_0.05") 
+#x<- MDSbetasim0.05$points[,1]
+#y<- MDSbetasim0.05$points[,2]
+#text(x, y, pos = 1, cex=0.7, labels = row.names (community_Lepidoptera_Site0.05))
+
+#plot (MDSbetasim0.05, main="Lepidoptera_Site_0.05")
+#with(general_sample_Mountain1Site_0.05,ordispider(MDSbetasim0.05, Site, label=T, col="blue"))
+
+#############################
+#By SITES quitar 
+#107, 111, 86
+#'repeating after removing outlayers from matrix and general habitat table
+community_Lepidoptera_Site0.05[-which(row.names(community_Lepidoptera_Site0.05) %in% c("CON_NTO_SJH_76SHCON7", "CON_NTO_ASB_86ACON8", "CON_NTO_TLC_39TCONS9", "CON_NTO_SJH_74SHCON5", "CON_NTO_AAB_107ACON20",  "CON_NTO_AAB_111ACON24")),]->community_Lepidoptera_sinoutlayer0.05
+community_Lepidoptera_sinoutlayer0.05[,which(colSums(community_Lepidoptera_sinoutlayer0.05)!=0)]->community_Lepidoptera_sinoutlayer0.05 #'to remove no data colums
+dim(community_Lepidoptera_sinoutlayer0.05)  
+
+general_sample_Mountain1Site_0.05[-which(general_sample_Mountain1Site_0.05$sample_names %in% c("CON_NTO_SJH_76SHCON7", "CON_NTO_ASB_86ACON8", "CON_NTO_TLC_39TCONS9", "CON_NTO_SJH_74SHCON5", "CON_NTO_AAB_107ACON20",  "CON_NTO_AAB_111ACON24")),]->general_sample_sinoutlayer0.05
+
+
+beta.pair(community_Lepidoptera_sinoutlayer0.05, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+metaMDS (beta.pair$beta.sim)->MDSbetasim0.05
+
+#general_sample_sinoutlayer0.05
+#separate(sample_names, c("Conservation","Mountain","Site","ID")
+#plot (MDSbetasim0.05, main="Lepidoptera_Site")
+#with(general_sample_sinoutlayer0.05,ordispider(MDSbetasim0.05, Mountain, label=T, col="green"))
+plot (MDSbetasim0.05, main="Lepidoptera_Site_0.05")
+with(general_sample_sinoutlayer0.05,ordispider(MDSbetasim0.05, Site, label=T, col="blue"))
+#plot (MDSbetasim0.05, main="Lepidoptera_Site")
+#with(general_sample_sinoutlayer0.05,ordispider(MDSbetasim0.05, ID, label=T, col="red"))
+plot (MDSbetasim0.05, main="Lepidoptera_Site0.05")
+x<- MDSbetasim0.05$points[,1]
+y<- MDSbetasim0.05$points[,2]
+text(x, y, pos = 1, cex=0.7, labels = row.names (community_Lepidoptera_sinoutlayer0.05))
+
+plot (MDSbetasim0.05, xlim=c(-0.5, 0.5), ylim=c(-0.49, 0.49), cex.axis=1.4, cex=1.2, cex.lab=1.4, main="Lepidoptera_Site_0.05")
+with(general_sample_sinoutlayer0.05,ordispider(MDSbetasim0.05, Site, label=T, cex.lab=0.9, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0")))
+
+plot (MDSbetasim0.05, xlim=c(-0.5, 0.5), ylim=c(-0.49, 0.49), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5, main="Lepidoptera_Site_0.05")
+with(general_sample_sinoutlayer0.05,ordispider(MDSbetasim0.05, Site, cex.lab=1, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"), lwd=4.5))
+legend(0.21, 0.55,
+       legend = c("Agua Bendita", "San Bartolo", "San Juan Huertas", "Tlacotepec"),
+       col=c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"),
+       bty="n", text.font=2, lty=1, lwd= 7, cex = 1.1)
+    
+#Anosim
+anosim(beta.pair$beta.sim, general_sample_sinoutlayer0.05$Site, permutations=999)
+
+#I put letter "r" in cursive and r2 value
+mylabel = bquote(italic(r)^2)
+text(x=0.25, y=-0.42, labels = mylabel, cex=2)
+text(x=0.56, y=-0.42, labels="=0.114 ns", cex=2)
+mtext(c("Lepidoptera"), side = 4, col = "black", line = 1, cex = 2)
+
+############################ E N D #####################################

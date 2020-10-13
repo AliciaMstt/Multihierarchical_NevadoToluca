@@ -7,15 +7,14 @@
 library(stats)
 library(base)
 library(dplyr)
-library(dplyr)
 library(tidyr)
-library (knitr)
+library(knitr)
 library(PMCMR)
 library(rcdd) 
 library(vegan)
 library(betapart) 
 library(stringr)
-library(permute) #Me pide que carge permute y lattice en el Rstudio que estoy usando
+library(permute) 
 library(lattice)
 
 

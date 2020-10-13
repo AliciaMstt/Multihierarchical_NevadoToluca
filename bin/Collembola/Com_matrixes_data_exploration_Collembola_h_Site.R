@@ -4,6 +4,19 @@
 
 #'In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
 
+library(stats)
+library(base)
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(PMCMR)
+library(rcdd) 
+library(vegan)
+library(betapart) 
+library(stringr)
+library(permute) 
+library(lattice)
+
 ################################################################################################################################################################################
 ###########'open table with names including Region and habitat parameters
 s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", header=TRUE)

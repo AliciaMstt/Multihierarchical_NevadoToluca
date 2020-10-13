@@ -14,8 +14,6 @@ library(rcdd)
 library(vegan)
 library(betapart) 
 library(stringr)
-library(permute) 
-library(lattice)
 
 
 #'**We get the diversity analysis at haplotypes, CL 3%, and CL 5% in Diptera**'#

@@ -14,8 +14,6 @@ library(rcdd)
 library(vegan)
 library(betapart) 
 library(stringr)
-library(permute) 
-library(lattice)
 
 ################################################################################################################################################################################
 ###########'open table with names including Region and habitat parameters

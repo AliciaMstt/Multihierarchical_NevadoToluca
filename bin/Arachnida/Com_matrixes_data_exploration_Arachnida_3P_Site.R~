@@ -114,9 +114,19 @@ richness_Site
 richness_Site %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site #'generating a variable combining layer and habitat
 richness_Site
 
+##'Generating variables with in total SITE_C.
+richness_Site %>% separate(sample_names_Site, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
+richness_SiteC
+richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC #'generating a variable combining layer and habitat
+richness_SiteC
+
 #BY SITE
 write.table(richness_Site, file="../genetic/Data_out/Arachnida/Arachnida3P/richness_Site_Arachnida_0.03.txt") #'this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Arachnida/Arachnida3P/richness_Site_Arachnida_0.03.txt",header=TRUE)->richness_Site
+
+#BY SITE_C general
+write.table(richness_SiteC, file="../genetic/Data_out/Arachnida/Arachnida3P/richness_SiteC_Arachnida0.03.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Arachnida/Arachnida3P/richness_SiteC_Arachnida0.03.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site$sample_richness_Site,col=richness_Site$Mountain1Site,names.arg= richness_Site$sample_names_Site,las=2,cex.names=0.5, ylab="richness_Site", main="H richness_Site Arachnida_0.03")

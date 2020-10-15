@@ -14,11 +14,13 @@ library(rcdd)
 library(vegan)
 library(betapart) 
 library(stringr)
+library(permute)
+library(lattice)
 
 #'**TABLES AND COMMUNITY MATRIXES**'# 
 ###################################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Hemiptera/s2_raw_all_Hemiptera_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../../genetic/Data_in/Hemiptera/s2_raw_all_Hemiptera_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
 ###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -44,8 +46,8 @@ for (i in 1:length(unique (s2_raw_threshold$limite0.05)))
 {
   levels_limite0.05[i]->level0.05
   s2_raw_threshold[which(s2_raw_threshold$limite0.05==level0.05),]->subcom_level_names0.05
-  subcom_level_names0.05[,c(2:52)]->subcom_level  #delete names, level and also the negative column
-  colSums(subcom_level)->sum0.05
+  subcom_level_names0.05[,c(2:52)]->subcom_level0.05  #delete names, level and also the negative column
+  colSums(subcom_level0.05)->sum0.05
   as.data.frame(sum0.05)->sum0.05
   t(sum0.05)->sum0.05
   row.names(sum0.05)<-subcom_level_names0.05[1,1] #keep the name of the first haplotype
@@ -71,8 +73,8 @@ as.data.frame(community_Hemiptera_limite0.05)->community_Hemiptera0.05 #'trasp i
 #community_Hemiptera[-49,]->community_Hemiptera #'removing neg
 dim(community_Hemiptera0.05)
 community_Hemiptera0.05[order(row.names(community_Hemiptera0.05)),]->community_Hemiptera0.05 #'order samples
-write.table (community_Hemiptera0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt")->community_Hemiptera0.05
+write.table (community_Hemiptera0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt")->community_Hemiptera0.05
 
 #'submatrixes by SITE in Nevado Toluca.
 dim(community_Hemiptera0.05)
@@ -91,8 +93,8 @@ sample_names_Mountain1_0.05 %>% separate(sample_names_Mountain1_0.05, c("Conserv
 general_sample_Mountain1Site_0.05
 general_sample_Mountain1Site_0.05 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site_0.05 #'generating a variable combining layer and habitat
 general_sample_Mountain1Site_0.05
-write.table(general_sample_Mountain1Site_0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
+write.table(general_sample_Mountain1Site_0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
 
 ####################################################
 ####################################################
@@ -115,13 +117,34 @@ richness_Site0.05
 richness_Site0.05 %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.05 #'generating a variable combining layer and habitat
 richness_Site0.05
 
+##'Generating variables with in total SITE_C.
+richness_Site0.05 %>% separate(sample_names_Site0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
+richness_SiteC
+richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC #'generating a variable combining layer and habitat
+richness_SiteC
+
 #BY SITE
-write.table(richness_Site0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt",header=TRUE)->richness_Site0.05
+write.table(richness_Site0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt",header=TRUE)->richness_Site0.05
+
+#BY SITE_C general
+write.table(richness_SiteC, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_SiteC_Hemiptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_SiteC_Hemiptera.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site0.05$sample_richness_Site0.05,col=richness_Site0.05$Mountain1Site,names.arg= richness_Site0.05$sample_names_Site0.05,las=2,cex.names=0.5, ylab="richness_Site0.05", main="H richness_Site0.05 Hemiptera_0.05")
 richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.05))
+
+#min, max, ds Summarise
+richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.05))
+richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.05))
+richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.05))
+
+##'General mean, min, max, ds by sample in SITE_richness_SiteC
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.05))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(min(sample_richness_Site0.05))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(max(sample_richness_Site0.05))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(sd(sample_richness_Site0.05))
 
 ##'Global richness by SITE.  
 plot(richness_Site0.05$Mountain1Site,richness_Site0.05$sample_richness_Site0.05,ylab="richness_Site0.05", ylim=c(0,15), cex=1.4, cex.axis=2.3, lwd=2.5, main="H richness_Site0.05 Hemiptera_0.05")
@@ -146,8 +169,8 @@ rbind(h_names_Site0.05,h_ocurrence_Site0.05)->h_ocurrence_Site0.05
 t(h_ocurrence_Site0.05)->h_ocurrence_Site0.05
 colnames(h_ocurrence_Site0.05)<-c("h_names_Site0.05","h_ocurrence_Site0.05")
 dim(h_ocurrence_Site0.05)
-write.table(h_ocurrence_Site0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt",header=TRUE)->h_ocurrence_Site0.05
+write.table(h_ocurrence_Site0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt",header=TRUE)->h_ocurrence_Site0.05
 
 #' percentege of singletons by sample
 h_ocurrence_Site0.05
@@ -156,10 +179,10 @@ length(singletons_Site0.05)
 length(singletons_Site0.05)/length(h_ocurrence_Site0.05$h_ocurrence_Site0.05)*100
 
 #' percentege of h in more than 2 samples
-which(h_ocurrence_Site0.05$h_ocurrence_Site0.05>2)->more2_Site
-more2_Site
-length(more2_Site)
-length(more2_Site)/length(h_ocurrence_Site0.05$h_ocurrence_Site0.05)*100
+which(h_ocurrence_Site0.05$h_ocurrence_Site0.05>2)->more2_Site0.05
+more2_Site0.05
+length(more2_Site0.05)
+length(more2_Site0.05)/length(h_ocurrence_Site0.05$h_ocurrence_Site0.05)*100
 
 #'number of singletons by SITE
 #community_Hemiptera_Site0.05

@@ -14,11 +14,13 @@ library(rcdd)
 library(vegan)
 library(betapart) 
 library(stringr)
+library(permute) 
+library(lattice)
 
 #'**TABLES AND COMMUNITY MATRIXES**'# 
 ################################################################################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Lepidoptera/s2_raw_all_Lepidoptera_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../../genetic/Data_in/Lepidoptera/s2_raw_all_Lepidoptera_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
 ###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -71,8 +73,8 @@ as.data.frame(community_Lepidoptera_limite0.03)->community_Lepidoptera0.03 #'tra
 #community_Lepidoptera[-49,]->community_Lepidoptera #'removing neg
 dim(community_Lepidoptera0.03)
 community_Lepidoptera0.03[order(row.names(community_Lepidoptera0.03)),]->community_Lepidoptera0.03 #'order samples
-write.table (community_Lepidoptera0.03, file="../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera0.03.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera0.03.txt")->community_Lepidoptera0.03
+write.table (community_Lepidoptera0.03, file="../../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera0.03.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera0.03.txt")->community_Lepidoptera0.03
 
 #'submatrixes by SITE in Nevado Toluca
 dim(community_Lepidoptera0.03)
@@ -91,8 +93,8 @@ sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conserv
 sample_names_Mountain1_0.03
 sample_names_Mountain1_0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->sample_names_Mountain1_0.03 #'generating a variable combining layer and habitat
 sample_names_Mountain1_0.03
-write.table(sample_names_Mountain1_0.03, file="../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt",header=TRUE)->sample_names_Mountain1_0.03
+write.table(sample_names_Mountain1_0.03, file="../../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt",header=TRUE)->sample_names_Mountain1_0.03
 
 ##############################################################
 #'**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES**'# 
@@ -114,13 +116,34 @@ richness_Site0.03
 richness_Site0.03 %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.03 #'generating a variable combining layer and habitat
 richness_Site0.03
 
+##'Generating variables with in total SITE_C.
+richness_Site0.03 %>% separate(sample_names_Site0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
+richness_SiteC
+richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC #'generating a variable combining layer and habitat
+richness_SiteC
+
 #BY SITE
-write.table(richness_Site0.03, file="richness_Site_Lepidoptera.txt") #'this is the only way I found to be able to work later
-read.table("richness_Site_Lepidoptera.txt",header=TRUE)->richness_Site0.03
+write.table(richness_Site0.03, file="../../genetic/Data_out/Lepidoptera/Lepidoptera3P/richness_Site_Lepidoptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Lepidoptera/Lepidoptera3P/richness_Site_Lepidoptera.txt",header=TRUE)->richness_Site0.03
+
+#BY SITE_C general
+write.table(richness_SiteC, file="../../genetic/Data_out/Lepidoptera/Lepidoptera3P/richness_SiteC_Lepidoptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Lepidoptera/Lepidoptera3P/richness_SiteC_Lepidoptera.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site0.03$sample_richness_Site0.03,col=richness_Site0.03$Mountain1Site,names.arg= richness_Site0.03$sample_names_Site0.03,las=2,cex.names=0.5, ylab="richness_Site0.03", main="H richness_Site Lepidoptera_0.03")
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.03))
+
+#min, max, ds Summarise
+richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.03))
+richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.03))
+richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.03))
+
+##'General mean, min, max, ds by sample in SITE_richness_SiteC
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.03))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(min(sample_richness_Site0.03))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(max(sample_richness_Site0.03))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(sd(sample_richness_Site0.03))
 
 ##'Global richness by SITE.  
 plot(richness_Site0.03$Mountain1Site,richness_Site0.03$sample_richness_Site0.03,ylab="richness_Site0.03", ylim=c(0,8), cex=1.4, cex.axis=2.3, lwd=2.5, main="H richness_Site Lepidoptera_0.03")
@@ -144,8 +167,8 @@ rbind(h_names_Site0.03,h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 t(h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 colnames(h_ocurrence_Site0.03)<-c("h_names_Site0.03","h_ocurrence_Site0.03")
 dim(h_ocurrence_Site0.03)
-write.table(h_ocurrence_Site0.03, file="../genetic/Data_out/Lepidoptera/Lepidoptera3P/h_ocurrence_Site0.03_Lepidoptera.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Lepidoptera/Lepidoptera3P/h_ocurrence_Site0.03_Lepidoptera.txt",header=TRUE)->h_ocurrence_Site0.03
+write.table(h_ocurrence_Site0.03, file="../../genetic/Data_out/Lepidoptera/Lepidoptera3P/h_ocurrence_Site0.03_Lepidoptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Lepidoptera/Lepidoptera3P/h_ocurrence_Site0.03_Lepidoptera.txt",header=TRUE)->h_ocurrence_Site0.03
 
 #' percentege of singletons by sample
 h_ocurrence_Site0.03
@@ -154,10 +177,10 @@ length(singletons_Site0.03)
 length(singletons_Site0.03)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
 
 #' percentege of h in more than 2 samples
-which(h_ocurrence_Site0.03$h_ocurrence_Site0.03>2)->more2_Site
-more2_Site
-length(more2_Site)
-length(more2_Site)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
+which(h_ocurrence_Site0.03$h_ocurrence_Site0.03>2)->more2_Site0.03
+more2_Site0.03
+length(more2_Site0.03)
+length(more2_Site0.03)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
 
 #'number of singletons by SITE
 #community_Lepidoptera_Site0.03

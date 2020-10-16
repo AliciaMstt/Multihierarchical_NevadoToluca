@@ -152,7 +152,6 @@ posthoc.kruskal.nemenyi.test(x=richness_Site0.05$sample_richness_Site0.05, g=ric
 # Comparison of each group against. 
 text(x=c(1,2,3,4), y=(15.7), labels=c("a","b","ab","b"), cex=1.4)
 text(x=4.5, y=15.7, labels="**", cex=2)
-#mtext(c("Clustering 5%"), side = 3, col = "black", line = 1, cex = 2)
 mtext(c("Coleoptera"), side = 4, col = "black", line = 1, cex = 2)
 
 ####################################################
@@ -207,6 +206,8 @@ specaccum(community_Coleoptera_Site0.05,"random", permutations=1000)->cum_Site0.
 plot(cum_Site0.05, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,100), main="h_Coleoptera_Site_0.05")
 specpool(community_Coleoptera_Site0.05)->specpool_Site0.05
 specpool_Site0.05$Species/specpool_Site0.05$chao*100
+text(x=38, y=5, labels="49.71%", cex=1.5)
+mtext(c("Coleoptera"), side = 4, col = "black", line = 1, cex = 2)
 
 ####################################################
 ####################################################

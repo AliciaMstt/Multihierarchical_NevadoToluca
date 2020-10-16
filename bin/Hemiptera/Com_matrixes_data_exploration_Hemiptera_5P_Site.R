@@ -153,7 +153,6 @@ posthoc.kruskal.nemenyi.test(x=richness_Site0.05$sample_richness_Site0.05, g=ric
 # Comparison of each group against. 
 #text(x=c(1,2,3,4.1), y=(153), labels=c("a","a","ab","b"), cex=1.4)
 text(x=4.5, y=14, labels="ns", cex=2)
-#mtext(c("Clustering 5%"), side = 3, col = "black", line = 1, cex = 2)
 mtext(c("Hemiptera"), side = 4, col = "black", line = 1, cex = 2)
 
 ####################################################
@@ -209,6 +208,8 @@ specaccum(community_Hemiptera_Site0.05,"random", permutations=1000)->cum_Site0.0
 plot(cum_Site0.05, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,60), main="h_Hemiptera_Site_0.05")
 specpool(community_Hemiptera_Site0.05)->specpool_Site0.05
 specpool_Site0.05$Species/specpool_Site0.05$chao*100
+text(x=38, y=5, labels="60.77%", cex=1.5)
+mtext(c("Hemiptera"), side = 4, col = "black", line = 1, cex = 2)
 
 ###################################################
 ####################################################

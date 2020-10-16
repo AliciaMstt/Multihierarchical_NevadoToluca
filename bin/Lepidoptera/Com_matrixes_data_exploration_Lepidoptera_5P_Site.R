@@ -153,6 +153,8 @@ posthoc.kruskal.nemenyi.test(x=richness_Site0.05$sample_richness_Site0.05, g=ric
 # Comparison of each group against. 
 #text(x=c(1,2,3,4.1), y=(29), labels=c("a","b","a","a"), cex=1.4)
 text(x=4.5, y=7, labels="ns", cex=2)
+#mtext(c("Clustering 5%"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("Lepidoptera"), side = 4, col = "black", line = 1, cex = 2)
 
 ####################################################
 ####################################################

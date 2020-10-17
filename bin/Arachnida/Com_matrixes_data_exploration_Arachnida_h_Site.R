@@ -187,6 +187,7 @@ specaccum(community_Arachnida_Site_h,"random", permutations=1000)->cum_Site_h
 plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, main="h_Arachnida_Site")
 specpool(community_Arachnida_Site_h)->specpool_Site_h
 specpool_Site_h$Species/specpool_Site_h$chao*100
+text(x=38, y=5, labels="66.99%", cex=1.5)
 
 ####################################################
 #'**BETADIVERSITY ORDINATIONS**'# by Sites

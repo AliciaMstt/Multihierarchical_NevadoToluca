@@ -185,7 +185,7 @@ plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3)
 specpool(community_Collembola_Site_h)->specpool_Site_h
 specpool_Site_h$Species/specpool_Site_h$chao*100
 text(x=38, y=5, labels="91.05%", cex=1.5)
-mtext(c("Haplotypes"), side = 3, col = "black", line = 1, cex = 2)
+
 
 ####################################################
 ####################################################

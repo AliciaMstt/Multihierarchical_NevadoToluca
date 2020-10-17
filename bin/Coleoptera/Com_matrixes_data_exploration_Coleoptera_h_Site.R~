@@ -14,11 +14,13 @@ library(rcdd)
 library(vegan)
 library(betapart) 
 library(stringr)
+library(permute)
+library(lattice)
 
 #'**TABLES AND COMMUNITY MATRIXES**'# 
 ################################################################################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_h_all <- read.table("../genetic/Data_in/Coleoptera/s2_raw_all_Coleoptera_threshold.txt", header=TRUE)
+s2_raw_h_all <- read.table("../../genetic/Data_in/Coleoptera/s2_raw_all_Coleoptera_threshold.txt", header=TRUE)
 dim(s2_raw_h_all)
 
 #'Table Haplotipos'
@@ -52,8 +54,8 @@ as.data.frame(community_Coleoptera_h)->community_Coleoptera_h #'trasp including 
 #community_Acari[-49,]->community_Coleoptera #'removing neg
 dim(community_Coleoptera_h)
 community_Coleoptera_h[order(row.names(community_Coleoptera_h)),]->community_Coleoptera_h #'order samples
-write.table (community_Coleoptera_h, file="../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_h.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_h.txt")->community_Coleoptera_h
+write.table (community_Coleoptera_h, file="../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_h.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_h.txt")->community_Coleoptera_h
 
 #'submatrixes by SITE in Nevado Toluca.
 dim(community_Coleoptera_h)
@@ -72,8 +74,8 @@ sample_names_Mountain1_h %>% separate(sample_names_Mountain1_h, c("Conservation"
 general_sample_Mountain1Site_h
 general_sample_Mountain1Site_h %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site_h #'generating a variable combining layer and habitat
 general_sample_Mountain1Site_h
-write.table(general_sample_Mountain1Site_h, file="../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/general_sample_Mountain1Site_h.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
+write.table(general_sample_Mountain1Site_h, file="../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/general_sample_Mountain1Site_h.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 ####################################################
 ####################################################
@@ -96,13 +98,34 @@ richness_Site_h
 richness_Site_h %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site_h #'generating a variable combining layer and habitat
 richness_Site_h
 
+##'Generating variables with in total SITE_C.
+richness_Site_h %>% separate(sample_names_Site_h, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
+richness_SiteC
+richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC #'generating a variable combining layer and habitat
+richness_SiteC
+
 #BY SITE
-write.table(richness_Site_h, file="../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/richness_Site_h_Coleoptera.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/richness_Site_h_Coleoptera.txt",header=TRUE)->richness_Site_h
+write.table(richness_Site_h, file="../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/richness_Site_h_Coleoptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/richness_Site_h_Coleoptera.txt",header=TRUE)->richness_Site_h
+
+#BY SITE_C general
+write.table(richness_SiteC, file="../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/richness_SiteC_Coleoptera_h.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/richness_SiteC_Coleoptera_h.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site_h$sample_richness_Site_h,col=richness_Site_h$Mountain1Site,names.arg= richness_Site_h$sample_names_Site_h, las=2,cex.names=0.5, ylab="richness_Site_h", main="H richness_Site_h Coleoptera")
 richness_Site_h %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site_h))
+
+#min, max, ds Summarise
+richness_Site_h %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site_h))
+richness_Site_h %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site_h))
+richness_Site_h %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site_h))
+
+##'General mean, min, max, ds by sample in SITE_richness_SiteC
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site_h))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(min(sample_richness_Site_h))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(max(sample_richness_Site_h))
+richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(sd(sample_richness_Site_h))
 
 ##'Global richness by SITE.  
 plot(richness_Site_h$Mountain1Site,richness_Site_h$sample_richness_Site_h,ylab="richness_Site_h", ylim=c(0,16), cex=1.4, cex.axis=2.3, lwd=2.5, main="H richness_Site_h Coleoptera")
@@ -127,8 +150,8 @@ rbind(h_names_Site,h_ocurrence_Site)->h_ocurrence_Site
 t(h_ocurrence_Site)->h_ocurrence_Site
 colnames(h_ocurrence_Site)<-c("h_names_Site","h_ocurrence_Site")
 dim(h_ocurrence_Site)
-write.table(h_ocurrence_Site, file="../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/h_ocurrence_Site_Coleoptera.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/h_ocurrence_Site_Coleoptera.txt",header=TRUE)->h_ocurrence_Site
+write.table(h_ocurrence_Site, file="../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/h_ocurrence_Site_Coleoptera.txt") #'this is the only way I found to be able to work later
+read.table("../../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/h_ocurrence_Site_Coleoptera.txt",header=TRUE)->h_ocurrence_Site
 
 #' percentege of singletons by sample
 h_ocurrence_Site
@@ -175,10 +198,10 @@ beta.multi(community_Coleoptera_Site_h, index.family="sorensen")
 
 #'turnover by pairs, nmds, anosim
 beta.pair(community_Coleoptera_Site_h, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
-metaMDS (beta.pair$beta.sim)->MDSbetasim #'NMDS
-plot (MDSbetasim, main="Coleoptera_Site") 
-x<- MDSbetasim$points[,1]
-y<- MDSbetasim$points[,2]
+metaMDS (beta.pair$beta.sim)->MDSbetasim_h #'NMDS
+plot (MDSbetasim_h, main="Coleoptera_Site") 
+x<- MDSbetasim_h$points[,1]
+y<- MDSbetasim_h$points[,2]
 text(x, y, pos = 1, cex=0.7, labels = row.names (community_Coleoptera_Site_h))
 
 ############################
@@ -191,28 +214,28 @@ dim(community_Coleoptera_sinoutlayer)
 general_sample_Mountain1Site_h[-which(general_sample_Mountain1Site_h$sample_names %in% c("CON_NTO_AAB_120ACON10", "CON_NTO_TLC_32TCONS2")),]->general_sample_sinoutlayer
 
 beta.pair(community_Coleoptera_sinoutlayer, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
-metaMDS (beta.pair$beta.sim)->MDSbetasim
+metaMDS (beta.pair$beta.sim)->MDSbetasim_h
 
 #general_sample_sinoutlayer
 #separate(sample_names, c("Conservation","Mountain","Site","ID")
 ###Hasta aqui modificado Nancy
-plot (MDSbetasim, main="Coleoptera_Site_h")
-with(general_sample_sinoutlayer,ordispider(MDSbetasim, Site, label=T, col="blue"))
-#with(general_sample_sinoutlayer,ordispider(MDSbetasim, Mountain, label=T, col="green"))
-#plot (MDSbetasim, main="Coleoptera_Site")
-plot (MDSbetasim, main="Coleoptera_Site_h")
-x<- MDSbetasim$points[,1]
-y<- MDSbetasim$points[,2]
+plot (MDSbetasim_h, main="Coleoptera_Site_h")
+with(general_sample_sinoutlayer,ordispider(MDSbetasim_h, Site, label=T, col="blue"))
+#with(general_sample_sinoutlayer,ordispider(MDSbetasim_h, Mountain, label=T, col="green"))
+#plot (MDSbetasim_h, main="Coleoptera_Site")
+plot (MDSbetasim_h, main="Coleoptera_Site_h")
+x<- MDSbetasim_h$points[,1]
+y<- MDSbetasim_h$points[,2]
 text(x, y, pos = 1, cex=0.7, labels = row.names (community_Coleoptera_sinoutlayer))
 
-plot (MDSbetasim, xlim=c(-0.5, 0.5), ylim=c(-0.5, 0.5), cex.axis=1.4, cex=1.2, cex.lab=1.4, main="Coleoptera_Site_h")
-with(general_sample_sinoutlayer,ordispider(MDSbetasim, Site, label=T, cex.lab=0.9, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0")))
+plot (MDSbetasim_h, xlim=c(-0.5, 0.5), ylim=c(-0.5, 0.5), cex.axis=1.4, cex=1.2, cex.lab=1.4, main="Coleoptera_Site_h")
+with(general_sample_sinoutlayer,ordispider(MDSbetasim_h, Site, label=T, cex.lab=0.9, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0")))
 
 #Anosim
 anosim(beta.pair$beta.sim, general_sample_sinoutlayer$Site, permutations=999)
 
-plot (MDSbetasim, xlim=c(-0.5, 0.5), ylim=c(-0.5, 0.5), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5, main="Coleoptera_Site_h")
-with(general_sample_sinoutlayer,ordispider(MDSbetasim, Site, cex.lab=1, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"), lwd=4.5))
+plot (MDSbetasim_h, xlim=c(-0.5, 0.5), ylim=c(-0.5, 0.5), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5, main="Coleoptera_Site_h")
+with(general_sample_sinoutlayer,ordispider(MDSbetasim_h, Site, cex.lab=1, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"), lwd=4.5))
 #I put letter "r" in cursive and r2 value
 mylabel = bquote(italic(r)^2)
 text(x=0.25, y=-0.35, labels = mylabel, cex=2)

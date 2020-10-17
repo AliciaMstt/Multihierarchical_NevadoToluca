@@ -208,6 +208,7 @@ specaccum(community_Hymenoptera_Site0.03,"random", permutations=1000)->cum_Site0
 plot(cum_Site0.03, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,100), main="h_Hymenoptera_Site_0.03")
 specpool(community_Hymenoptera_Site0.03)->specpool_Site0.03
 specpool_Site0.03$Species/specpool_Site0.03$chao*100
+text(x=38, y=5, labels="66.69%", cex=1.5)
 
 ####################################################
 ####################################################

@@ -20,7 +20,7 @@ library(lattice)
 #'**TABLES AND COMMUNITY MATRIXES**'# 
 ################################################################################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
 ###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -73,8 +73,8 @@ as.data.frame(community_Diptera_limite0.03)->community_Diptera0.03 #'trasp inclu
 #community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.03)
 community_Diptera0.03[order(row.names(community_Diptera0.03)),]->community_Diptera0.03 #'order samples
-write.table (community_Diptera0.03, file="../../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt")->community_Diptera0.03
+write.table (community_Diptera0.03, file="../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt")->community_Diptera0.03
 
 #'submatrixes by SITE in Nevado Toluca
 dim(community_Diptera0.03)
@@ -93,8 +93,8 @@ sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conserv
 general_sample_Mountain1Site0.03
 general_sample_Mountain1Site0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site0.03 #'generating a variable combining layer and habitat
 general_sample_Mountain1Site0.03
-write.table(general_sample_Mountain1Site0.03, file="../../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
+write.table(general_sample_Mountain1Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 ####################################################
 ####################################################
@@ -124,12 +124,12 @@ richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_"
 richness_SiteC
 
 #BY SITE
-write.table(richness_Site0.03, file="../../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt",header=TRUE)->richness_Site0.03
+write.table(richness_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt",header=TRUE)->richness_Site0.03
 
 #BY SITE_C general
-write.table(richness_SiteC, file="../../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt",header=TRUE)->richness_SiteC
+write.table(richness_SiteC, file="../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site0.03$sample_richness_Site0.03,col=richness_Site0.03$Mountain1Site,names.arg= richness_Site0.03$sample_names_Site0.03,las=2,cex.names=0.5, ylab="richness_Site0.03", main="H richness_Site Diptera_0.03")
@@ -155,6 +155,7 @@ text(x=c(1,2,3,4.1), y=(49), labels=c("ab","a","ab","b"), cex=1.4)
 text(x=4.5, y=49, labels="*", cex=2)
 mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex = 2)
 
+
 ####################################################
 ####################################################
 #'**HAPLOTYPE OCURRENCE TABLES AND SINGLETONS by SITE**'
@@ -170,8 +171,8 @@ rbind(h_names_Site0.03,h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 t(h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 colnames(h_ocurrence_Site0.03)<-c("h_names_Site0.03","h_ocurrence_Site0.03")
 dim(h_ocurrence_Site0.03)
-write.table(h_ocurrence_Site0.03, file="../../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt",header=TRUE)->h_ocurrence_Site0.03
+write.table(h_ocurrence_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt",header=TRUE)->h_ocurrence_Site0.03
 
 #' percentege of singletons by sample
 h_ocurrence_Site0.03

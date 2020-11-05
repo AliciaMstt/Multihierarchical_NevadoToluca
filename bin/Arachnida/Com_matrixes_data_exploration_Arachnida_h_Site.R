@@ -23,7 +23,7 @@ library(lattice)
 ################################################################################################################################################################################
 
 ###########'open table with names including Region and Site parameters
-s2_raw_all <- read.table("../../genetic/Data_in/Arachnida/s2_raw_all_Arachnida_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Arachnida/s2_raw_all_Arachnida_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
 #'Table Haplotipos'
@@ -57,8 +57,8 @@ as.data.frame(community_Arachnida_h)->community_Arachnida_h #'trasp including co
 #community_Arachnida[-49,]->community_Arachnida #'removing neg
 dim(community_Arachnida_h)
 community_Arachnida_h[order(row.names(community_Arachnida_h)),]->community_Arachnida_h #'order samples
-write.table (community_Arachnida_h, file="../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_h.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_h.txt")->community_Arachnida_h
+write.table (community_Arachnida_h, file="../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_h.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_h.txt")->community_Arachnida_h
 
 #'submatrixes by SITE in Nevado Toluca.
 dim(community_Arachnida_h)
@@ -76,8 +76,8 @@ sample_names_Mountain1_h %>% separate(sample_names_Mountain1_h, c("Conservation"
 general_sample_Mountain1Site_h
 general_sample_Mountain1Site_h %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site_h #'generating a variable combining layer and habitat
 general_sample_Mountain1Site_h
-write.table(general_sample_Mountain1Site_h, file="../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/general_sample_Mountain1Site_h.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
+write.table(general_sample_Mountain1Site_h, file="../genetic/Data_out/Arachnida/Arachnida_Haplotypes/general_sample_Mountain1Site_h.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 ####################################################
 ####################################################
@@ -107,12 +107,12 @@ richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_"
 richness_SiteC
 
 #BY SITE
-write.table(richness_Site_h, file="../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_Site_h_Arachnida_h.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_Site_h_Arachnida_h.txt",header=TRUE)->richness_Site_h
+write.table(richness_Site_h, file="../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_Site_h_Arachnida_h.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_Site_h_Arachnida_h.txt",header=TRUE)->richness_Site_h
 
 #BY SITE_C general
-write.table(richness_SiteC, file="../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_SiteC_Arachnida_h.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_SiteC_Arachnida_h.txt",header=TRUE)->richness_SiteC
+write.table(richness_SiteC, file="../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_SiteC_Arachnida_h.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/richness_SiteC_Arachnida_h.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site_h$sample_richness_Site_h,col=richness_Site_h$Mountain1Site,names.arg= richness_Site_h$sample_names_Site_h, las=2,cex.names=0.5, ylab="richness_Site_h", main="H richness_Site Arachnida")
@@ -151,8 +151,8 @@ rbind(h_names_Site,h_ocurrence_Site)->h_ocurrence_Site
 t(h_ocurrence_Site)->h_ocurrence_Site
 colnames(h_ocurrence_Site)<-c("h_names_Site","h_ocurrence_Site")
 dim(h_ocurrence_Site)
-write.table(h_ocurrence_Site, file="../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/h_ocurrence_Site_Arachnida.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Arachnida/Arachnida_Haplotypes/h_ocurrence_Site_Arachnida.txt",header=TRUE)->h_ocurrence_Site
+write.table(h_ocurrence_Site, file="../genetic/Data_out/Arachnida/Arachnida_Haplotypes/h_ocurrence_Site_Arachnida.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/h_ocurrence_Site_Arachnida.txt",header=TRUE)->h_ocurrence_Site
 
 #' percentege of singletons by sample
 h_ocurrence_Site

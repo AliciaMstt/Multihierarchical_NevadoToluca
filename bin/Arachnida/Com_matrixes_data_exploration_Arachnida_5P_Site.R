@@ -105,40 +105,40 @@ row.names(community_Arachnida_Site0.05)->sample_names_Site0.05
 dim(community_Arachnida_Site0.05)->dims_Site0.05
 dims_Site0.05
 .rowSums (community_Arachnida_Site0.05,dims_Site0.05[1],dims_Site0.05[2])->sample_richness_Site0.05 #'summatory by rows
-rbind(sample_names_Site0.05,sample_richness_Site0.05)->richness_Site0.05
-t(richness_Site0.05)->richness_Site0.05
-colnames(richness_Site0.05)<-c("sample_names_Site0.05","sample_richness_Site0.05")
-richness_Site0.05
-as.data.frame(richness_Site0.05)->richness_Site0.05
+rbind(sample_names_Site0.05,sample_richness_Site0.05)->richness_Site0.05_Arachnida
+t(richness_Site0.05_Arachnida)->richness_Site0.05_Arachnida
+colnames(richness_Site0.05_Arachnida)<-c("sample_names_Site0.05","sample_richness_Site0.05")
+richness_Site0.05_Arachnida
+as.data.frame(richness_Site0.05_Arachnida)->richness_Site0.05_Arachnida
 
 ##'Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio. 
-richness_Site0.05 %>% separate(sample_names_Site0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_Site0.05
-richness_Site0.05
-richness_Site0.05 %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.05 #'generating a variable combining layer and habitat
-richness_Site0.05
+richness_Site0.05_Arachnida %>% separate(sample_names_Site0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_Site0.05_Arachnida
+richness_Site0.05_Arachnida
+richness_Site0.05_Arachnida %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.05_Arachnida #'generating a variable combining layer and habitat
+richness_Site0.05_Arachnida
 
 ##'Generating variables with in total SITE_C.
-richness_Site0.05 %>% separate(sample_names_Site0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
+richness_Site0.05_Arachnida %>% separate(sample_names_Site0.05, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
 richness_SiteC
 richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC #'generating a variable combining layer and habitat
 richness_SiteC
 
 #BY SITE
-write.table(richness_Site0.05, file="../genetic/Data_out/Arachnida/Arachnida5P/richness_Site_Arachnida0.05.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Arachnida/Arachnida5P/richness_Site_Arachnida0.05.txt",header=TRUE)->richness_Site0.05
+write.table(richness_Site0.05_Arachnida, file="../genetic/Data_out/Arachnida/Arachnida5P/richness_Site_Arachnida0.05.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Arachnida/Arachnida5P/richness_Site_Arachnida0.05.txt",header=TRUE)->richness_Site0.05_Arachnida
 
 #BY SITE_C general
 write.table(richness_SiteC, file="../genetic/Data_out/Arachnida/Arachnida5P/richness_SiteC_Arachnida0.05.txt") #'this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Arachnida/Arachnida5P/richness_SiteC_Arachnida0.05.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
-barplot(richness_Site0.05$sample_richness_Site0.05,col=richness_Site0.05$Mountain1Site,names.arg= richness_Site0.05$sample_names_Site0.05,las=2,cex.names=0.5, ylab="richness_Site0.05", main="Richness_Site Arachnida_0.05")
-richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.05))
+barplot(richness_Site0.05_Arachnida$sample_richness_Site0.05,col=richness_Site0.05_Arachnida$Mountain1Site,names.arg= richness_Site0.05_Arachnida$sample_names_Site0.05,las=2,cex.names=0.5, ylab="richness_Site0.05_Arachnida", main="Richness_Site Arachnida_0.05")
+richness_Site0.05_Arachnida %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.05))
 
 #min, max, ds Summarise
-richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.05))
-richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.05))
-richness_Site0.05 %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.05))
+richness_Site0.05_Arachnida %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.05))
+richness_Site0.05_Arachnida %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.05))
+richness_Site0.05_Arachnida %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.05))
 
 ##'General mean, min, max, ds by sample in SITE_richness_SiteC
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.05))
@@ -147,9 +147,9 @@ richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(max(sample_rich
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(sd(sample_richness_Site0.05))
 
 ##'Global richness by SITE.  
-plot(richness_Site0.05$Mountain1Site,richness_Site0.05$sample_richness_Site0.05,ylab="richness_Site0.05", ylim=c(0,30), cex=1.4, cex.axis=2.3, lwd=2.5, main="Richness_Site Arachnida_0.05")
-kruskal.test(sample_richness_Site0.05 ~ Mountain1Site, data = richness_Site0.05)
-posthoc.kruskal.nemenyi.test(x=richness_Site0.05$sample_richness_Site0.05, g=richness_Site0.05$Mountain1Site, method="Bonferroni")
+plot(richness_Site0.05_Arachnida$Mountain1Site,richness_Site0.05_Arachnida$sample_richness_Site0.05,ylab="richness_Site0.05_Arachnida", ylim=c(0,30), cex=1.4, cex.axis=2.3, lwd=2.5, main="Richness_Site Arachnida_0.05")
+kruskal.test(sample_richness_Site0.05 ~ Mountain1Site, data = richness_Site0.05_Arachnida)
+posthoc.kruskal.nemenyi.test(x=richness_Site0.05_Arachnida$sample_richness_Site0.05, g=richness_Site0.05_Arachnida$Mountain1Site, method="Bonferroni")
 # Comparison of each group against. 
 text(x=c(1,2,3,4), y=(28), labels=c("a","a","b","b"), cex=1.4)
 text(x=4.5, y=29.5, labels="***", cex=2)

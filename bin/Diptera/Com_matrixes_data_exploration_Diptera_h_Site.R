@@ -65,6 +65,8 @@ dim(community_Diptera_Site_h)
 community_Diptera_Site_h[,which(colSums(community_Diptera_Site_h)!=0)]->community_Diptera_Site_h #'to remove no data colums
 dim(community_Diptera_Site_h)
 
+
+
 ####################################################
 #BY SITE
 #'Generating a general table with names and habitat parameters
@@ -203,6 +205,8 @@ beta.multi(community_Diptera_Site_h, index.family="sorensen")
 #'turnover by pairs, nmds, anosim
 beta.pair(community_Diptera_Site_h, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 metaMDS (beta.pair$beta.sim)->MDSbetasim_h #'NMDS
+
+
 plot (MDSbetasim_h, main="Diptera_Site_h") 
 x<- MDSbetasim_h$points[,1]
 y<- MDSbetasim_h$points[,2]

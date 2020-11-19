@@ -698,12 +698,12 @@ dim(community_Myriapoda_sinoutlayer0.03)
 general_sample_Mountain1Site0.03[-which(general_sample_Mountain1Site0.03$sample_names %in% c("CON_NTO_ASB_79ACON1")),]->general_sample_sinoutlayer0.03
 beta.pair(community_Myriapoda_sinoutlayer0.03, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 metaMDS (beta.pair$beta.sim)->MDSbetasim0.03
-plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.4, 0.4), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5)
+plot (MDSbetasim0.03, xlim=c(-0.59, 0.59), ylim=c(-0.49, 0.49), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5)
 with(general_sample_sinoutlayer0.03,ordispider(MDSbetasim0.03, Site, cex.lab=1, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"), lwd=4.5))
 #I put letter "r" in cursive and r2 value
 mylabel = bquote(italic(r)^2)
-text(x=0.10, y=-0.45, labels = mylabel, cex=2)
-text(x=0.36, y=-0.45, labels="=0.034 ns", cex=2)
+text(x=0.10, y=-0.46, labels = mylabel, cex=2)
+text(x=0.36, y=-0.46, labels="=0.034 ns", cex=2)
 
 
 read.table ("../genetic/Data_out/Myriapoda/Myriapoda5P/community_Myriapoda0.05.txt")->community_Myriapoda0.05

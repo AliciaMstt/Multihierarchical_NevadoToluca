@@ -137,7 +137,7 @@ richness_Site0.05_Collembola %>% group_by(Mountain1Site) %>% summarise(mean(samp
 #min, max, ds Summarise
 richness_Site0.05_Collembola %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.05))
 richness_Site0.05_Collembola %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.05))
-richness_Site0.05_Collembola %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.05_Collembola))
+richness_Site0.05_Collembola %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.05))
 
 ##'General mean, min, max, ds by sample in SITE_richness_SiteC
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.05))

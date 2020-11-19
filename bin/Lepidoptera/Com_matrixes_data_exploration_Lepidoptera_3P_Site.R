@@ -89,12 +89,12 @@ dim(community_Lepidoptera_Site0.03)
 #'Generating a general table with names and habitat parameters
 row.names(community_Lepidoptera_Site0.03)->sample_names_Mountain1_0.03
 as.data.frame(sample_names_Mountain1_0.03)->sample_names_Mountain1_0.03
-sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->sample_names_Mountain1_0.03
-sample_names_Mountain1_0.03
-sample_names_Mountain1_0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->sample_names_Mountain1_0.03 #'generating a variable combining layer and habitat
-sample_names_Mountain1_0.03
-write.table(sample_names_Mountain1_0.03, file="../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt") #'this is the only way I found to be able to work later
-read.table("../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt",header=TRUE)->sample_names_Mountain1_0.03
+sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->general_sample_Mountain1Site_0.03
+general_sample_Mountain1Site_0.03
+general_sample_Mountain1Site_0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site_0.03 #'generating a variable combining layer and habitat
+general_sample_Mountain1Site_0.03
+write.table(general_sample_Mountain1Site_0.03, file="../genetic/Data_out/Lepidoptera/Lepidoptera5P/general_sample_Mountain1Site_0.03.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Lepidoptera/Lepidoptera3P/general_sample_Mountain1Site_0.03.txt",header=TRUE)->general_sample_Mountain1Site_0.03
 
 ##############################################################
 #'**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES**'# 
@@ -223,7 +223,7 @@ beta.pair(community_Lepidoptera_Site0.03, index.family="sorensen")->beta.pair  #
 #text(x, y, pos = 1, cex=0.7, labels = row.names (community_Lepidoptera_Site0.03))
 
 #plot (MDSbetasim0.03, main="Lepidoptera_Site_0.03")
-#with(sample_names_Mountain1_0.03,ordispider(MDSbetasim0.03, Site, label=T, col="blue"))
+#with(general_sample_Mountain1Site_0.03,ordispider(MDSbetasim0.03, Site, label=T, col="blue"))
 
 ############################
 #By SITES quitar 
@@ -233,7 +233,7 @@ community_Lepidoptera_Site0.03[-which(row.names(community_Lepidoptera_Site0.03) 
 community_Lepidoptera_sinoutlayer0.03[,which(colSums(community_Lepidoptera_sinoutlayer0.03)!=0)]->community_Lepidoptera_sinoutlayer0.03 #'to remove no data colums
 dim(community_Lepidoptera_sinoutlayer0.03)  
 
-sample_names_Mountain1_0.03[-which(sample_names_Mountain1_0.03$sample_names %in% c("CON_NTO_SJH_76SHCON7", "CON_NTO_ASB_86ACON8", "CON_NTO_TLC_39TCONS9", "CON_NTO_SJH_74SHCON5", "CON_NTO_AAB_107ACON20",  "CON_NTO_AAB_111ACON24")),]->general_sample_sinoutlayer0.03
+general_sample_Mountain1Site_0.03[-which(general_sample_Mountain1Site_0.03$sample_names %in% c("CON_NTO_SJH_76SHCON7", "CON_NTO_ASB_86ACON8", "CON_NTO_TLC_39TCONS9", "CON_NTO_SJH_74SHCON5", "CON_NTO_AAB_107ACON20",  "CON_NTO_AAB_111ACON24")),]->general_sample_sinoutlayer0.03
 
 beta.pair(community_Lepidoptera_sinoutlayer0.03, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 metaMDS (beta.pair$beta.sim)->MDSbetasim0.03

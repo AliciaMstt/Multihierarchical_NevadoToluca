@@ -44,12 +44,12 @@ data.frame()->s2_raw_Coleoptera_limite0.05
 for (i in 1:length(unique (s2_raw_threshold$limite0.05)))
 {
   levels_limite0.05[i]->level0.05
-  s2_raw_threshold[which(s2_raw_threshold$limite0.05==level0.05),]->subcom_level_names0.05
-  subcom_level_names0.05[,c(2:50)]->subcom_level0.05  #delete names, level0.05 and also the negative column
+  s2_raw_threshold[which(s2_raw_threshold$limite0.05==level0.05),]->subcom_level0.05_names
+  subcom_level0.05_names[,c(2:50)]->subcom_level0.05  #delete names, level0.05 and also the negative column
   colSums(subcom_level0.05)->sum0.05
   as.data.frame(sum0.05)->sum0.05
   t(sum0.05)->sum0.05
-  row.names(sum0.05)<-subcom_level_names0.05[1,1] #keep the name of the first haplotype
+  row.names(sum0.05)<-subcom_level0.05_names[1,1] #keep the name of the first haplotype
   rbind(s2_raw_Coleoptera_limite0.05,sum0.05)->s2_raw_Coleoptera_limite0.05
 }
 

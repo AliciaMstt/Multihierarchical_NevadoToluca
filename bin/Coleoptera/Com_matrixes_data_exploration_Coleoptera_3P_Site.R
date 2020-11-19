@@ -45,8 +45,8 @@ data.frame()->s2_raw_Coleoptera_limite0.03
 for (i in 1:length(unique (s2_raw_threshold$limite0.03)))
 {
   levels_limite0.03[i]->level0.03
-  s2_raw_threshold[which(s2_raw_threshold$limite0.03==level0.03),]->subcom_level_names0.03
-  subcom_level_names0.03[,c(2:50)]->subcom_level0.03  #delete names, level and also the negative column
+  s2_raw_threshold[which(s2_raw_threshold$limite0.03==level0.03),]->subcom_level0.03_names
+  subcom_level0.03_names[,c(2:50)]->subcom_level0.03  #delete names, level and also the negative column
   colSums(subcom_level0.03)->sum0.03
   as.data.frame(sum0.03)->sum0.03
   t(sum0.03)->sum0.03

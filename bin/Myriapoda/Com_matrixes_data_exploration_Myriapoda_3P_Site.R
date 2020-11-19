@@ -140,7 +140,7 @@ richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness
 #min, max, ds Summarise
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.03))
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.03))
-richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.0))
+richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.03))
 
 ##'General mean, min, max, ds by sample in SITE_richness_SiteC
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.03))

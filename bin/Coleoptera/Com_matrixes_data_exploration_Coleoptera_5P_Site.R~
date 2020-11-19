@@ -20,7 +20,7 @@ library(lattice)
 #'**TABLES AND COMMUNITY MATRIXES**'# 
 ################################################################################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../../genetic/Data_in/Coleoptera/s2_raw_all_Coleoptera_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Coleoptera/s2_raw_all_Coleoptera_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
 ###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -44,12 +44,12 @@ data.frame()->s2_raw_Coleoptera_limite0.05
 for (i in 1:length(unique (s2_raw_threshold$limite0.05)))
 {
   levels_limite0.05[i]->level0.05
-  s2_raw_threshold[which(s2_raw_threshold$limite0.05==level0.05),]->subcom_level_names0.05
-  subcom_level_names0.05[,c(2:50)]->subcom_level0.05  #delete names, level0.05 and also the negative column
+  s2_raw_threshold[which(s2_raw_threshold$limite0.05==level0.05),]->subcom_level0.05_names
+  subcom_level0.05_names[,c(2:50)]->subcom_level0.05  #delete names, level0.05 and also the negative column
   colSums(subcom_level0.05)->sum0.05
   as.data.frame(sum0.05)->sum0.05
   t(sum0.05)->sum0.05
-  row.names(sum0.05)<-subcom_level_names0.05[1,1] #keep the name of the first haplotype
+  row.names(sum0.05)<-subcom_level0.05_names[1,1] #keep the name of the first haplotype
   rbind(s2_raw_Coleoptera_limite0.05,sum0.05)->s2_raw_Coleoptera_limite0.05
 }
 
@@ -72,8 +72,8 @@ as.data.frame(community_Coleoptera_limite0.05)->community_Coleoptera0.05 #'trasp
 #community_Acari[-49,]->community_Coleoptera #'removing neg
 dim(community_Coleoptera0.05)
 community_Coleoptera0.05[order(row.names(community_Coleoptera0.05)),]->community_Coleoptera0.05 #'order samples
-write.table (community_Coleoptera0.05, file="../../genetic/Data_out/Coleoptera/Coleoptera5P/community_Coleoptera0.05.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../../genetic/Data_out/Coleoptera/Coleoptera5P/community_Coleoptera0.05.txt")->community_Coleoptera0.05
+write.table (community_Coleoptera0.05, file="../genetic/Data_out/Coleoptera/Coleoptera5P/community_Coleoptera0.05.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Coleoptera/Coleoptera5P/community_Coleoptera0.05.txt")->community_Coleoptera0.05
 
 #'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Coleoptera0.05)
@@ -92,8 +92,8 @@ sample_names_Mountain1_0.05 %>% separate(sample_names_Mountain1_0.05, c("Conserv
 general_sample_Mountain1Site0.05
 general_sample_Mountain1Site0.05 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site0.05 #'generating a variable combining layer and habitat
 general_sample_Mountain1Site0.05
-write.table(general_sample_Mountain1Site0.05, file="../../genetic/Data_out/Coleoptera/Coleoptera5P/general_sample_Mountain1Site0.05.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Coleoptera/Coleoptera5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
+write.table(general_sample_Mountain1Site0.05, file="../genetic/Data_out/Coleoptera/Coleoptera5P/general_sample_Mountain1Site0.05.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
 
 ####################################################
 ####################################################
@@ -123,12 +123,12 @@ richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_"
 richness_SiteC
 
 #BY SITE
-write.table(richness_Site0.05, file="../../genetic/Data_out/Coleoptera/Coleoptera5P/richness_Site0.05_Coleoptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Coleoptera/Coleoptera5P/richness_Site0.05_Coleoptera.txt",header=TRUE)->richness_Site0.05
+write.table(richness_Site0.05, file="../genetic/Data_out/Coleoptera/Coleoptera5P/richness_Site0.05_Coleoptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera5P/richness_Site0.05_Coleoptera.txt",header=TRUE)->richness_Site0.05
 
 #BY SITE_C general
-write.table(richness_SiteC, file="../../genetic/Data_out/Coleoptera/Coleoptera5P/richness_SiteC_Coleoptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Coleoptera/Coleoptera5P/richness_SiteC_Coleoptera.txt",header=TRUE)->richness_SiteC
+write.table(richness_SiteC, file="../genetic/Data_out/Coleoptera/Coleoptera5P/richness_SiteC_Coleoptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera5P/richness_SiteC_Coleoptera.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site0.05$sample_richness_Site0.05,col=richness_Site0.05$Mountain1Site,names.arg= richness_Site0.05$sample_names_Site0.05,las=2,cex.names=0.5, ylab="richness_Site0.05", main="H richness_SiteColeoptera_0.05")
@@ -169,8 +169,8 @@ rbind(h_names_Site0.05,h_ocurrence_Site0.05)->h_ocurrence_Site0.05
 t(h_ocurrence_Site0.05)->h_ocurrence_Site0.05
 colnames(h_ocurrence_Site0.05)<-c("h_names_Site0.05","h_ocurrence_Site0.05")
 dim(h_ocurrence_Site0.05)
-write.table(h_ocurrence_Site0.05, file="../../genetic/Data_out/Coleoptera/Coleoptera5P/h_ocurrence_Site0.05_Coleoptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Coleoptera/Coleoptera5P/h_ocurrence_Site0.05_Coleoptera.txt",header=TRUE)->h_ocurrence_Site0.05
+write.table(h_ocurrence_Site0.05, file="../genetic/Data_out/Coleoptera/Coleoptera5P/h_ocurrence_Site0.05_Coleoptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Coleoptera/Coleoptera5P/h_ocurrence_Site0.05_Coleoptera.txt",header=TRUE)->h_ocurrence_Site0.05
 
 #' percentege of singletons by sample
 h_ocurrence_Site0.05

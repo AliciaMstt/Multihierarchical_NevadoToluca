@@ -47,7 +47,6 @@ plot(x, col=c("white", "grey80", "black"),
      legend=FALSE, xaxt='n', yaxt='n')
 text(label="Alt. C", x=-100.09, y=19.03, adj=0, cex=1.2)
 
-
 ## Slope
 # Slope A .2, .5, 1
 x<-raster("../spatial/Slope/rcl_S_A.asc")
@@ -70,7 +69,6 @@ for (i in c("C", "D")){
   text(label=paste("Slo.", i), x=-100.09, y=19.03, adj=0, cex=1.2)
 }
 
- 
 # Vegetation type
 # A  0, .1, .7, 1
 x<-raster("../spatial/VegetationType/rcl_A_G_3.asc")

@@ -1,3 +1,5 @@
+
+
 #############################################################################################
 #############################################################################################
 
@@ -6,12 +8,15 @@
 #It is important to place the correct number of columns and rows, because this can change in each group.
 #In this step, we can join all the groups or put them separately as in this case.
 
+
 library(dplyr)
 library(tidyr)
 library (knitr)
 
+
 ###############to_get_conservative_threshold_on_original_table_Arachnida#####################
 #############################################################################################
+
 
 #'open table with names including Region and habitat parameters
 s2_raw_all_Arachnida <- read.table("../genetic/Data_in/Arachnida/3allele_table_3Arachnida336YLimitesEspecie.txt", sep = ",", header=TRUE)
@@ -64,6 +69,7 @@ colSums(s2_f4_Arachnida_limpia)
      }
 
 colSums(s2_f4_Arachnida_limpia)
+
  
 deleted_Arachnida<-which(rowSums(s2_f4_Arachnida_limpia)==0)
 maintained_Arachnida<-which(rowSums(s2_f4_Arachnida_limpia)!=0)
@@ -87,7 +93,9 @@ cbind (maintained_Arachnida, haplo_maintained_Arachnida)->haplo_maintained_Arach
 rbind(haplo_deleted_Arachnida,haplo_maintained_Arachnida)->conservative_threshold_Arachnida
 table(conservative_threshold_Arachnida[,2])
 
+
 rbind(conservative_threshold_Arachnida)->conservative_threshold_all_Arachnida
+
 
 #Combining conservative threshold info with intial table
 
@@ -99,8 +107,11 @@ cbind(s2_raw_all_ord_Arachnida,conservative_threshold_all_ord_Arachnida)->s2_raw
 write.table(s2_raw_all_Arachnida_threshold,file="../genetic/Data_in/Arachnida/s2_raw_all_Arachnida_threshold.txt")
 
 
+
+
 #############################################################################################
 ###############to_get_conservative_threshold_on_original_table_Coleoptera####################
+
 
 #'open table with names including Region and habitat parameters
 s2_raw_all_Coleoptera <- read.table("../genetic/Data_in/Coleoptera/7allele_table_6Coleoptera209YLimiteEspecies.txt",sep = ",", header=TRUE)
@@ -189,6 +200,8 @@ colnames(conservative_threshold_all_ord_Coleoptera)<-c("haplo_names_conservative
 
 cbind(s2_raw_all_ord_Coleoptera,conservative_threshold_all_ord_Coleoptera)->s2_raw_all_Coleoptera_threshold
 write.table(s2_raw_all_Coleoptera_threshold,file="../genetic/Data_in/Coleoptera/s2_raw_all_Coleoptera_threshold.txt")
+
+
 
 
 #############################################################################################
@@ -284,6 +297,8 @@ cbind(s2_raw_all_ord_Collembola,conservative_threshold_all_ord_Collembola)->s2_r
 write.table(s2_raw_all_Collembola_threshold,file="../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt")
 
 
+
+
 #############################################################################################
 #################to_get_conservative_threshold_on_original_table_Diptera#####################
 
@@ -375,6 +390,8 @@ colnames(conservative_threshold_all_ord_Diptera)<-c("haplo_names_conservative_th
 
 cbind(s2_raw_all_ord_Diptera,conservative_threshold_all_ord_Diptera)->s2_raw_all_Diptera_threshold
 write.table(s2_raw_all_Diptera_threshold,file="../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt")
+
+
 
 
 #############################################################################################
@@ -470,6 +487,8 @@ cbind(s2_raw_all_ord_Hemiptera,conservative_threshold_all_ord_Hemiptera)->s2_raw
 write.table(s2_raw_all_Hemiptera_threshold,file="../genetic/Data_in/Hemiptera/s2_raw_all_Hemiptera_threshold.txt")
 
 
+
+
 #############################################################################################
 ##########to_get_conservative_threshold_on_original_table_Hymenoptera###########################################
 
@@ -561,6 +580,8 @@ colnames(conservative_threshold_all_ord_Hymenoptera)<-c("haplo_names_conservativ
 
 cbind(s2_raw_all_ord_Hymenoptera,conservative_threshold_all_ord_Hymenoptera)->s2_raw_all_Hymenoptera_threshold
 write.table(s2_raw_all_Hymenoptera_threshold,file="../genetic/Data_in/Hymenoptera/s2_raw_all_Hymenoptera_threshold.txt")
+
+
 
 
 #############################################################################################
@@ -656,6 +677,8 @@ cbind(s2_raw_all_ord_Lepidoptera,conservative_threshold_all_ord_Lepidoptera)->s2
 write.table(s2_raw_all_Lepidoptera_threshold,file="../genetic/Data_in/Lepidoptera/s2_raw_all_Lepidoptera_threshold.txt")
 
 
+
+
 #############################################################################################
 ###############to_get_conservative_threshold_on_original_table_Myriapoda#####################
 
@@ -747,6 +770,7 @@ colnames(conservative_threshold_all_ord_Myriapoda)<-c("haplo_names_conservative_
 
 cbind(s2_raw_all_ord_Myriapoda,conservative_threshold_all_ord_Myriapoda)->s2_raw_all_Myriapoda_threshold
 write.table(s2_raw_all_Myriapoda_threshold,file="../genetic/Data_in/Myriapoda/s2_raw_all_Myriapoda_threshold.txt")
+
 
 ####################################END######################################################################
 

@@ -1,9 +1,8 @@
-#'**INITIAL STEPS**'#
+#**INITIAL STEPS**
 
-#'**Community diversity and composition at the 3% Clustering level of the Diptera order**'#
+#**Community diversity and composition at the 3% Clustering level of the Diptera order**
 
-#'In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
-
+#####In excel remove the simbol ## from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
 library(stats)
 library(base)
 library(dplyr)
@@ -17,27 +16,24 @@ library(stringr)
 library(permute)
 library(lattice)
 
-#'**TABLES AND COMMUNITY MATRIXES**'# 
-################################################################################################################################################################################
-###########'open table with names including Region and habitat parameters
+#**TABLES AND COMMUNITY MATRIXES**
+#####open table with names including Region and habitat parameters
 s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
-###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+#####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
 s2_raw_all[,c(1:66,68)]->s2_raw
-dim(s2_raw) #'49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
+dim(s2_raw) ##49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
 colnames(s2_raw)
 
-###########'Applying the conservative threshold (this is a binary column)
+#####Applying the conservative threshold (this is a binary column)
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold #'remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold ##remove threshold col
 dim(s2_raw_threshold)
 colnames(s2_raw_threshold)
 
-################################################################################################################################################################################
-#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#'
-#'*Diptera*
+#####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#**Diptera**
 unique (s2_raw_threshold$limite0.03)->levels_limite0.03
 
 data.frame()->s2_raw_Diptera_limite0.03
@@ -54,158 +50,149 @@ for (i in 1:length(unique (s2_raw_threshold$limite0.03)))
   rbind(s2_raw_Diptera_limite0.03,sum0.03)->s2_raw_Diptera_limite0.03
 }
 
-#'transform in present/absence table
+##**transform in present/absence table**
 s2_raw_Diptera_limite0.03->s2_raw_Diptera_limite0.03
-s2_raw_Diptera_limite0.03[s2_raw_Diptera_limite0.03>1]<-1 #'transform in present/absence table 
+s2_raw_Diptera_limite0.03[s2_raw_Diptera_limite0.03>1]<-1 ##transform in present/absence table 
 
-#'checking if there is any row with no presence
+##**checking if there is any row with no presence**
 s2_raw_Diptera_limite0.03[,1:51]->data0.03
 rowSums(data0.03)
 length(which(rowSums(data0.03)!=0))
 length(which(rowSums(data0.03)==0))
 
-#'Community matrixes (samples in rows and h in cols).
-#'*Diptera*
-t(s2_raw_Diptera_limite0.03)->t_s2_f4_Diptera_limite0.03 #'trasp
+##**Community matrixes (samples in rows and h in cols).**
+##**Diptera**
+t(s2_raw_Diptera_limite0.03)->t_s2_f4_Diptera_limite0.03 ##trasp
 t_s2_f4_Diptera_limite0.03[1:51,]->community_Diptera_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data0.03".
 colnames(t_s2_f4_Diptera_limite0.03)<-community_Diptera_limite0.03[1,] 
-as.data.frame(community_Diptera_limite0.03)->community_Diptera0.03 #'trasp including col and row names
-#community_Acari[-49,]->community_Diptera #'removing neg
+as.data.frame(community_Diptera_limite0.03)->community_Diptera0.03 ##trasp including col and row names
+####community_Acari[-49,]->community_Diptera ##removing neg
 dim(community_Diptera0.03)
-community_Diptera0.03[order(row.names(community_Diptera0.03)),]->community_Diptera0.03 #'order samples
-write.table (community_Diptera0.03, file="../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt") #'this is necessary for the format, not able to solve in other way
+community_Diptera0.03[order(row.names(community_Diptera0.03)),]->community_Diptera0.03 ##order samples
+write.table (community_Diptera0.03, file="../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt") ##this is necessary for the format, not able to solve in other way
 read.table ("../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt")->community_Diptera0.03
 
-#'submatrixes by SITE in Nevado Toluca
+##**submatrixes by SITE in Nevado Toluca**
 dim(community_Diptera0.03)
 community_Diptera0.03[which(str_extract (row.names(community_Diptera0.03), "_NTO_") %in% "_NTO_"),]->community_Diptera_Site0.03
 dim(community_Diptera_Site0.03)
-community_Diptera_Site0.03[,which(colSums(community_Diptera_Site0.03)!=0)]->community_Diptera_Site0.03 #'to remove no data colums
+community_Diptera_Site0.03[,which(colSums(community_Diptera_Site0.03)!=0)]->community_Diptera_Site0.03 ##to remove no data colums
 dim(community_Diptera_Site0.03)
 
-####################################################
-#'Generating a general table with names and habitat parameters.
-#BY SITE
-#'Generating a general table with names and habitat parameters
+##**Generating a general table with names and habitat parameters.**
+##BY SITE
+##**Generating a general table with names and habitat parameters**
 row.names(community_Diptera_Site0.03)->sample_names_Mountain1_0.03
 as.data.frame(sample_names_Mountain1_0.03)->sample_names_Mountain1_0.03
 sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->general_sample_Mountain1Site0.03
 general_sample_Mountain1Site0.03
-general_sample_Mountain1Site0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site0.03 #'generating a variable combining layer and habitat
+general_sample_Mountain1Site0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site0.03 ####generating a variable combining layer and habitat
 general_sample_Mountain1Site0.03
-write.table(general_sample_Mountain1Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt") #'this is the only way I found to be able to work later
+write.table(general_sample_Mountain1Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
-####################################################
-####################################################
-#'**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES**'# 
-#'*Diptera*
+#**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES**
+##**Diptera**
 as.matrix(community_Diptera_Site0.03)->community_Diptera_Site0.03
 row.names(community_Diptera_Site0.03)->sample_names_Site0.03
 dim(community_Diptera_Site0.03)->dims_Site0.03
 dims_Site0.03
-.rowSums (community_Diptera_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->sample_richness_Site0.03 #'summatory by rows
+.rowSums (community_Diptera_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->sample_richness_Site0.03 ##summatory by rows
 rbind(sample_names_Site0.03,sample_richness_Site0.03)->richness_Site0.03
 t(richness_Site0.03)->richness_Site0.03
 colnames(richness_Site0.03)<-c("sample_names_Site0.03","sample_richness_Site0.03")
 richness_Site0.03
 as.data.frame(richness_Site0.03)->richness_Site0.03
 
-##'Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio. 
+##**Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio.** 
 richness_Site0.03 %>% separate(sample_names_Site0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_Site0.03
 richness_Site0.03
-richness_Site0.03 %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.03 #'generating a variable combining layer and habitat
+richness_Site0.03 %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.03 ##generating a variable combining layer and habitat
 richness_Site0.03
 
-##'Generating variables with in total SITE_C.
+##**Generating variables with in total SITE_C.**
 richness_Site0.03 %>% separate(sample_names_Site0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
 richness_SiteC
-richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC #'generating a variable combining layer and habitat
+richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC ##generating a variable combining layer and habitat
 richness_SiteC
 
-#BY SITE
-write.table(richness_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt") #'this is the only way I found to be able to work later
+##**BY SITE**
+write.table(richness_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt",header=TRUE)->richness_Site0.03
 
-#BY SITE_C general
-write.table(richness_SiteC, file="../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt") #'this is the only way I found to be able to work later
+##**BY SITE_C general**
+write.table(richness_SiteC, file="../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Diptera/Diptera3P/richness_SiteC_Diptera.txt",header=TRUE)->richness_SiteC
 
-##'General plot of richness by sample in SITE
+##**General plot of richness by sample in SITE**
 barplot(richness_Site0.03$sample_richness_Site0.03,col=richness_Site0.03$Mountain1Site,names.arg= richness_Site0.03$sample_names_Site0.03,las=2,cex.names=0.5, ylab="richness_Site0.03", main="H richness_Site Diptera_0.03")
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.03))
 
-#min, max, ds Summarise
+##**min, max, ds Summarise**
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.03))
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.03))
 richness_Site0.03 %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.03))
 
-##'General mean, min, max, ds by sample in SITE_richness_SiteC
+##**General mean, min, max, ds by sample in SITE_richness_SiteC**
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.03))
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(min(sample_richness_Site0.03))
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(max(sample_richness_Site0.03))
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(sd(sample_richness_Site0.03))
 
-##'Global richness by SITE.  
+##**Global richness by SITE.**  
 plot(richness_Site0.03$Mountain1Site,richness_Site0.03$sample_richness_Site0.03,ylab="richness_Site0.03", ylim=c(0,50), cex=1.4, cex.axis=2.3, lwd=2.5)
 kruskal.test(sample_richness_Site0.03 ~ Mountain1Site, data = richness_Site0.03)
 posthoc.kruskal.nemenyi.test(x=richness_Site0.03$sample_richness_Site0.03, g=richness_Site0.03$Mountain1Site, method="Bonferroni")
-# Comparison of each group against. 
+##Comparison of each group against. 
 text(x=c(1,2,3,4.1), y=(49), labels=c("ab","a","ab","b"), cex=1.4)
 text(x=4.5, y=49, labels="*", cex=2)
 mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex = 2)
 
-
-####################################################
-####################################################
-#'**HAPLOTYPE OCURRENCE TABLES AND SINGLETONS by SITE**'
-#'*Diptera*
-#'General
-##'Singletons by SITE
-#'summatory by rows
+#**HAPLOTYPE OCURRENCE TABLES AND SINGLETONS by SITE**
+#**Diptera**
+##General
+##Singletons by SITE
+##summatory by rows
 colnames(community_Diptera_Site0.03)->h_names_Site0.03
 dim (community_Diptera_Site0.03)->dims_Site0.03
-.colSums (community_Diptera_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->h_ocurrence_Site0.03 #'summatory by cols
+.colSums (community_Diptera_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->h_ocurrence_Site0.03 ##summatory by cols
 
 rbind(h_names_Site0.03,h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 t(h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 colnames(h_ocurrence_Site0.03)<-c("h_names_Site0.03","h_ocurrence_Site0.03")
 dim(h_ocurrence_Site0.03)
-write.table(h_ocurrence_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt") #'this is the only way I found to be able to work later
+write.table(h_ocurrence_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Diptera/Diptera3P/h_ocurrence_Site0.03_Diptera.txt",header=TRUE)->h_ocurrence_Site0.03
 
-#' percentege of singletons by sample
+##**percentege of singletons by sample**
 h_ocurrence_Site0.03
 which(h_ocurrence_Site0.03$h_ocurrence_Site0.03==1)->singletons_Site0.03
 length(singletons_Site0.03)
 length(singletons_Site0.03)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
 
-#' percentege of h in more than 2 samples
+##**percentege of h in more than 2 samples**
 which(h_ocurrence_Site0.03$h_ocurrence_Site0.03>2)->more2_Site0.03
 more2_Site0.03
 length(more2_Site0.03)
 length(more2_Site0.03)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
 
-#'number of singletons by SITE
-#community_Diptera_Site0.03
-#singletons
+##**number of singletons by SITE**
+##community_Diptera_Site0.03
+##singletons
 community_Diptera_Site0.03[,singletons_Site0.03]->community_Diptera_singletons_Site0.03
 row.names(community_Diptera_singletons_Site0.03)->sample_names_Site0.03
 dim (community_Diptera_singletons_Site0.03)->dims_Site0.03
 dims_Site0.03
-.rowSums (community_Diptera_singletons_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->sample_richness_singletons_Site0.03 #'summatory by rows
+.rowSums (community_Diptera_singletons_Site0.03,dims_Site0.03[1],dims_Site0.03[2])->sample_richness_singletons_Site0.03 ##summatory by rows
 rbind(sample_names_Site0.03,sample_richness_singletons_Site0.03)->richness_singletons_Site0.03
 t(richness_singletons_Site0.03)->richness_singletons_Site0.03
 colnames(richness_singletons_Site0.03)<-c("sample_names_Site0.03","sample_richness_singletons_Site0.03")
 richness_singletons_Site0.03
 as.data.frame(richness_singletons_Site0.03)->richness_singletons_Site0.03
 
-####################################################
-####################################################
-#'**ACCUMULATION CURVES AND EXTRAPOLATED RICHNESS by SITE**'#
-#'
-#'*Diptera* by SITE
-#'General
+#**ACCUMULATION CURVES AND EXTRAPOLATED RICHNESS by SITE**
+#**Diptera**
+##General
 specaccum(community_Diptera_Site0.03,"random", permutations=1000)->cum_Site0.03
 plot(cum_Site0.03, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,180))
 specpool(community_Diptera_Site0.03)->specpool_Site0.03
@@ -213,17 +200,15 @@ specpool_Site0.03$Species/specpool_Site0.03$chao*100
 text(x=38, y=5, labels="80.66%", cex=1.5)
 mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex = 2)
 
-####################################################
-####################################################
-#'**BETADIVERSITY ORDINATIONS by Sites**'# 
-#'*Diptera*
-#'beta general
+#**BETADIVERSITY ORDINATIONS by Sites** 
+#**Diptera**
+##beta general
 
 beta.multi(community_Diptera_Site0.03, index.family="sorensen")
 
-#'turnover by pairs, nmds, anosim
-beta.pair(community_Diptera_Site0.03, index.family="sorensen")->beta.pair  #'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
-metaMDS (beta.pair$beta.sim)->MDSbetasim0.03 #'NMDS
+##**turnover by pairs, nmds, anosim**
+beta.pair(community_Diptera_Site0.03, index.family="sorensen")->beta.pair  ##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+metaMDS (beta.pair$beta.sim)->MDSbetasim0.03 ##NMDS
 plot (MDSbetasim0.03, main="Diptera_Site_0.03") 
 x<- MDSbetasim0.03$points[,1]
 y<- MDSbetasim0.03$points[,2]
@@ -235,17 +220,15 @@ with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, label=T, 
 plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.4, 0.4), cex.axis=1.4, cex=1.2, cex.lab=1.4, main="Diptera_Site_0.03")
 with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, label=T, cex.lab=0.9, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0")))
 
-#Anosim
+##**Anosim**
 anosim(beta.pair$beta.sim, general_sample_Mountain1Site0.03$Site, permutations=999)
 
 plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.4, 0.4), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5)
 with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, cex.lab=1, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0"), lwd=4.5))
-#I put letter "r" in cursive and r2 value
+##I put letter "r" in cursive and r2 value
 mylabel = bquote(italic(r)^2)
 text(x=0.25, y=-0.35, labels = mylabel, cex=2)
 text(x=0.56, y=-0.35, labels="=0.372 ***", cex=2)
 mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex = 2)
 
-################################# E N D ##############################
-
-
+#**END**

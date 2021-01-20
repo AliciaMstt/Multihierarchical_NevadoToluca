@@ -20,7 +20,7 @@ library(lattice)
 #'**TABLES AND COMMUNITY MATRIXES**'# 
 ###################################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../../genetic/Data_in/Hemiptera/s2_raw_all_Hemiptera_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Hemiptera/s2_raw_all_Hemiptera_threshold.txt", header=TRUE)
 dim(s2_raw_all)
 
 ###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -73,8 +73,8 @@ as.data.frame(community_Hemiptera_limite0.05)->community_Hemiptera0.05 #'trasp i
 #community_Hemiptera[-49,]->community_Hemiptera #'removing neg
 dim(community_Hemiptera0.05)
 community_Hemiptera0.05[order(row.names(community_Hemiptera0.05)),]->community_Hemiptera0.05 #'order samples
-write.table (community_Hemiptera0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt") #'this is necessary for the format, not able to solve in other way
-read.table ("../../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt")->community_Hemiptera0.05
+write.table (community_Hemiptera0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt")->community_Hemiptera0.05
 
 #'submatrixes by SITE in Nevado Toluca.
 dim(community_Hemiptera0.05)
@@ -93,8 +93,8 @@ sample_names_Mountain1_0.05 %>% separate(sample_names_Mountain1_0.05, c("Conserv
 general_sample_Mountain1Site_0.05
 general_sample_Mountain1Site_0.05 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site_0.05 #'generating a variable combining layer and habitat
 general_sample_Mountain1Site_0.05
-write.table(general_sample_Mountain1Site_0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
+write.table(general_sample_Mountain1Site_0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
 
 ####################################################
 ####################################################
@@ -124,12 +124,12 @@ richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_"
 richness_SiteC
 
 #BY SITE
-write.table(richness_Site0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt",header=TRUE)->richness_Site0.05
+write.table(richness_Site0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/richness_Site0.05_Hemiptera.txt",header=TRUE)->richness_Site0.05
 
 #BY SITE_C general
-write.table(richness_SiteC, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_SiteC_Hemiptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/richness_SiteC_Hemiptera.txt",header=TRUE)->richness_SiteC
+write.table(richness_SiteC, file="../genetic/Data_out/Hemiptera/Hemiptera5P/richness_SiteC_Hemiptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/richness_SiteC_Hemiptera.txt",header=TRUE)->richness_SiteC
 
 ##'General plot of richness by sample in SITE
 barplot(richness_Site0.05$sample_richness_Site0.05,col=richness_Site0.05$Mountain1Site,names.arg= richness_Site0.05$sample_names_Site0.05,las=2,cex.names=0.5, ylab="richness_Site0.05", main="H richness_Site0.05 Hemiptera_0.05")
@@ -170,8 +170,8 @@ rbind(h_names_Site0.05,h_ocurrence_Site0.05)->h_ocurrence_Site0.05
 t(h_ocurrence_Site0.05)->h_ocurrence_Site0.05
 colnames(h_ocurrence_Site0.05)<-c("h_names_Site0.05","h_ocurrence_Site0.05")
 dim(h_ocurrence_Site0.05)
-write.table(h_ocurrence_Site0.05, file="../../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt",header=TRUE)->h_ocurrence_Site0.05
+write.table(h_ocurrence_Site0.05, file="../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt") #'this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/h_ocurrence_Site0.05_Hemiptera.txt",header=TRUE)->h_ocurrence_Site0.05
 
 #' percentege of singletons by sample
 h_ocurrence_Site0.05

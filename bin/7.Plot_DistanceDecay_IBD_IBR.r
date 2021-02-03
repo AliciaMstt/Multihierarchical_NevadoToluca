@@ -133,7 +133,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(a)", cex=2)
+text(x=0.41, y=0.0, labels="(a)", cex=1.8)
 
 #**Creating plot**
 ##Collembola Altitude 3000 Site
@@ -243,7 +243,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff") 
-text(x=0.41, y=0.0, labels="(b)", cex=2)
+text(x=0.41, y=0.0, labels="(b)", cex=1.8)
 mtext(c("Collembola"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
 
 #**Creating plot**
@@ -351,8 +351,8 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(c)", cex=2)
-mtext(c("Effective distance flat"), side = 1, col = "black", line = 2.5, cex=1.6)
+text(x=0.41, y=0.0, labels="(c)", cex=1.8)
+mtext(c("Effective distance flat"), side = 1, col = "black", line = 2.5, cex=1.5)
 #
 #**Creating plot**
 ##Diptera Altitude B Site
@@ -459,7 +459,7 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=1.32, y=0.0, labels="(d)", cex=2)
+text(x=1.31, y=0.0, labels="(d)", cex=1.8)
 mtext(c("Diptera"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
 mtext(c("Effective distance (Altitude rasters)"), side = 1, col = "black", line = 2.5, cex=1.5)
 par(xpd=TRUE)
@@ -587,7 +587,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(a)", cex=2)
+text(x=0.41, y=0.0, labels="(a)", cex=1.8)
 
 #**Creating plot**
 ##Finer scale Collembola WEST Flat
@@ -696,7 +696,7 @@ plot.decay(decay_0.029,add=T, pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(b)", cex=2)
+text(x=0.36, y=0.0, labels="(b)", cex=1.8)
 mtext(c("Collembola"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
 
 #**Creating plot**
@@ -804,8 +804,8 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(c)", cex=2)
-mtext(c("Effective distance East flat"), side = 1, col = "black", line = 2.5, cex=1.6)
+text(x=0.41, y=0.0, labels="(c)", cex=1.8)
+mtext(c("Effective distance East flat"), side = 1, col = "black", line = 2.5, cex=1.5)
 
 #**Creating plot**
 ##Finer scale Diptera West Flat
@@ -913,18 +913,18 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(d)", cex=2)
+text(x=0.36, y=0.0, labels="(d)", cex=1.8)
 mtext(c("Diptera"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
-mtext(c("Effective distance West flat"), side = 1, col = "black", line = 2.5, cex=1.6)
+mtext(c("Effective distance West flat"), side = 1, col = "black", line = 2.5, cex=1.5)
 par(xpd=TRUE)
 ###Legend
-legend(1.13, 1, xpd=NA,
+legend(1.24, 1, xpd=NA,
        legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"), 
        col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"), 
-       pch=19,  bty="n", text.font=2, lty=1, cex=2, lwd=3) 
+       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.7, lwd=2.2) 
        
 ###Legend
-mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.8)
+mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.6)
 
 dev.off()
 #
@@ -1041,7 +1041,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff") 
-text(x=0.41, y=0.0, labels="(a)", cex=2)
+text(x=0.41, y=0.0, labels="(a)", cex=1.8)
 
 #**Creating plot**
 #**Finer scale Collembola WEST Altitude**
@@ -1151,7 +1151,7 @@ plot.decay(decay_0.029,add=T, pch=20,lwd=4, col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,lty=3,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff") 
-text(x=0.41, y=0.0, labels="(b)", cex=2)
+text(x=0.41, y=0.0, labels="(b)", cex=1.8)
 mtext(c("Collembola"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
 
 #**Creating plot**
@@ -1260,7 +1260,7 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=1.25, y=0.0, labels="(c)", cex=2)
+text(x=1.21, y=0.0, labels="(c)", cex=1.8)
 mtext(c("Effective distance (East altitude rasters)"), side = 1, col = "black", line = 2.5, cex=1.2)
 
 #**Creating plot**
@@ -1369,18 +1369,18 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=1.25, y=0.0, labels="(d)", cex=2)
+text(x=1.21, y=0.0, labels="(d)", cex=1.8)
 mtext(c("Diptera"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
 mtext(c("Effective distance (West altitude rasters)"), side = 1, col = "black", line = 2.5, cex=1.2)
 par(xpd=TRUE)
 ###Legend
-legend(4.35, 1, xpd=NA,
+legend(4.75, 1, xpd=NA,
        legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"), 
        col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"), 
-       pch=19,  bty="n", text.font=2, lty=1, cex=2, lwd=3) 
+       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.7, lwd=2.2) 
 
 ###Legend
-mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.8)
+mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.6)
 
 dev.off()
 

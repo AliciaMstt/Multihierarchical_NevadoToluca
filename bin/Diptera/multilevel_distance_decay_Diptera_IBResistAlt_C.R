@@ -1,6 +1,6 @@
 #**INITIAL STEPS**
 
-####In excel remove the simbol ## from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
+#'In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
 library(stats)
 library(base)
 library(dplyr)
@@ -16,109 +16,110 @@ library(lattice)
 library(ecodist)
 library(Imap)
 
-#**TABLES AND COMMUNITY MATRIXES** 
-#####open table with names including Region and habitat parameters
+#**TABLES AND COMMUNITY MATRIXES**
+############################################################################################################################################
+###########'open table with names including Region and habitat parameters
 s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", sep = ",", header=TRUE)
 dim(s2_raw_all)
 
-#**Table Haplotipos**
-#####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+#'Table Haplotipos'
+###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
 s2_raw_all[,c(1:52,68)]->s2_raw 
-dim(s2_raw) ##51 samples = 51 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
+dim(s2_raw) #'51 samples = 51 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
 colnames(s2_raw)
 
-#####Applying the conservative threshold (this is a binary column)
+###########'Applying the conservative threshold (this is a binary column)
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:52]->s2_raw_threshold_h ##remove threshold col
+s2_raw_threshold [,1:52]->s2_raw_threshold_h #'remove threshold col
 dim(s2_raw_threshold_h)
 colnames(s2_raw_threshold_h)
 
-#**Table levels clustering**
-######remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+#################################################################################################################################
+#'Table levels clustering'
+###########'remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
 s2_raw_all[,c(1:66,68)]->s2_raw
-dim(s2_raw) ##49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
+dim(s2_raw) #'49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
 colnames(s2_raw)
 
-##**Applying the conservative threshold (this is a binary column)_0.005**
+###########'Applying the conservative threshold (this is a binary column)_0.005#######
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.005 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.005 #'remove threshold col
 dim(s2_raw_threshold0.005)
 colnames(s2_raw_threshold0.005)
 
-##**Applying the conservative threshold (this is a binary column)_0.015**
+###########'Applying the conservative threshold (this is a binary column)_0.015#######
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.015 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.015 #'remove threshold col
 dim(s2_raw_threshold0.015)
 colnames(s2_raw_threshold0.015)
 
-##**Applying the conservative threshold (this is a binary column)_0.020**
+###########'Applying the conservative threshold (this is a binary column)_0.020#######
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.02 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.02 #'remove threshold col
 dim(s2_raw_threshold0.02)
 colnames(s2_raw_threshold0.02)
 
-##**Applying the conservative threshold (this is a binary column)_0.03**
+###########'Applying the conservative threshold (this is a binary column)_0.03#####
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.03 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.03 #'remove threshold col
 dim(s2_raw_threshold0.03)
 colnames(s2_raw_threshold0.03)
 
-##**Applying the conservative threshold (this is a binary column)_0.05**
+###########'Applying the conservative threshold (this is a binary column)_0.05#####
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.05 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.05 #'remove threshold col
 dim(s2_raw_threshold0.05)
 colnames(s2_raw_threshold0.05)
 
-##**Applying the conservative threshold (this is a binary column)_0.075**
+###########'Applying the conservative threshold (this is a binary column)_0.075#####
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.075 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.075 #'remove threshold col
 dim(s2_raw_threshold0.075)
 colnames(s2_raw_threshold0.075)
 
-##**Applying the conservative threshold (this is a binary column)GMYC_0.0088**
+###########'Applying the conservative threshold (this is a binary column)GMYC_0.0088#######
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
-s2_raw_threshold [,1:66]->s2_raw_threshold0.0088 ##remove threshold col
+s2_raw_threshold [,1:66]->s2_raw_threshold0.0088 #'remove threshold col
 dim(s2_raw_threshold0.0088)
 colnames(s2_raw_threshold0.0088)
 
-#**level Haplotipos**
-#####delete the ocurrences with less than 4 reads by library (same criteria than denoising)
-#####s2_raw_threshold->s2_f4_with_abundance_h 
-#####s2_f4_with_abundance_h[s2_f4_with_abundance_h<4]<-0  ##2 warning corresponding wiht the columms of the names and taxa
+################################################################################################################################################################################
+#'level Haplotipos'
+#'delete the ocurrences with less than 4 reads by library (same criteria than denoising)
+#s2_raw_threshold->s2_f4_with_abundance_h 
+#s2_f4_with_abundance_h[s2_f4_with_abundance_h<4]<-0  #'2 warning corresponding wiht the columms of the names and taxa
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_threshold_h->s2_f4_h #NOTA_Nancy: Tengo un subset de Colembolos
-s2_f4_h[s2_f4_h>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+s2_f4_h[s2_f4_h>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_f4_h[,2:52]->data_h #Nota_Nancy: Modifique el numero: 2:50 por 1:52.
 rowSums(data_h)
 length(which(rowSums(data_h)!=0))
 length(which(rowSums(data_h)==0))
 
-##Diptera
-t(s2_f4_h)->t_s2_f4_h ##trasp
+#'*Diptera*
+t(s2_f4_h)->t_s2_f4_h #'trasp
 t_s2_f4_h[2:52,]->community_Diptera_h #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(community_Diptera_h)<-t_s2_f4_h[1,]
-as.data.frame(community_Diptera_h)->community_Diptera_h ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_h)->community_Diptera_h #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera_h)
-community_Diptera_h[order(row.names(community_Diptera_h)),]->community_Diptera_h ##order samples 
-write.table (community_Diptera_h, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera_h.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera_h.txt")->community_Diptera_h
+community_Diptera_h[order(row.names(community_Diptera_h)),]->community_Diptera_h #'order samples
+write.table (community_Diptera_h, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera_h.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera_h.txt")->community_Diptera_h
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera_h)
 community_Diptera_h[which(str_extract (row.names(community_Diptera_h), "_NTO_") %in% "_NTO_"),]->community_Diptera_h_Site
 dim(community_Diptera_h_Site)
-community_Diptera_h_Site[,which(colSums(community_Diptera_h_Site)!=0)]->community_Diptera_h_Site ##to remove no data colums
+community_Diptera_h_Site[,which(colSums(community_Diptera_h_Site)!=0)]->community_Diptera_h_Site #'to remove no data colums
 dim(community_Diptera_h_Site)
-write.table (community_Diptera_h_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera_h_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera_h_Site.txt")->community_Diptera_h_Site
-#
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE_0.005**
+##################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE_0.005*
 unique(s2_raw_threshold0.005$limite0.005)->levels_limite0.005
 
 data.frame()->s2_raw_Diptera_limite0.005
@@ -135,47 +136,46 @@ for (i in 1:length(unique (s2_raw_threshold0.005$limite0.005)))
   rbind(s2_raw_Diptera_limite0.005,sum)->s2_raw_Diptera_limite0.005
 }
 
-#####delete the ocurrences with less than 4 reads by library (same criteria than denoising)
-#####s2_raw_Diptera_limite0.005->s2_f4_with_abundance_Diptera_limite0.005 
-#####s2_f4_with_abundance_Diptera_limite0.005[s2_f4_with_abundance_Diptera_limite0.005<4]<-0  ##2 warning corresponding wiht the columms of the names and taxa
+#'delete the ocurrences with less than 4 reads by library (same criteria than denoising)
+#s2_raw_Diptera_limite0.005->s2_f4_with_abundance_Diptera_limite0.005 
+#s2_f4_with_abundance_Diptera_limite0.005[s2_f4_with_abundance_Diptera_limite0.005<4]<-0  #'2 warning corresponding wiht the columms of the names and taxa
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.005->s2_raw_Diptera_limite0.005
-s2_raw_Diptera_limite0.005[s2_raw_Diptera_limite0.005>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.005[s2_raw_Diptera_limite0.005>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.005[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.005)->t_s2_f4_Diptera_limite0.005 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.005)->t_s2_f4_Diptera_limite0.005 #'trasp
 t_s2_f4_Diptera_limite0.005[1:51,]->community_Diptera_limite0.005 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.005)<-community_Diptera_limite0.005[1,] 
-as.data.frame(community_Diptera_limite0.005)->community_Diptera0.005 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.005)->community_Diptera0.005 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.005)
-community_Diptera0.005[order(row.names(community_Diptera0.005)),]->community_Diptera0.005 ##order samples
-write.table (community_Diptera0.005, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.005.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.005.txt")->community_Diptera0.005
+community_Diptera0.005[order(row.names(community_Diptera0.005)),]->community_Diptera0.005 #'order samples
+write.table (community_Diptera0.005, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.005.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.005.txt")->community_Diptera0.005
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.005)
 community_Diptera0.005[which(str_extract (row.names(community_Diptera0.005), "_NTO_") %in% "_NTO_"),]->community_Diptera0.005_Site
 dim(community_Diptera0.005_Site)
-community_Diptera0.005_Site[,which(colSums(community_Diptera0.005_Site)!=0)]->community_Diptera0.005_Site ##to remove no data colums
+community_Diptera0.005_Site[,which(colSums(community_Diptera0.005_Site)!=0)]->community_Diptera0.005_Site #'to remove no data colums
 dim(community_Diptera0.005_Site)
-write.table (community_Diptera0.005_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.005_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.005_Site.txt")->community_Diptera0.005_Site
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE_0.015**
+################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE_0.015*
 unique (s2_raw_threshold0.015$limite0.015)->levels_limite0.015
 
 data.frame()->s2_raw_Diptera_limite0.015
@@ -192,48 +192,46 @@ for (i in 1:length(unique (s2_raw_threshold0.015$limite0.015)))
   rbind(s2_raw_Diptera_limite0.015,sum)->s2_raw_Diptera_limite0.015
 }
 
-#####delete the ocurrences with less than 4 reads by library (same criteria than denoising)
-#####s2_raw_Diptera_limite0.015->s2_f4_with_abundance_Diptera_limite0.015 
-#####s2_f4_with_abundance_Diptera_limite0.015[s2_f4_with_abundance_Diptera_limite0.015<4]<-0  ##2 warning corresponding wiht the columms of the names and taxa
+#'delete the ocurrences with less than 4 reads by library (same criteria than denoising)
+#s2_raw_Diptera_limite0.015->s2_f4_with_abundance_Diptera_limite0.015 
+#s2_f4_with_abundance_Diptera_limite0.015[s2_f4_with_abundance_Diptera_limite0.015<4]<-0  #'2 warning corresponding wiht the columms of the names and taxa
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.015->s2_raw_Diptera_limite0.015
-s2_raw_Diptera_limite0.015[s2_raw_Diptera_limite0.015>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.015[s2_raw_Diptera_limite0.015>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.015[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.015)->t_s2_f4_Diptera_limite0.015 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.015)->t_s2_f4_Diptera_limite0.015 #'trasp
 t_s2_f4_Diptera_limite0.015[1:51,]->community_Diptera_limite0.015 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.015)<-community_Diptera_limite0.015[1,] 
-as.data.frame(community_Diptera_limite0.015)->community_Diptera0.015 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.015)->community_Diptera0.015 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.015)
-community_Diptera0.015[order(row.names(community_Diptera0.015)),]->community_Diptera0.015 ##order samples
-write.table (community_Diptera0.015, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.015.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.015.txt")->community_Diptera0.015
+community_Diptera0.015[order(row.names(community_Diptera0.015)),]->community_Diptera0.015 #'order samples
+write.table (community_Diptera0.015, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.015.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.015.txt")->community_Diptera0.015
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.015)
 community_Diptera0.015[which(str_extract (row.names(community_Diptera0.015), "_NTO_") %in% "_NTO_"),]->community_Diptera0.015_Site
 dim(community_Diptera0.015_Site)
-community_Diptera0.015_Site[,which(colSums(community_Diptera0.015_Site)!=0)]->community_Diptera0.015_Site ##to remove no data colums
+community_Diptera0.015_Site[,which(colSums(community_Diptera0.015_Site)!=0)]->community_Diptera0.015_Site #'to remove no data colums
 dim(community_Diptera0.015_Site)
-write.table (community_Diptera0.015_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.015_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.015_Site.txt")->community_Diptera0.015_Site
-#
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE_0.02**
+##################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE_0.02*
 unique(s2_raw_threshold0.02$limite0.02)->levels_limite0.02
 
 data.frame()->s2_raw_Diptera_limite0.02
@@ -250,48 +248,46 @@ for (i in 1:length(unique (s2_raw_threshold0.02$limite0.02)))
   rbind(s2_raw_Diptera_limite0.02,sum)->s2_raw_Diptera_limite0.02
 }
 
-#####delete the ocurrences with less than 4 reads by library (same criteria than denoising)
-#####s2_raw_Diptera_limite0.02->s2_f4_with_abundance_Diptera_limite0.02 
-#####s2_f4_with_abundance_Diptera_limite0.02[s2_f4_with_abundance_Diptera_limite0.02<4]<-0  ##2 warning corresponding wiht the columms of the names and taxa
+#'delete the ocurrences with less than 4 reads by library (same criteria than denoising)
+#s2_raw_Diptera_limite0.02->s2_f4_with_abundance_Diptera_limite0.02 
+#s2_f4_with_abundance_Diptera_limite0.02[s2_f4_with_abundance_Diptera_limite0.02<4]<-0  #'2 warning corresponding wiht the columms of the names and taxa
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.02->s2_raw_Diptera_limite0.02
-s2_raw_Diptera_limite0.02[s2_raw_Diptera_limite0.02>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.02[s2_raw_Diptera_limite0.02>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.02[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.02)->t_s2_f4_Diptera_limite0.02 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.02)->t_s2_f4_Diptera_limite0.02 #'trasp
 t_s2_f4_Diptera_limite0.02[1:51,]->community_Diptera_limite0.02 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.02)<-community_Diptera_limite0.02[1,] 
-as.data.frame(community_Diptera_limite0.02)->community_Diptera0.02 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.02)->community_Diptera0.02 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.02)
-community_Diptera0.02[order(row.names(community_Diptera0.02)),]->community_Diptera0.02 ##order samples
-write.table (community_Diptera0.02, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.02.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.02.txt")->community_Diptera0.02
+community_Diptera0.02[order(row.names(community_Diptera0.02)),]->community_Diptera0.02 #'order samples
+write.table (community_Diptera0.02, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.02.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.02.txt")->community_Diptera0.02
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.02)
 community_Diptera0.02[which(str_extract (row.names(community_Diptera0.02), "_NTO_") %in% "_NTO_"),]->community_Diptera0.02_Site
 dim(community_Diptera0.02_Site)
-community_Diptera0.02_Site[,which(colSums(community_Diptera0.02_Site)!=0)]->community_Diptera0.02_Site ##to remove no data colums
+community_Diptera0.02_Site[,which(colSums(community_Diptera0.02_Site)!=0)]->community_Diptera0.02_Site #'to remove no data colums
 dim(community_Diptera0.02_Site)
-write.table (community_Diptera0.02_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.02_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.02_Site.txt")->community_Diptera0.02_Site
-#
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE_0.03**
+##################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE_0.03*
 unique (s2_raw_threshold0.03$limite0.03)->levels_limite0.03
 
 data.frame()->s2_raw_Diptera_limite0.03
@@ -308,44 +304,42 @@ for (i in 1:length(unique (s2_raw_threshold0.03$limite0.03)))
   rbind(s2_raw_Diptera_limite0.03,sum)->s2_raw_Diptera_limite0.03
 }
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.03->s2_raw_Diptera_limite0.03
-s2_raw_Diptera_limite0.03[s2_raw_Diptera_limite0.03>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.03[s2_raw_Diptera_limite0.03>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.03[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.03)->t_s2_f4_Diptera_limite0.03 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.03)->t_s2_f4_Diptera_limite0.03 #'trasp
 t_s2_f4_Diptera_limite0.03[1:51,]->community_Diptera_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.03)<-community_Diptera_limite0.03[1,] 
-as.data.frame(community_Diptera_limite0.03)->community_Diptera0.03 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.03)->community_Diptera0.03 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.03)
-community_Diptera0.03[order(row.names(community_Diptera0.03)),]->community_Diptera0.03 ##order samples
-write.table (community_Diptera0.03, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.03.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.03.txt")->community_Diptera0.03
+community_Diptera0.03[order(row.names(community_Diptera0.03)),]->community_Diptera0.03 #'order samples
+write.table (community_Diptera0.03, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.03.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.03.txt")->community_Diptera0.03
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.03)
 community_Diptera0.03[which(str_extract (row.names(community_Diptera0.03), "_NTO_") %in% "_NTO_"),]->community_Diptera0.03_Site
 dim(community_Diptera0.03_Site)
-community_Diptera0.03_Site[,which(colSums(community_Diptera0.03_Site)!=0)]->community_Diptera0.03_Site ##to remove no data colums
+community_Diptera0.03_Site[,which(colSums(community_Diptera0.03_Site)!=0)]->community_Diptera0.03_Site #'to remove no data colums
 dim(community_Diptera0.03_Site)
-write.table (community_Diptera0.03_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.03_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.03_Site.txt")->community_Diptera0.03_Site
-#
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE_0.05**
+##################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE_0.05*
 unique (s2_raw_threshold0.05$limite0.05)->levels_limite0.05
 
 data.frame()->s2_raw_Diptera_limite0.05
@@ -362,44 +356,42 @@ for (i in 1:length(unique (s2_raw_threshold0.05$limite0.05)))
   rbind(s2_raw_Diptera_limite0.05,sum)->s2_raw_Diptera_limite0.05
 }
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.05->s2_raw_Diptera_limite0.05
-s2_raw_Diptera_limite0.05[s2_raw_Diptera_limite0.05>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.05[s2_raw_Diptera_limite0.05>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.05[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.05)->t_s2_f4_Diptera_limite0.05 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.05)->t_s2_f4_Diptera_limite0.05 #'trasp
 t_s2_f4_Diptera_limite0.05[1:51,]->community_Diptera_limite0.05 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.05)<-community_Diptera_limite0.05[1,] 
-as.data.frame(community_Diptera_limite0.05)->community_Diptera0.05 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.05)->community_Diptera0.05 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.05)
-community_Diptera0.05[order(row.names(community_Diptera0.05)),]->community_Diptera0.05 ##order samples
-write.table (community_Diptera0.05, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.05.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.05.txt")->community_Diptera0.05
+community_Diptera0.05[order(row.names(community_Diptera0.05)),]->community_Diptera0.05 #'order samples
+write.table (community_Diptera0.05, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.05.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.05.txt")->community_Diptera0.05
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.05)
 community_Diptera0.05[which(str_extract (row.names(community_Diptera0.05), "_NTO_") %in% "_NTO_"),]->community_Diptera0.05_Site
 dim(community_Diptera0.05_Site)
-community_Diptera0.05_Site[,which(colSums(community_Diptera0.05_Site)!=0)]->community_Diptera0.05_Site ##to remove no data colums
+community_Diptera0.05_Site[,which(colSums(community_Diptera0.05_Site)!=0)]->community_Diptera0.05_Site #'to remove no data colums
 dim(community_Diptera0.05_Site)
-write.table (community_Diptera0.05_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.05_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.05_Site.txt")->community_Diptera0.05_Site
-#
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE_0.075**
+##################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE_0.075*
 unique (s2_raw_threshold0.075$limite0.075)->levels_limite0.075
 
 data.frame()->s2_raw_Diptera_limite0.075
@@ -416,44 +408,42 @@ for (i in 1:length(unique (s2_raw_threshold0.075$limite0.075)))
   rbind(s2_raw_Diptera_limite0.075,sum)->s2_raw_Diptera_limite0.075
 }
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.075->s2_raw_Diptera_limite0.075
-s2_raw_Diptera_limite0.075[s2_raw_Diptera_limite0.075>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.075[s2_raw_Diptera_limite0.075>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.075[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.075)->t_s2_f4_Diptera_limite0.075 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.075)->t_s2_f4_Diptera_limite0.075 #'trasp
 t_s2_f4_Diptera_limite0.075[1:51,]->community_Diptera_limite0.075 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.075)<-community_Diptera_limite0.075[1,] 
-as.data.frame(community_Diptera_limite0.075)->community_Diptera0.075 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.075)->community_Diptera0.075 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.075)
-community_Diptera0.075[order(row.names(community_Diptera0.075)),]->community_Diptera0.075 ##order samples
-write.table (community_Diptera0.075, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.075.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.075.txt")->community_Diptera0.075
+community_Diptera0.075[order(row.names(community_Diptera0.075)),]->community_Diptera0.075 #'order samples
+write.table (community_Diptera0.075, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.075.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.075.txt")->community_Diptera0.075
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.075)
 community_Diptera0.075[which(str_extract (row.names(community_Diptera0.075), "_NTO_") %in% "_NTO_"),]->community_Diptera0.075_Site
 dim(community_Diptera0.075_Site)
-community_Diptera0.075_Site[,which(colSums(community_Diptera0.075_Site)!=0)]->community_Diptera0.075_Site ##to remove no data colums
+community_Diptera0.075_Site[,which(colSums(community_Diptera0.075_Site)!=0)]->community_Diptera0.075_Site #'to remove no data colums
 dim(community_Diptera0.075_Site)
-write.table (community_Diptera0.075_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.075_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.075_Site.txt")->community_Diptera0.075_Site
-#
 
-####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-#**Diptera MATRIX_LIMITE GMYC_0.0088**
+##################################################################################################
+#'loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+#'*Diptera MATRIX_LIMITE GMYC_0.0088*
 unique(s2_raw_threshold0.0088$limite0.0088)->levels_limite0.0088
 
 data.frame()->s2_raw_Diptera_limite0.0088
@@ -470,88 +460,88 @@ for (i in 1:length(unique (s2_raw_threshold0.0088$limite0.0088)))
   rbind(s2_raw_Diptera_limite0.0088,sum)->s2_raw_Diptera_limite0.0088
 }
 
-#####delete the ocurrences with less than 4 reads by library (same criteria than denoising)
-#####s2_raw_Diptera_limite0.0088->s2_f4_with_abundance_Diptera_limite0.0088 
-#####s2_f4_with_abundance_Diptera_limite0.0088[s2_f4_with_abundance_Diptera_limite0.0088<4]<-0  ##2 warning corresponding wiht the columms of the names and taxa
+#'delete the ocurrences with less than 4 reads by library (same criteria than denoising)
+#s2_raw_Diptera_limite0.0088->s2_f4_with_abundance_Diptera_limite0.0088 
+#s2_f4_with_abundance_Diptera_limite0.0088[s2_f4_with_abundance_Diptera_limite0.0088<4]<-0  #'2 warning corresponding wiht the columms of the names and taxa
 
-##**transform in present/absence table**
+#'transform in present/absence table
 s2_raw_Diptera_limite0.0088->s2_raw_Diptera_limite0.0088
-s2_raw_Diptera_limite0.0088[s2_raw_Diptera_limite0.0088>1]<-1 ##transform in present/absence table 
+s2_raw_Diptera_limite0.0088[s2_raw_Diptera_limite0.0088>1]<-1 #'transform in present/absence table 
 
-##**transform in present/absence table**
-#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-#####s2_f4[s2_f4>1]<-1 ##2 warning corresponding wiht the columms of the names and taxa
+#'transform in present/absence table
+#s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#s2_f4[s2_f4>1]<-1 #'2 warning corresponding wiht the columms of the names and taxa
 
-##**checking if there is any row with no presence**
+#'checking if there is any row with no presence
 s2_raw_Diptera_limite0.0088[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
-t(s2_raw_Diptera_limite0.0088)->t_s2_f4_Diptera_limite0.0088 ##trasp
+#'Community matrixes (samples in rows and h in cols). 
+#'*Diptera*
+t(s2_raw_Diptera_limite0.0088)->t_s2_f4_Diptera_limite0.0088 #'trasp
 t_s2_f4_Diptera_limite0.0088[1:51,]->community_Diptera_limite0.0088 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.0088)<-community_Diptera_limite0.0088[1,] 
-as.data.frame(community_Diptera_limite0.0088)->community_Diptera0.0088 ##trasp including col and row names
-####community_Acari[-49,]->community_Diptera ##removing neg
+as.data.frame(community_Diptera_limite0.0088)->community_Diptera0.0088 #'trasp including col and row names
+#community_Acari[-49,]->community_Diptera #'removing neg
 dim(community_Diptera0.0088)
-community_Diptera0.0088[order(row.names(community_Diptera0.0088)),]->community_Diptera0.0088 ##order samples
-write.table (community_Diptera0.0088, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.0088.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.0088.txt")->community_Diptera0.0088
+community_Diptera0.0088[order(row.names(community_Diptera0.0088)),]->community_Diptera0.0088 #'order samples
+write.table (community_Diptera0.0088, file="../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.0088.txt") #'this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Altitude_C/community_Diptera0.0088.txt")->community_Diptera0.0088
 
-####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+#'submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Diptera0.0088)
 community_Diptera0.0088[which(str_extract (row.names(community_Diptera0.0088), "_NTO_") %in% "_NTO_"),]->community_Diptera0.0088_Site
 dim(community_Diptera0.0088_Site)
-community_Diptera0.0088_Site[,which(colSums(community_Diptera0.0088_Site)!=0)]->community_Diptera0.0088_Site ##to remove no data colums
+community_Diptera0.0088_Site[,which(colSums(community_Diptera0.0088_Site)!=0)]->community_Diptera0.0088_Site #'to remove no data colums
 dim(community_Diptera0.0088_Site)
-write.table (community_Diptera0.0088_Site, file="../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.0088_Site.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../genetic/Data_out/Diptera/Diptera_IBR_Flat_Site/community_Diptera0.0088_Site.txt")->community_Diptera0.0088_Site
-#
 
-#**BETADIVERSITY ORDINATIONS by SITE** 
-##Diptera
+########################################################
+#'**BETADIVERSITY ORDINATIONS**'# by SITE
+#'
+#'
+#'*Diptera*
 
-##**beta general_Level_Haplotipos**
+#'beta general_Level_Haplotipos
 beta.pair(community_Diptera_h_Site, index.family="sorensen")->beta.pair_DipteraSite_h
 
-##**beta general_Level_0.005**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.005
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.005_Site, index.family="sorensen")->beta.pair_DipteraSite_0.005
 
-##**beta general_Level_0.015**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.015
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.015_Site, index.family="sorensen")->beta.pair_DipteraSite_0.015
 
-##**beta general_Level_0.02**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.02
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.02_Site, index.family="sorensen")->beta.pair_DipteraSite_0.02
 
-##**beta general_Level_0.03**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.03
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.03_Site, index.family="sorensen")->beta.pair_DipteraSite_0.03
 
-##**beta general_Level_0.05**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.05
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.05_Site, index.family="sorensen")->beta.pair_DipteraSite_0.05
 
-##**beta general_Level_0.075**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.075
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.075_Site, index.family="sorensen")->beta.pair_DipteraSite_0.075
 
-##**beta general_Level_0.0088**
-#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#'beta general_Level_0.0088
+#'betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Diptera0.0088_Site, index.family="sorensen")->beta.pair_DipteraSite_0.0088
 
-##**FORMAS DE OBTENER LA MATRIX effective resistance.** 
-Resistance_matrix_Site <- read.table("../spatial/IBResistanceFlatMatrix/Result_flat_resistances_DipteraSite.txt",sep = ",", header=T, row.names = 1)
+#FORMAS DE OBTENER LA MATRIX effective resistance. 
+Resistance_matrix_Site <- read.table("../spatial/IBResitanceElevationMatrix/Result_Alt_C_resistances.txt",sep = ",", header=T, row.names = 1)
 dim(Resistance_matrix_Site)
 class(Resistance_matrix_Site)
 Resistance_matrix_Site <- as.matrix(Resistance_matrix_Site)
 class(Resistance_matrix_Site)
 
-Resistance_matrix_Site[order(row.names(Resistance_matrix_Site)),order(colnames(Resistance_matrix_Site))]->Resistance_matrix_Site #Ordena la Resistance matrix con la de beta. ##important order both matrixes
+Resistance_matrix_Site[order(row.names(Resistance_matrix_Site)),order(colnames(Resistance_matrix_Site))]->Resistance_matrix_Site #Ordena la Resistance matrix con la de beta. #'important order both matrixes
 
 Resistance_matrix_Site[upper.tri(Resistance_matrix_Site)] <- NA 
 Resistance_matrix_Site
@@ -559,9 +549,9 @@ class(Resistance_matrix_Site)
 
 Resistance_matrix_Site <- as.dist(Resistance_matrix_Site) 
 Resistance_matrix_Site
-#
 
-##**Generating similarity values and adding 0.001 to avoid LOG(0)**
+################################################################################################################################################################################
+#Generating similarity values and adding 0.001 to avoid LOG(0)
 1-beta.pair_DipteraSite_h$beta.sim +0.001->all_h_betasim
 1-beta.pair_DipteraSite_0.005$beta.sim+0.001->all_0.005_betasim
 1-beta.pair_DipteraSite_0.015$beta.sim+0.001->all_0.015_betasim
@@ -570,8 +560,8 @@ Resistance_matrix_Site
 1-beta.pair_DipteraSite_0.05$beta.sim+0.001->all_0.05_betasim
 1-beta.pair_DipteraSite_0.075$beta.sim+0.001->all_0.075_betasim
 1-beta.pair_DipteraSite_0.0088$beta.sim+0.001->all_0.0088_betasim
-#
-##**log log linear regression multiple levels (fractality 1)**
+
+#'log log linear regression multiple levels (fractality 1)
 MRM(log(all_0.005_betasim)~log(all_h_betasim))
 MRM(log(all_0.015_betasim)~log(all_h_betasim))
 MRM(log(all_0.02_betasim)~log(all_h_betasim))
@@ -579,8 +569,8 @@ MRM(log(all_0.03_betasim)~log(all_h_betasim))
 MRM(log(all_0.05_betasim)~log(all_h_betasim))
 MRM(log(all_0.075_betasim)~log(all_h_betasim))
 MRM(log(all_0.0088_betasim)~log(all_h_betasim))
-#
-##**only to plot linear regressions**
+
+#'only to plot linear regressions
 log(all_h_betasim)->log_all_h_betasim
 log(all_0.005_betasim)->log_all_0.005_betasim
 log(all_0.015_betasim)->log_all_0.015_betasim
@@ -589,9 +579,8 @@ log(all_0.03_betasim)->log_all_0.03_betasim
 log(all_0.05_betasim)->log_all_0.05_betasim
 log(all_0.075_betasim)->log_all_0.075_betasim
 log(all_0.0088_betasim)->log_all_0.0088_betasim
-#
 
-###estimated <- seq(-4, 0, 0.01) nuevo
+#estimated <- seq(-4, 0, 0.01) nuevo
 linear.model_0.005 <- lm(log_all_0.005_betasim~ log_all_h_betasim)
 summary(linear.model_0.005)
 estimated <- seq(-4, 0, 0.01)
@@ -626,9 +615,7 @@ linear.model_0.0088 <- lm(log_all_0.0088_betasim~ log_all_h_betasim)
 summary(linear.model_0.0088)
 estimated <- seq(-4, 0, 0.01)
 counts.lineal_0.0088 <- predict(linear.model_0.0088,list(log_all_h_betasim=estimated))
-#
 
-##palette(gray(0:20 / 20))
 #########Color: "#003695", "#c997a9", "#9d9cc6", "#d49e57", "#9cb15b", "#fbd048", "#93dfff", "#F4A582"
 plot(log_all_h_betasim, log_all_0.005_betasim, pch=20, main="log_all_forestDiptera_similarity_multilevel", col = "#003695", ylim=c(-2.0,-0.05),xlim=c(-3.0,-0.1),ylab="log_similarity",xlab="log_similarity_h_level", cex.lab= 1.5, cex.axis= 1.5)
 lines(estimated, counts.lineal_0.005,lwd=2, col = "#003695", xlab = "Time (s)", ylab = "Counts")
@@ -650,9 +637,8 @@ lines(estimated, counts.lineal_0.05,lwd=2, col = "#2b72a6", xlab = "Time (s)", y
 
 points(log_all_h_betasim, log_all_0.075_betasim, pch=20, col= "#93dfff")
 lines(estimated, counts.lineal_0.075,lwd=2, col = "#93dfff", xlab = "Time (s)", ylab = "Counts")
-#
 
-##**Ddecay using geomatrix**
+#'Ddecay using geomatrix
 decay.model(all_h_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")
 decay.model(all_h_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")->decay_h
 
@@ -676,19 +662,54 @@ decay.model(all_0.075_betasim,Resistance_matrix_Site,model.type = "exp",y.type="
 
 decay.model(all_0.0088_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")
 decay.model(all_0.0088_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")->decay_0.0088
-#
-##**Plot with levels: h, 0.5, 1.5, 3, 5, 7.5, GMYC**
-plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0.4,1.35), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
+
+#########Color: "#003695", "#c997a9", "#9d9cc6", "#d49e57", "#9cb15b", "#fbd048", "#93dfff", "#F4A582"
+#Plot all levels
+plot.decay(decay_h, ylim=c(0,1), xlim=c(1,4.8), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
-plot.decay(decay_0.0088,add=T, pch=20, lwd=4, col="#92000A")
 plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
-##plot.decay(decay_0.02,add=T,pch=20,lwd=4,col="#d49e57")
+plot.decay(decay_0.02,add=T,pch=20,lwd=4,col="#d49e57")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-#
+plot.decay(decay_0.0088,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
 
-##**rsquared and pval of ddecays and slopes (Plot all levels)**
+#Plot with 6 levels: h, 1.5, 3, 5, 7.5, GMYC
+plot.decay(decay_h, ylim=c(0,1.0), xlim=c(1,5.0), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
+#plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
+plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
+#plot.decay(decay_0.02,add=T,pch=20,lwd=4,col="#d49e57")
+plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
+plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
+plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
+plot.decay(decay_0.0088,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
+
+#Plot levels: h,3, 5, y GMYC.
+plot.decay(decay_h, ylim=c(0,1.0), xlim=c(1,5.0), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
+#plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
+#plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
+#plot.decay(decay_0.02,add=T,pch=20,lwd=4,col="#d49e57")
+plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
+plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
+#plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
+plot.decay(decay_0.0088,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
+
+#Plot with levels: h, 0.5, 1.5, 3, 5, 7.5, GMYC
+plot.decay(decay_h, ylim=c(0,1.0), xlim=c(1,5.0), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
+plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
+plot.decay(decay_0.0088,add=T,pch=20, lwd=4, col="#92000A")
+plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
+#plot.decay(decay_0.02,add=T,pch=20,lwd=4,col="#d49e57")
+plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
+plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
+plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
+#legend(x = 5.74, y = 1.0, 
+#       legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"),
+#       col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"),
+#       pch=19,  bty="n", lty=1, cex=1.1, lwd=3) 
+#plot.decay(decay_0.029,add=T, pch=20, lty=3, lwd=4, col= "#F4A582")
+
+####'rsquared and pval of ddecays and slopes (Plot all levels)####
 cbind (decay_h$pseudo.r.squared,decay_0.005$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.02$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared, decay_0.075$pseudo.r.squared, decay_0.0088$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h","0.005","0.015","0.02","0.03","0.05", "0.075","GMYC")
 rsquared
@@ -699,7 +720,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0), cex.lab= 1.4, cex.axis= 1.4, cex=1.4
 cbind (decay_h$b.slope,decay_0.005$b.slope,decay_0.015$b.slope, decay_0.02$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slope, decay_0.0088$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-##**rsquared and pval of ddecays and slopes (levels: h, GMYC, 1.5, 3, 5, 7.5)**
+####'rsquared and pval of ddecays and slopes (levels: h, GMYC, 1.5, 3, 5, 7.5)####
 cbind (decay_h$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared,decay_0.075$pseudo.r.squared, decay_0.0088$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h", "0.015","0.03","0.05", "0.075", "GMYC")
 rsquared
@@ -710,7 +731,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0), cex.lab= 1.4, cex.axis= 1.4, cex=1.4
 cbind (decay_h$b.slope,decay_0.015$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slopedecay_0.0088$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-##**rsquared and pval of ddecays and slopes (levels: levels: h, GMYC, 3 and 5)**
+####'rsquared and pval of ddecays and slopes (levels: levels: h, GMYC, 3 and 5)####
 cbind (decay_h$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared, decay_0.0088$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h", "0.03","0.05", "GMYC")
 rsquared
@@ -721,7 +742,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0),cex.lab= 1.4, cex.axis= 1.4, cex=1.4,
 cbind (decay_h$b.slope,decay_0.03$b.slope,decay_0.05$b.slope, decay_0.0088$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-##**rsquared and pval of ddecays and slopes (levels: h, 0.5, 1.5, 3, 5, 7.5)**
+####'rsquared and pval of ddecays and slopes (levels: h, 0.5, 1.5, 3, 5, 7.5)####
 cbind (decay_h$pseudo.r.squared,decay_0.005$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.03$pseudo.r.squared, decay_0.05$pseudo.r.squared, decay_0.075$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h","0.005","0.015","0.03","0.05", "0.075")
 rsquared
@@ -732,14 +753,14 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0), cex.lab= 1.4, cex.axis= 1.4, cex=1.4
 cbind (decay_h$b.slope,decay_0.005$b.slope,decay_0.015$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-##**log log pearson correlations (fractality_2)**
+#'log log pearson correlations (fractality_2)
 levels<-c(1,2,3,4,5,6,7,9)
 
 rbind (decay_h$a.intercept,decay_0.005$a.intercept,decay_0.015$a.intercept,decay_0.02$a.intercept,decay_0.03$a.intercept,decay_0.05$a.intercept, decay_0.075$a.intercept, decay_0.0088$a.intercept)->intercepts
 intercepts
 
-##**h, 0.005, 0.015, 0.02, 0.03, 0.05, 0.75, 0.0088**
-##**beta.pair_DipteraSite_h**
+##h, 0.005, 0.015, 0.02, 0.03, 0.05, 0.75, 0.0088
+#beta.pair_DipteraSite_h
 beta.multi(community_Diptera_h_Site, index.family="sorensen")->diss_mean_h
 diss_mean_h$beta.SIM->diss_mean_h
 beta.multi(community_Diptera0.005_Site, index.family="sorensen")->diss_mean_0.005
@@ -773,7 +794,7 @@ dim(community_Diptera0.0088_Site)[2]->n_0.0088
 rbind (n_h,n_0.005,n_0.015,n_0.02,n_0.03,n_0.05,n_0.075, n_0.0088)->n_lineages
 n_lineages
 
-###colors: 
+# colors: 
 cor.test(log(levels),log(intercepts))
 plot(log(intercepts)~log(levels), lwd=2, pch=16, cex=1.5, cex.lab= 1.5, cex.axis=1.5, col= c("#003695", "#c997a9", "#9d9cc6", "#d49e57", "#9cb15b", "#fbd048", "#93dfff", "#F4A582"))
 abline(lm(log(intercepts)~log(levels)))
@@ -787,3 +808,4 @@ plot(log(mean_sim)~log(levels), lwd=2, pch=16,cex=1.5, cex.lab= 1.5,  cex.axis= 
 abline(lm(log(mean_sim)~log(levels)))
 
 #**END**
+

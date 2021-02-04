@@ -420,33 +420,33 @@ for (i in 1:length(unique (s2_raw_threshold0.075$limite0.075)))
   rbind(s2_raw_Collembola_limite0.075,sum)->s2_raw_Collembola_limite0.075
 }
 
-#**transform in present/absence table**
+##**transform in present/absence table**
 s2_raw_Collembola_limite0.075->s2_raw_Collembola_limite0.075
 s2_raw_Collembola_limite0.075[s2_raw_Collembola_limite0.075>1]<-1 transform in present/absence table 
 
-#**transform in present/absence table**
-##s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-##s2_f4[s2_f4>1]<-1 2 warning corresponding wiht the columms of the names and taxa
+##**transform in present/absence table**
+#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#####s2_f4[s2_f4>1]<-1 2 warning corresponding wiht the columms of the names and taxa
 
-#**checking if there is any row with no presence**
+##**checking if there is any row with no presence**
 s2_raw_Collembola_limite0.075[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-#**Community matrixes (samples in rows and h in cols)** 
-#**Collembola**
+##**Community matrixes (samples in rows and h in cols)** 
+##**Collembola**
 t(s2_raw_Collembola_limite0.075)->t_s2_f4_Collembola_limite0.075 trasp
 t_s2_f4_Collembola_limite0.075[1:51,]->community_Collembola_limite0.075 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Collembola_limite0.075)<-community_Collembola_limite0.075[1,] 
 as.data.frame(community_Collembola_limite0.075)->community_Collembola0.075 trasp including col and row names
-##community_Acari[-49,]->community_Collembola removing neg
+####community_Acari[-49,]->community_Collembola removing neg
 dim(community_Collembola0.075)
 community_Collembola0.075[order(row.names(community_Collembola0.075)),]->community_Collembola0.075 order samples
 write.table (community_Collembola0.075, file="../genetic/Data_out/Collembola/Collembola_IBR_Flat_West/community_Collembola0.075.txt") this is necessary for the format, not able to solve in other way
 read.table ("../genetic/Data_out/Collembola/Collembola_IBR_Flat_West/community_Collembola0.075.txt")->community_Collembola0.075
 
-##submatrixes of the Nevado Toluca del lado West de nivel 7.5%. NOTA_Nancy: Quiero hacer tablas que incluyan datos con localidades del lado West dentro del Nevado de Toluca.
+####submatrixes of the Nevado Toluca del lado West de nivel 7.5%. NOTA_Nancy: Quiero hacer tablas que incluyan datos con localidades del lado West dentro del Nevado de Toluca.
 dim(community_Collembola0.075)
 community_Collembola0.075[which(str_extract (row.names(community_Collembola0.075), "_W_") %in% "_W_"),]->community_Collembola0.075_West
 dim(community_Collembola0.075_West)
@@ -456,7 +456,7 @@ write.table (community_Collembola0.075_West, file="../genetic/Data_out/Collembol
 read.table ("../genetic/Data_out/Collembola/Collembola_IBR_Flat_West/community_Collembola0.075_West.txt")->community_Collembola0.075_West
 #
 
-##loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
 #**Collembola MATRIX_LIMITE GMYC_0.029**
 unique(s2_raw_threshold0.029$limite0.029)->levels_limite0.029
 
@@ -474,37 +474,37 @@ for (i in 1:length(unique (s2_raw_threshold0.029$limite0.029)))
   rbind(s2_raw_Collembola_limite0.029,sum)->s2_raw_Collembola_limite0.029
 }
 
-##delete the ocurrences with less than 4 reads by library (same criteria than denoising)
-##s2_raw_Collembola_limite0.029->s2_f4_with_abundance_Collembola_limite0.029 
-##s2_f4_with_abundance_Collembola_limite0.029[s2_f4_with_abundance_Collembola_limite0.029<4]<-0  2 warning corresponding wiht the columms of the names and taxa
+#####delete the ocurrences with less than 4 reads by library (same criteria than denoising)
+#####s2_raw_Collembola_limite0.029->s2_f4_with_abundance_Collembola_limite0.029 
+#####s2_f4_with_abundance_Collembola_limite0.029[s2_f4_with_abundance_Collembola_limite0.029<4]<-0  2 warning corresponding wiht the columms of the names and taxa
 
-#**transform in present/absence table**
+##**transform in present/absence table**
 s2_raw_Collembola_limite0.029->s2_raw_Collembola_limite0.029
 s2_raw_Collembola_limite0.029[s2_raw_Collembola_limite0.029>1]<-1 transform in present/absence table 
 
-#**transform in present/absence table**
-##s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
-##s2_f4[s2_f4>1]<-1 2 warning corresponding wiht the columms of the names and taxa
+##**transform in present/absence table**
+#####s2_f4_with_abundance->s2_f4 #NOTA_Nancy: Tengo un subset de Coleoptear
+#####s2_f4[s2_f4>1]<-1 2 warning corresponding wiht the columms of the names and taxa
 
-#**checking if there is any row with no presence**
+##**checking if there is any row with no presence**
 s2_raw_Collembola_limite0.029[,1:51]->data #Nota_Nancy: Modifique el numero: 2:50 por 1:51, aunque no funcionó. Volví a la version de 2:50
 rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-#**Community matrixes (samples in rows and h in cols)**
-#**Collembola**
+##**Community matrixes (samples in rows and h in cols)**
+##**Collembola**
 t(s2_raw_Collembola_limite0.029)->t_s2_f4_Collembola_limite0.029 trasp
 t_s2_f4_Collembola_limite0.029[1:51,]->community_Collembola_limite0.029 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Collembola_limite0.029)<-community_Collembola_limite0.029[1,] 
 as.data.frame(community_Collembola_limite0.029)->community_Collembola0.029 trasp including col and row names
-##community_Acari[-49,]->community_Collembola removing neg
+####community_Acari[-49,]->community_Collembola removing neg
 dim(community_Collembola0.029)
 community_Collembola0.029[order(row.names(community_Collembola0.029)),]->community_Collembola0.029 order samples
 write.table (community_Collembola0.029, file="../genetic/Data_out/Collembola/Collembola_IBR_Flat_West/community_Collembola0.029.txt") this is necessary for the format, not able to solve in other way
 read.table ("../genetic/Data_out/Collembola/Collembola_IBR_Flat_West/community_Collembola0.029.txt")->community_Collembola0.029
 
-##submatrixes of the Nevado Toluca del lado West de nivel GMYC. NOTA_Nancy: Quiero hacer tablas que incluyan datos con localidades del lado West dentro del Nevado de Toluca.
+####submatrixes of the Nevado Toluca del lado West de nivel GMYC. NOTA_Nancy: Quiero hacer tablas que incluyan datos con localidades del lado West dentro del Nevado de Toluca.
 dim(community_Collembola0.029)
 community_Collembola0.029[which(str_extract (row.names(community_Collembola0.029), "_W_") %in% "_W_"),]->community_Collembola0.029_West
 dim(community_Collembola0.029_West)
@@ -521,34 +521,34 @@ read.table ("../genetic/Data_out/Collembola/Collembola_IBR_Flat_West/community_C
 beta.pair(community_Collembola_h_West, index.family="sorensen")->beta.pair_CollembolaWest_h
 
 ##**beta general_Level_0.005**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.005_West, index.family="sorensen")->beta.pair_CollembolaWest_0.005
 
 ##**beta general_Level_0.015**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.015_West, index.family="sorensen")->beta.pair_CollembolaWest_0.015
 
 ##**beta general_Level_0.02**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.02_West, index.family="sorensen")->beta.pair_CollembolaWest_0.02
 
 ##**beta general_Level_0.03**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.03_West, index.family="sorensen")->beta.pair_CollembolaWest_0.03
 
 ##**beta general_Level_0.05**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.05_West, index.family="sorensen")->beta.pair_CollembolaWest_0.05
 
 ##**beta general_Level_0.075**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.075_West, index.family="sorensen")->beta.pair_CollembolaWest_0.075
 
 ##**beta general_Level_0.029**
-##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
+#####betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 beta.pair(community_Collembola0.029_West, index.family="sorensen")->beta.pair_CollembolaWest_0.029
 
-#**FORMAS DE OBTENER LA MATRIX effective resistance** 
+##**FORMAS DE OBTENER LA MATRIX effective resistance** 
 Resistance_matrix_West <- read.table("../spatial/IBResistanceFlatMatrix/Result_flat_resistances_CollembolaWest.txt", sep = ",", header=T, row.names = 1)
 dim(Resistance_matrix_West)
 class(Resistance_matrix_West)
@@ -565,7 +565,7 @@ Resistance_matrix_West <- as.dist(Resistance_matrix_West)
 Resistance_matrix_West
 #
 
-#**Generating similarity values and adding 0.001 to avoid LOG(0)**
+##**Generating similarity values and adding 0.001 to avoid LOG(0)**
 1-beta.pair_CollembolaWest_h$beta.sim +0.001->all_h_betasim
 1-beta.pair_CollembolaWest_0.005$beta.sim+0.001->all_0.005_betasim
 1-beta.pair_CollembolaWest_0.015$beta.sim+0.001->all_0.015_betasim
@@ -575,8 +575,7 @@ Resistance_matrix_West
 1-beta.pair_CollembolaWest_0.075$beta.sim+0.001->all_0.075_betasim
 1-beta.pair_CollembolaWest_0.029$beta.sim+0.001->all_0.029_betasim
 #
-
-#**log log linear regression multiple levels (fractality 1)**
+##**log log linear regression multiple levels (fractality 1)**
 MRM(log(all_0.005_betasim)~log(all_h_betasim))
 MRM(log(all_0.015_betasim)~log(all_h_betasim))
 MRM(log(all_0.02_betasim)~log(all_h_betasim))
@@ -585,8 +584,7 @@ MRM(log(all_0.05_betasim)~log(all_h_betasim))
 MRM(log(all_0.075_betasim)~log(all_h_betasim))
 MRM(log(all_0.029_betasim)~log(all_h_betasim))
 #
-
-#**only to plot linear regressions**
+##**only to plot linear regressions**
 log(all_h_betasim)->log_all_h_betasim
 log(all_0.005_betasim)->log_all_0.005_betasim
 log(all_0.015_betasim)->log_all_0.015_betasim
@@ -658,7 +656,7 @@ points(log_all_h_betasim, log_all_0.075_betasim, pch=20, col= "#93dfff")
 lines(estimated, counts.lineal_0.075,lwd=2, col = "#93dfff", xlab = "Time (s)", ylab = "Counts")
 #
 
-#**Ddecay using geomatrix**
+##**Decay using geomatrix**
 decay.model(all_h_betasim,Resistance_matrix_West,model.type = "exp",y.type="sim")
 decay.model(all_h_betasim,Resistance_matrix_West,model.type = "exp",y.type="sim")->decay_h
 
@@ -687,8 +685,8 @@ decay.model(all_0.029_betasim,Resistance_matrix_West,model.type = "exp",y.type="
 ##palette(gray(0:20 / 20))
 ##colors: "#003695", "#c997a9", "#9d9cc6", "#d49e57", "#9cb15b", "#fbd048", "#93dfff", "#F4A582"
 
-##Plot with 6 levels: h, 1.5, 3, 5, 7.5, GMYC
-##Plot all levels
+##**Plot with 6 levels: h, 1.5, 3, 5, 7.5, GMYC**
+##**Plot all levels**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0.35,1.10), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 ##plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
@@ -698,8 +696,8 @@ plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
 plot.decay(decay_0.029,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
 
-##Plot levels: h,3, 5, y GMYC.
-##Plot all levels
+##**Plot levels: h,3, 5, y GMYC.**
+##**Plot all levels**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0.35,1.10), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 ##plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 ##plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
@@ -709,8 +707,8 @@ plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
 plot.decay(decay_0.029,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
 
-##Plot with levels: h, 0.5, 1.5, 3, 5, 7.5
-##Plot all levels
+##**Plot with levels: h, 0.5, 1.5, 3, 5, 7.5**
+##**Plot all levels**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0.35,1.10), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
@@ -720,8 +718,7 @@ plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
 
-
-#**rsquared and pval of ddecays and slopes (Plot all levels)**
+##**rsquared and pval of ddecays and slopes (Plot all levels)**
 cbind (decay_h$pseudo.r.squared,decay_0.005$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.02$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared, decay_0.075$pseudo.r.squared, decay_0.029$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h","0.005","0.015","0.02","0.03","0.05", "0.075","GMYC")
 rsquared
@@ -732,7 +729,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0),cex.lab= 1.4, cex.axis= 1.4, cex=1.4,
 cbind (decay_h$b.slope,decay_0.005$b.slope,decay_0.015$b.slope, decay_0.02$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slope, decay_0.029$b.slope)->b.slope
 barplot(b.slope,main="all_forestCollembola_geomatrix_slopes_ddcay")
 
-#**rsquared and pval of ddecays and slopes (levels: h, GMYC, 1.5, 3, 5, 7.5)**
+##**rsquared and pval of ddecays and slopes (levels: h, GMYC, 1.5, 3, 5, 7.5)**
 cbind (decay_h$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared,decay_0.075$pseudo.r.squared, decay_0.029$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h", "0.015","0.03","0.05", "0.075", "GMYC")
 rsquared
@@ -743,7 +740,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0),cex.lab= 1.4, cex.axis= 1.4, cex=1.4,
 cbind (decay_h$b.slope,decay_0.015$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slopedecay_0.029$b.slope)->b.slope
 barplot(b.slope,main="all_forestCollembola_geomatrix_slopes_ddcay")
 
-#**rsquared and pval of ddecays and slopes (levels: levels: h, GMYC, 3 and 5)**
+##**rsquared and pval of ddecays and slopes (levels: levels: h, GMYC, 3 and 5)**
 cbind (decay_h$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared, decay_0.029$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h", "0.03","0.05", "GMYC")
 rsquared
@@ -754,7 +751,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0),cex.lab= 1.4, cex.axis= 1.4, cex=1.4,
 cbind (decay_h$b.slope,decay_0.03$b.slope,decay_0.05$b.slope, decay_0.029$b.slope)->b.slope
 barplot(b.slope,main="all_forestCollembola_geomatrix_slopes_ddcay")
 
-#**rsquared and pval of ddecays and slopes (levels: h, 0.5, 1.5, 3, 5, 7.5)**
+##**rsquared and pval of ddecays and slopes (levels: h, 0.5, 1.5, 3, 5, 7.5)**
 cbind (decay_h$pseudo.r.squared,decay_0.005$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.03$pseudo.r.squared, decay_0.05$pseudo.r.squared, decay_0.075$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h","0.005","0.015","0.03","0.05", "0.075")
 rsquared
@@ -765,14 +762,14 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0),cex.lab= 1.4, cex.axis= 1.4, cex=1.4,
 cbind (decay_h$b.slope,decay_0.005$b.slope,decay_0.015$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slope)->b.slope
 barplot(b.slope,main="all_forestCollembola_geomatrix_slopes_ddcay")
 
-#**log log pearson correlations (fractality_2)**
+##**log log pearson correlations (fractality_2)**
 levels<-c(1,2,3,4,5,6,7,9)
 
 rbind (decay_h$a.intercept,decay_0.005$a.intercept,decay_0.015$a.intercept,decay_0.02$a.intercept,decay_0.03$a.intercept,decay_0.05$a.intercept, decay_0.075$a.intercept, decay_0.029$a.intercept)->intercepts
 intercepts
 
-##h, 0.005, 0.015, 0.02, 0.03, 0.05, 0.75, 0.029
-##beta.pair_CollembolaWest_h
+##**h, 0.005, 0.015, 0.02, 0.03, 0.05, 0.75, 0.029**
+##**beta.pair_CollembolaWest_h**
 beta.multi(community_Collembola_h_West, index.family="sorensen")->diss_mean_h
 diss_mean_h$beta.SIM->diss_mean_h
 beta.multi(community_Collembola0.005_West, index.family="sorensen")->diss_mean_0.005

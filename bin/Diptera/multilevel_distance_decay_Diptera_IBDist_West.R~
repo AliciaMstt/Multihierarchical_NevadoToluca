@@ -1,6 +1,6 @@
 #**INITIAL STEPS**
 
-####In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
+#####In excel remove the simbol #' from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
 library(stats)
 library(base)
 library(dplyr)
@@ -17,24 +17,24 @@ library(ecodist)
 library(Imap)
 
 #**TABLES AND COMMUNITY MATRIXES** 
-####open table with names including Region and habitat parameters
+#####open table with names including Region and habitat parameters
 s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", sep= ",", header=TRUE)
 dim(s2_raw_all)
 
 #**Table Haplotipos**
-####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+#####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
 s2_raw_all[,c(1:52,68)]->s2_raw 
 dim(s2_raw) #'51 samples = 51 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
 colnames(s2_raw)
 
-####Applying the conservative threshold (this is a binary column)
+#####Applying the conservative threshold (this is a binary column)
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
 s2_raw_threshold [,1:52]->s2_raw_threshold_h #'remove threshold col
 dim(s2_raw_threshold_h)
 colnames(s2_raw_threshold_h)
 
 #**Table levels clustering**
-####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+#####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
 s2_raw_all[,c(1:66,68)]->s2_raw
 dim(s2_raw) #'49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
 colnames(s2_raw)
@@ -96,7 +96,7 @@ rowSums(data_h)
 length(which(rowSums(data_h)!=0))
 length(which(rowSums(data_h)==0))
 
-##Diptera
+##**Diptera**
 t(s2_f4_h)->t_s2_f4_h #'trasp
 t_s2_f4_h[2:52,]->community_Diptera_h #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(community_Diptera_h)<-t_s2_f4_h[1,]
@@ -154,7 +154,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.005)->t_s2_f4_Diptera_limite0.005 #'trasp
 t_s2_f4_Diptera_limite0.005[1:51,]->community_Diptera_limite0.005 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.005)<-community_Diptera_limite0.005[1,] 
@@ -212,7 +212,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.015)->t_s2_f4_Diptera_limite0.015 #'trasp
 t_s2_f4_Diptera_limite0.015[1:51,]->community_Diptera_limite0.015 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.015)<-community_Diptera_limite0.015[1,] 
@@ -270,7 +270,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.02)->t_s2_f4_Diptera_limite0.02 #'trasp
 t_s2_f4_Diptera_limite0.02[1:51,]->community_Diptera_limite0.02 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.02)<-community_Diptera_limite0.02[1,] 
@@ -324,7 +324,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.03)->t_s2_f4_Diptera_limite0.03 #'trasp
 t_s2_f4_Diptera_limite0.03[1:51,]->community_Diptera_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.03)<-community_Diptera_limite0.03[1,] 
@@ -378,7 +378,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.05)->t_s2_f4_Diptera_limite0.05 #'trasp
 t_s2_f4_Diptera_limite0.05[1:51,]->community_Diptera_limite0.05 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.05)<-community_Diptera_limite0.05[1,] 
@@ -388,8 +388,8 @@ dim(community_Diptera0.05)
 community_Diptera0.05[order(row.names(community_Diptera0.05)),]->community_Diptera0.05 #'order samples
 write.table (community_Diptera0.05, file="../genetic/Data_out/Diptera/Diptera_IBD_West/community_Diptera0.05.txt") #'this is necessary for the format, not able to solve in other way
 read.table ("../genetic/Data_out/Diptera/Diptera_IBD_West/community_Diptera0.05.txt")->community_Diptera0.05
-#
-##**submatrixes by West in Nevado Toluca of the 5.0% level.**
+
+####submatrixes by West in Nevado Toluca of the 5.0% level.
 dim(community_Diptera0.05)
 community_Diptera0.05[which(str_extract (row.names(community_Diptera0.05), "_W_") %in% "_W_"),]->community_Diptera0.05_West
 dim(community_Diptera0.05_West)
@@ -432,7 +432,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.075)->t_s2_f4_Diptera_limite0.075 #'trasp
 t_s2_f4_Diptera_limite0.075[1:51,]->community_Diptera_limite0.075 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.075)<-community_Diptera_limite0.075[1,] 
@@ -591,7 +591,6 @@ log(all_0.05_betasim)->log_all_0.05_betasim
 log(all_0.075_betasim)->log_all_0.075_betasim
 log(all_0.0088_betasim)->log_all_0.0088_betasim
 #
-
 ###estimated <- seq(-4, 0, 0.01) nuevo
 linear.model_0.005 <- lm(log_all_0.005_betasim~ log_all_h_betasim)
 summary(linear.model_0.005)
@@ -650,7 +649,7 @@ lines(estimated, counts.lineal_0.05,lwd=2, col = "#2b72a6", xlab = "Time (s)", y
 
 points(log_all_h_betasim, log_all_0.075_betasim, pch=20, col= "#93dfff")
 lines(estimated, counts.lineal_0.075,lwd=2, col = "#93dfff", xlab = "Time (s)", ylab = "Counts")
-
+#
 ##**Decay using geomatrix**
 decay.model(all_h_betasim,Resistance_matrix_West,model.type = "exp",y.type="sim")
 decay.model(all_h_betasim,Resistance_matrix_West,model.type = "exp",y.type="sim")->decay_h
@@ -677,7 +676,7 @@ decay.model(all_0.0088_betasim,Resistance_matrix_West,model.type = "exp",y.type=
 decay.model(all_0.0088_betasim,Resistance_matrix_West,model.type = "exp",y.type="sim")->decay_0.0088
 
 #########Color: "#003695", "#c997a9", "#9d9cc6", "#d49e57", "#9cb15b", "#fbd048", "#93dfff", "#F4A582"
-#**Plot all levels**
+##**Plot all levels**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0,3300), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
@@ -687,7 +686,7 @@ plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
 plot.decay(decay_0.0088,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
 
-#**Plot with 6 levels: h, 1.5, 3, 5, 7.5, GMYC**
+##**Plot with 6 levels: h, 1.5, 3, 5, 7.5, GMYC**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0,3300), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 ##plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
@@ -697,7 +696,7 @@ plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
 plot.decay(decay_0.0088,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
 
-#**Plot levels: h,3, 5, y GMYC.**
+##**Plot levels: h,3, 5, y GMYC.**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0,3300), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 ##plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 ##plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
@@ -707,7 +706,7 @@ plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 ##plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
 plot.decay(decay_0.0088,add=T, pch=20, lty=3, lwd=4, col="#F4A582")
 
-#**Plot with levels: h, 0.5, 1.5, 3, 5, 7.5**
+##**Plot with levels: h, 0.5, 1.5, 3, 5, 7.5**
 plot.decay(decay_h, ylim=c(0,1.0), xlim=c(0,3300), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 plot.decay(decay_0.0088,add=T,pch=20,lwd=4,col="#92000A")
@@ -733,7 +732,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0), cex.lab= 1.4, cex.axis= 1.4, cex=1.4
 cbind (decay_h$b.slope,decay_0.005$b.slope,decay_0.015$b.slope, decay_0.02$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slope, decay_0.0088$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-#**rsquared and pval of ddecays and slopes (levels: h, GMYC, 1.5, 3, 5, 7.5)**
+##**rsquared and pval of ddecays and slopes (levels: h, GMYC, 1.5, 3, 5, 7.5)**
 cbind (decay_h$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared,decay_0.075$pseudo.r.squared, decay_0.0088$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h", "0.015","0.03","0.05", "0.075", "GMYC")
 rsquared
@@ -744,7 +743,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0), cex.lab= 1.4, cex.axis= 1.4, cex=1.4
 cbind (decay_h$b.slope,decay_0.015$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slopedecay_0.0088$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-#**rsquared and pval of ddecays and slopes (levels: levels: h, GMYC, 3 and 5)**
+##**rsquared and pval of ddecays and slopes (levels: levels: h, GMYC, 3 and 5)**
 cbind (decay_h$pseudo.r.squared,decay_0.03$pseudo.r.squared,decay_0.05$pseudo.r.squared, decay_0.0088$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h", "0.03","0.05", "GMYC")
 rsquared
@@ -755,7 +754,7 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0),cex.lab= 1.4, cex.axis= 1.4, cex=1.4,
 cbind (decay_h$b.slope,decay_0.03$b.slope,decay_0.05$b.slope, decay_0.0088$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-#**rsquared and pval of ddecays and slopes (levels: h, 0.5, 1.5, 3, 5, 7.5)**
+##**rsquared and pval of ddecays and slopes (levels: h, 0.5, 1.5, 3, 5, 7.5)**
 cbind (decay_h$pseudo.r.squared,decay_0.005$pseudo.r.squared,decay_0.015$pseudo.r.squared,decay_0.03$pseudo.r.squared, decay_0.05$pseudo.r.squared, decay_0.075$pseudo.r.squared)->rsquared
 colnames(rsquared)<-c("h","0.005","0.015","0.03","0.05", "0.075")
 rsquared
@@ -766,14 +765,14 @@ text (x=barplot(rsquared[1,],ylim=c(0,1.0), cex.lab= 1.4, cex.axis= 1.4, cex=1.4
 cbind (decay_h$b.slope,decay_0.005$b.slope,decay_0.015$b.slope, decay_0.03$b.slope,decay_0.05$b.slope, decay_0.075$b.slope)->b.slope
 barplot(b.slope,main="all_forestDiptera_geomatrix_slopes_ddcay")
 
-#**log log pearson correlations (fractality_2)**
+##**log log pearson correlations (fractality_2)**
 levels<-c(1,2,3,4,5,6,7,9)
 
 rbind (decay_h$a.intercept,decay_0.005$a.intercept,decay_0.015$a.intercept,decay_0.02$a.intercept,decay_0.03$a.intercept,decay_0.05$a.intercept, decay_0.075$a.intercept, decay_0.0088$a.intercept)->intercepts
 intercepts
 
-##h, 0.005, 0.015, 0.02, 0.03, 0.05, 0.75, 0.0088
-#**beta.pair_DipteraSite_h**
+##**h, 0.005, 0.015, 0.02, 0.03, 0.05, 0.75, 0.0088**
+##**beta.pair_DipteraSite_h**
 beta.multi(community_Diptera_h_West, index.family="sorensen")->diss_mean_h
 diss_mean_h$beta.SIM->diss_mean_h
 beta.multi(community_Diptera0.005_West, index.family="sorensen")->diss_mean_0.005

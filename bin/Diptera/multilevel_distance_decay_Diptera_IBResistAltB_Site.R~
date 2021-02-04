@@ -1,6 +1,6 @@
 #**INITIAL STEPS**
 
-####In excel remove the simbol ## from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
+#####In excel remove the simbol ## from the names of the table and rename the samples acccording to the code used in the gradient e.g. GRA_S10_D_F_A10
 library(stats)
 library(base)
 library(dplyr)
@@ -32,7 +32,6 @@ s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold
 s2_raw_threshold [,1:52]->s2_raw_threshold_h ##remove threshold col
 dim(s2_raw_threshold_h)
 colnames(s2_raw_threshold_h)
-#
 
 #**Table levels clustering**
 #####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -98,7 +97,7 @@ rowSums(data_h)
 length(which(rowSums(data_h)!=0))
 length(which(rowSums(data_h)==0))
 
-##Diptera
+##**Diptera**
 t(s2_f4_h)->t_s2_f4_h ##trasp
 t_s2_f4_h[2:52,]->community_Diptera_h #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(community_Diptera_h)<-t_s2_f4_h[1,]
@@ -156,7 +155,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.005)->t_s2_f4_Diptera_limite0.005 ##trasp
 t_s2_f4_Diptera_limite0.005[1:51,]->community_Diptera_limite0.005 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.005)<-community_Diptera_limite0.005[1,] 
@@ -179,7 +178,6 @@ read.table ("../genetic/Data_out/Diptera/Diptera_IBR_AltB_Site/community_Diptera
 
 ####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
 #**Diptera MATRIX_LIMITE_0.015**
-
 unique (s2_raw_threshold0.015$limite0.015)->levels_limite0.015
 
 data.frame()->s2_raw_Diptera_limite0.015
@@ -215,7 +213,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.015)->t_s2_f4_Diptera_limite0.015 ##trasp
 t_s2_f4_Diptera_limite0.015[1:51,]->community_Diptera_limite0.015 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.015)<-community_Diptera_limite0.015[1,] 
@@ -327,7 +325,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.03)->t_s2_f4_Diptera_limite0.03 ##trasp
 t_s2_f4_Diptera_limite0.03[1:51,]->community_Diptera_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.03)<-community_Diptera_limite0.03[1,] 
@@ -380,9 +378,8 @@ rowSums(data)
 length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
-
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.05)->t_s2_f4_Diptera_limite0.05 ##trasp
 t_s2_f4_Diptera_limite0.05[1:51,]->community_Diptera_limite0.05 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.05)<-community_Diptera_limite0.05[1,] 
@@ -436,7 +433,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.075)->t_s2_f4_Diptera_limite0.075 ##trasp
 t_s2_f4_Diptera_limite0.075[1:51,]->community_Diptera_limite0.075 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.075)<-community_Diptera_limite0.075[1,] 
@@ -494,7 +491,7 @@ length(which(rowSums(data)!=0))
 length(which(rowSums(data)==0))
 
 ##**Community matrixes (samples in rows and h in cols).** 
-##Diptera
+##**Diptera**
 t(s2_raw_Diptera_limite0.0088)->t_s2_f4_Diptera_limite0.0088 ##trasp
 t_s2_f4_Diptera_limite0.0088[1:51,]->community_Diptera_limite0.0088 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Diptera_limite0.0088)<-community_Diptera_limite0.0088[1,] 
@@ -657,7 +654,7 @@ points(log_all_h_betasim, log_all_0.075_betasim, pch=20, col= "#93dfff")
 lines(estimated, counts.lineal_0.075,lwd=2, col = "#93dfff", xlab = "Time (s)", ylab = "Counts")
 #
 
-#**Ddecay using geomatrix**
+##**Decay using geomatrix**
 decay.model(all_h_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")
 decay.model(all_h_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")->decay_h
 
@@ -683,7 +680,7 @@ decay.model(all_0.0088_betasim,Resistance_matrix_Site,model.type = "exp",y.type=
 decay.model(all_0.0088_betasim,Resistance_matrix_Site,model.type = "exp",y.type="sim")->decay_0.0088
 #
 
-#**Plot with levels: h, 0.5, 1.5, 3, 5, 7.5, GMYC**
+##**Plot with levels: h, 0.5, 1.5, 3, 5, 7.5, GMYC**
 plot.decay(decay_h, ylim=c(0,1), xlim=c(1.3,5.6), pch=20, lwd=4, cex.lab= 1.5, cex.axis= 1.5, col="#003695")
 plot.decay(decay_0.005,add=T,pch=20,lwd=4,col="#c997a9")
 plot.decay(decay_0.0088,add=T,pch=20, lwd=4, col="#92000A")

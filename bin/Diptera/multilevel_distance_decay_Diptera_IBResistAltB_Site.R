@@ -18,7 +18,7 @@ library(Imap)
 
 #**TABLES AND COMMUNITY MATRIXES** 
 #####open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", sep=",", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", sep = ",", header=TRUE)
 dim(s2_raw_all)
 
 #**Table Haplotipos**

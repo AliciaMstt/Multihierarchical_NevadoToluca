@@ -68,15 +68,16 @@ Contais spatial data as follows:
 
 * `surveyed_mountainNevadoToluca` contains sampling points (`.csv`) used in `2.PlotRasters.R`
 
-`IBDistanceMatrix` contains geomatrix focal point (`*.txt`) used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
+* `IBDistanceMatrix` contains geomatrix focal point (`*.txt`) used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
 
-`IBResistanceFlatMatrix` flat output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
+* `IBResistanceFlatMatrix` flat output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
 
-`IBResistanceSlopeMatrix` slope output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
+* `IBResistanceSlopeMatrix` slope output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
 
-`IBResistanceVegTypeMatrix` Vegetation type output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
+* `IBResistanceVegTypeMatrix` Vegetation type output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
 
-`IBResitanceElevationMatrix` elevation output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
+* `IBResitanceElevationMatrix` elevation output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
 
-*`Circuitscape` contains the focal points (`*_focalpoints.txt`) used to run Circuit scape and the output (`/out`). (EN CONTRUCCION).
+* `Circuitscape` contains the focal points (`*_focalpoints.txt`) used to run Circuit scape and the output (`/out`). (EN CONTRUCCION).
 
+##**END**

@@ -19,7 +19,7 @@ library(Imap)
 #**TABLES AND COMMUNITY MATRIXES**
 #############################################################################################################################
 ###########'open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep= ",", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep = ",", header=TRUE)
 dim(s2_raw_all)
 
 #'Table Haplotipos'

@@ -1,8 +1,8 @@
-#**Local-scale dispersal constraints promote spatial structure and arthropod diversity within a tropical sky-island**
-
+**Local-scale dispersal constraints promote spatial structure and arthropod diversity within a tropical sky-island**
+#
 The repository contains the pipeline to perform bioinformatics tools from metabarcoding data of the project *Local-scale dispersal constraints promote spatial structure and arthropod diversity within a tropical sky-island*. We focus on a single tropical sky-island, Nevado de Toluca of the Transmexican Volcanic Belt, where we sampled whole-communities of arthropods for eight orders with a comparable design at a spatial scale ranging from 50 m to 20 km, using 840 pitfall traps and whole community metabarcoding. These samples were then used to build metabarcoding libraries of arthropods using COI marker. 
-
-####Primers and overhang adapter:
+#
+**Primers and overhang adapter:**
 
 **COI** expected size 418 pb
 
@@ -18,7 +18,7 @@ Forward overhang: 5’ TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG‐[locus‐
 specific sequence]
 Reverse overhang: 5’ GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG‐[locus‐
 specific sequence]
-
+#
 
 ## Repository organization
 Contains data and scripts for the sections *Bioinformatics processing to identify OTUs at different thresholds of genetic similarity*, *Community diversity and composition* and *Similarity distance-decay and landscape connectivity* of the manuscript.
@@ -26,7 +26,7 @@ Contains data and scripts for the sections *Bioinformatics processing to identif
 The **bin** directory cointains the scripts used in this pipeline. All scripts run using `bin` as working directory. The **data** directory is not included in this repository, but data is available at this [dryad](https://XXXXXXX).
 
 Data comes from Cornell Institute of Biotechnology, Cornell University, USA, for sequencing on a lane of Illumina MiSeq 2x300 bp.
-
+#
 
 ### `/bin/`
 
@@ -45,8 +45,9 @@ Scripts content:
 * `5.Plot_Diversity_All.r`This script plot "Community diversity and composition", "plot global Richness by sites", "Beta diversity", "Non-Metric Multidimensional scaling (NMDS) ordinations of community similarity", and "Accumulation Curves".
 * `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`This script gets all scripts (source) to estimate "Distance decay at the multihierchical leveles" and Isolation by resistence.
 * `7.Plot_DistanceDecay_IBD_IBR`This script plot "Distance decay" and Isolation by resistance at the figure 5, figure 6 and Figure S6.
+#
 
-These scripts use the data in `genetic` and `spatial`.
+These scripts use the data in `genetic`, `spatial` and `meta`.
 
 ### `/genetic`
 
@@ -55,6 +56,7 @@ Contains genetic *data in* and *data out* for each order
 Genetic *data in* corresponds to `0.Soup_processing_steps.sh` output using the subset of each order. 
 
 Genetic *data out* corresponds to `4.to_get_Diversity_All.r`using the subset of 8 orders and `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r` output using the subset of Diptera and Collembola order. 
+#
 
 ### `/spatial`
 
@@ -80,4 +82,24 @@ Contais spatial data as follows:
 
 * `Circuitscape` contains the focal points (`*_focalpoints.txt`) used to run Circuit scape and the output (`/out`). (EN CONTRUCCION).
 
-##**END**
+### `/meta`
+`ConservationForestNevadoToluca.csv` contains metadata for each of the samples sequenced in a lane Miseq. Each column names refer to:
+
+* `ID`: sample number ID 
+* `Code`: ID of the sequencing run 
+ * `Label_Metabarcoding`: sample name of each library: e.g. `CON_NTO_TLC_31TCONS1`: `CON` Conservation (Treatment), `NTO`Nevado de Toluca (Mountain), `TLC`Tlacotepec (locality), `31TCONS1` ID of the sequencing sample run.    
+ * `Locality`: Locality of the sampling 
+* `key`: Abbreviation of the sampling location
+* `Municipality`: Municipality of the sampling
+* `State`: State of the sampling
+* `Natural_Protected_Area`: Natural Protected Area of the sampling
+* `key`: Abbreviation of the Natural Protected Area
+* `Latitude`: Latitude of the sampling 
+* `Longitude`: Longitude of the sampling 
+* `Samplig_Altitude`: Meter above level seal of each the sampling point.
+* `Treatment`: Name of the treatment 
+* `Key`: Abbreviation of the treatment
+* `Season`: Name of season in the sampling
+* `Forest_type`: Name of the tree specie in the forest.
+
+**END**

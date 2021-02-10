@@ -1,43 +1,43 @@
-Number,ID,Code,Label_Metabarcoding,Locality,key,Municipality,State,Natural_Protected_Area,Key,Latitude,Longitude,Samplig_Altitude,Treatment,Key,Season,forest_type
-1,31,31TCONSER1,CON_NTO_TLC_31TCONS1,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.175990,-99.761725,3323,Under conservation ,CON,Rainy,Abies religiosa
-2,32,32TCONSER2,CON_NTO_TLC_32TCONS2,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.176833,-99.760806,3310,Under conservation ,CON,Rainy,Abies religiosa
-3,33,33TCONSER3,CON_NTO_TLC_33TCONS3,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.177472,-99.760750,3302,Under conservation ,CON,Rainy,Abies religiosa
-4,34,34TCONSER4,CON_NTO_TLC_34TCONS4,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179472,-99.760083,3271,Under conservation ,CON,Rainy,Abies religiosa
-5,35,35TCONSER5,CON_NTO_TLC_35TCONS5,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179583,-99.759667,3264,Under conservation ,CON,Rainy,Abies religiosa
-6,36,36TCONSER6,CON_NTO_TLC_36TCONS6,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179056,-99.759333,3271,Under conservation ,CON,Rainy,Abies religiosa
-7,37,37TCONSER7,CON_NTO_TLC_37TCONS7,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179778,-99.760028,3266,Under conservation ,CON,Rainy,Abies religiosa
-8,38,38TCONSER8,CON_NTO_TLC_38TCONS8,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.180361,-99.760250,3265,Under conservation ,CON,Rainy,Abies religiosa
-9,39,39TCONSER9,CON_NTO_TLC_39TCONS9,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.180972,-99.759167,3245,Under conservation ,CON,Rainy,Abies religiosa
-10,70,70SHCON1,CON_NTO_SJH_70SHCON1,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.189917,-99.808917,3298,Under conservation ,CON,Rainy,Abies religiosa
-11,71,71SHCON2,CON_NTO_SJH_71SHCON2,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.189278,-99.808639,3303,Under conservation ,CON,Rainy,Abies religiosa
-12,72,72SHCON3,CON_NTO_SJH_72SHCON3,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.188667,-99.808778,3318,Under conservation ,CON,Rainy,Abies religiosa
-13,73,73SHCON4,CON_NTO_SJH_73SHCON4,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.183556,-99.811083,3386,Under conservation ,CON,Rainy,Abies religiosa
-14,74,74SHCON5,CON_NTO_SJH_74SHCON5,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.184222,-99.810889,3371,Under conservation ,CON,Rainy,Abies religiosa
-15,75,75SHCON6,CON_NTO_SJH_75SHCON6,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.184889,-99.810556,3355,Under conservation ,CON,Rainy,Abies religiosa
-16,76,76SHCON7,CON_NTO_SJH_76SHCON7,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.187056,-99.806361,3288,Under conservation ,CON,Rainy,Abies religiosa
-17,77,77SHCON8,CON_NTO_SJH_77SHCON8,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.187417,-99.806389,3284,Under conservation ,CON,Rainy,Abies religiosa
-18,78,78SHCON9,CON_NTO_SJH_78SHCON9,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.187333,-99.806861,3293,Under conservation ,CON,Rainy,Abies religiosa
-19,79,79ACON1,CON_NTO_ASB_79ACON1,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200500,-99.926639,3053,Under conservation ,CON,Rainy,Abies religiosa
-20,80,80ACON2,CON_NTO_ASB_80ACON2,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200444,-99.927000,3047,Under conservation ,CON,Rainy,Abies religiosa
-21,81,81ACON3,CON_NTO_ASB_81ACON3,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200194,-99.927194,3043,Under conservation ,CON,Rainy,Abies religiosa
-22,82,82ACON4,CON_NTO_ASB_82ACON4,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200278,-99.927500,3039,Under conservation ,CON,Rainy,Abies religiosa
-23,83,83ACON5,CON_NTO_ASB_83ACON5,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200194,-99.928056,3033,Under conservation ,CON,Rainy,Abies religiosa
-24,84,84ACON6,CON_NTO_ASB_84ACON6,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200167,-99.928444,3026,Under conservation ,CON,Rainy,Abies religiosa
-25,85,85ACON7,CON_NTO_ASB_85ACON7,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200222,-99.929167,3010,Under conservation ,CON,Rainy,Abies religiosa
-26,86,86ACON8,CON_NTO_ASB_86ACON8,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.199944,-99.929000,3014,Under conservation ,CON,Rainy,Abies religiosa
-27,87,87ACON9,CON_NTO_ASB_87ACON9,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.199778,-99.928917,3013,Under conservation ,CON,Rainy,Abies religiosa
-28,106,106ACON19,CON_NTO_AAB_106ACON19,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.222917,-99.920694,3143,Under conservation ,CON,Rainy,Abies religiosa
-29,107,107ACON20,CON_NTO_AAB_107ACON20,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.223300,-99.921194,3142,Under conservation ,CON,Rainy,Abies religiosa
-30,108,108ACON21,CON_NTO_AAB_108ACON21,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.223694,-99.921667,3136,Under conservation ,CON,Rainy,Abies religiosa
-31,109,109ACON22,CON_NTO_AAB_109ACON22,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.224500,-99.922722,3116,Under conservation ,CON,Rainy,Abies religiosa
-32,110,110ACON23,CON_NTO_AAB_110ACON23,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.224778,-99.923083,3109,Under conservation ,CON,Rainy,Abies religiosa
-33,111,111ACON24,CON_NTO_AAB_111ACON24,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.225111,-99.923556,3101,Under conservation ,CON,Rainy,Abies religiosa
-34,120,120ACON10,CON_NTO_AAB_120ACON10,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228137,-99.932371,3046,Under conservation ,CON,Rainy,Abies religiosa
-35,121,121ACON11,CON_NTO_AAB_121ACON11,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228139,-99.932861,3046,Under conservation ,CON,Rainy,Abies religiosa
-36,122,122ACON12,CON_NTO_AAB_122ACON12,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228028,-99.933250,3040,Under conservation ,CON,Rainy,Abies religiosa
-37,123,123ACON13,CON_NTO_AAB_123ACON13,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228222,-99.933750,3046,Under conservation ,CON,Rainy,Abies religiosa
-38,124,124ACON14,CON_NTO_AAB_124ACON14,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228306,-99.934111,3049,Under conservation ,CON,Rainy,Abies religiosa
-39,125,125ACON15,CON_NTO_AAB_125ACON15,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228472,-99.934500,3057,Under conservation ,CON,Rainy,Abies religiosa
-40,126,126ACON16,CON_NTO_AAB_126ACON16,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228361,-99.935056,3052,Under conservation ,CON,Rainy,Abies religiosa
-41,127,127ACON17,CON_NTO_AAB_127ACON17,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228389,-99.935306,3054,Under conservation ,CON,Rainy,Abies religiosa
-42,128,128ACON18,CON_NTO_AAB_128ACON18,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228306,-99.935694,3051,Under conservation ,CON,Rainy,Abies religiosa
+ID,Code,Label_Metabarcoding,Locality,key,Municipality,State,Natural_Protected_Area,Key,Latitude,Longitude,Samplig_Altitude,Treatment,Key,Season,forest_type
+31,31TCONSER1,CON_NTO_TLC_31TCONS1,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.17599,-99.761725,3323,Under conservation ,CON,Rainy,Abies religiosa
+32,32TCONSER2,CON_NTO_TLC_32TCONS2,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.176833,-99.760806,3310,Under conservation ,CON,Rainy,Abies religiosa
+33,33TCONSER3,CON_NTO_TLC_33TCONS3,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.177472,-99.76075,3302,Under conservation ,CON,Rainy,Abies religiosa
+34,34TCONSER4,CON_NTO_TLC_34TCONS4,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179472,-99.760083,3271,Under conservation ,CON,Rainy,Abies religiosa
+35,35TCONSER5,CON_NTO_TLC_35TCONS5,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179583,-99.759667,3264,Under conservation ,CON,Rainy,Abies religiosa
+36,36TCONSER6,CON_NTO_TLC_36TCONS6,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179056,-99.759333,3271,Under conservation ,CON,Rainy,Abies religiosa
+37,37TCONSER7,CON_NTO_TLC_37TCONS7,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.179778,-99.760028,3266,Under conservation ,CON,Rainy,Abies religiosa
+38,38TCONSER8,CON_NTO_TLC_38TCONS8,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.180361,-99.76025,3265,Under conservation ,CON,Rainy,Abies religiosa
+39,39TCONSER9,CON_NTO_TLC_39TCONS9,Tlacotepec,TLC,Santiago Tlacotepec,Estado de México,Nevado de Toluca,NTO,19.180972,-99.759167,3245,Under conservation ,CON,Rainy,Abies religiosa
+70,70SHCON1,CON_NTO_SJH_70SHCON1,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.189917,-99.808917,3298,Under conservation ,CON,Rainy,Abies religiosa
+71,71SHCON2,CON_NTO_SJH_71SHCON2,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.189278,-99.808639,3303,Under conservation ,CON,Rainy,Abies religiosa
+72,72SHCON3,CON_NTO_SJH_72SHCON3,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.188667,-99.808778,3318,Under conservation ,CON,Rainy,Abies religiosa
+73,73SHCON4,CON_NTO_SJH_73SHCON4,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.183556,-99.811083,3386,Under conservation ,CON,Rainy,Abies religiosa
+74,74SHCON5,CON_NTO_SJH_74SHCON5,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.184222,-99.810889,3371,Under conservation ,CON,Rainy,Abies religiosa
+75,75SHCON6,CON_NTO_SJH_75SHCON6,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.184889,-99.810556,3355,Under conservation ,CON,Rainy,Abies religiosa
+76,76SHCON7,CON_NTO_SJH_76SHCON7,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.187056,-99.806361,3288,Under conservation ,CON,Rainy,Abies religiosa
+77,77SHCON8,CON_NTO_SJH_77SHCON8,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.187417,-99.806389,3284,Under conservation ,CON,Rainy,Abies religiosa
+78,78SHCON9,CON_NTO_SJH_78SHCON9,San Juan Huertas,SJH,San Juan de las Huertas,Estado de México,Nevado de Toluca,NTO,19.187333,-99.806861,3293,Under conservation ,CON,Rainy,Abies religiosa
+79,79ACON1,CON_NTO_ASB_79ACON1,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.2005,-99.926639,3053,Under conservation ,CON,Rainy,Abies religiosa
+80,80ACON2,CON_NTO_ASB_80ACON2,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200444,-99.927,3047,Under conservation ,CON,Rainy,Abies religiosa
+81,81ACON3,CON_NTO_ASB_81ACON3,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200194,-99.927194,3043,Under conservation ,CON,Rainy,Abies religiosa
+82,82ACON4,CON_NTO_ASB_82ACON4,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200278,-99.9275,3039,Under conservation ,CON,Rainy,Abies religiosa
+83,83ACON5,CON_NTO_ASB_83ACON5,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200194,-99.928056,3033,Under conservation ,CON,Rainy,Abies religiosa
+84,84ACON6,CON_NTO_ASB_84ACON6,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200167,-99.928444,3026,Under conservation ,CON,Rainy,Abies religiosa
+85,85ACON7,CON_NTO_ASB_85ACON7,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.200222,-99.929167,3010,Under conservation ,CON,Rainy,Abies religiosa
+86,86ACON8,CON_NTO_ASB_86ACON8,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.199944,-99.929,3014,Under conservation ,CON,Rainy,Abies religiosa
+87,87ACON9,CON_NTO_ASB_87ACON9,San Bartolo,ASB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.199778,-99.928917,3013,Under conservation ,CON,Rainy,Abies religiosa
+106,106ACON19,CON_NTO_AAB_106ACON19,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.222917,-99.920694,3143,Under conservation ,CON,Rainy,Abies religiosa
+107,107ACON20,CON_NTO_AAB_107ACON20,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.2233,-99.921194,3142,Under conservation ,CON,Rainy,Abies religiosa
+108,108ACON21,CON_NTO_AAB_108ACON21,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.223694,-99.921667,3136,Under conservation ,CON,Rainy,Abies religiosa
+109,109ACON22,CON_NTO_AAB_109ACON22,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.2245,-99.922722,3116,Under conservation ,CON,Rainy,Abies religiosa
+110,110ACON23,CON_NTO_AAB_110ACON23,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.224778,-99.923083,3109,Under conservation ,CON,Rainy,Abies religiosa
+111,111ACON24,CON_NTO_AAB_111ACON24,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.225111,-99.923556,3101,Under conservation ,CON,Rainy,Abies religiosa
+120,120ACON10,CON_NTO_AAB_120ACON10,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228137,-99.932371,3046,Under conservation ,CON,Rainy,Abies religiosa
+121,121ACON11,CON_NTO_AAB_121ACON11,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228139,-99.932861,3046,Under conservation ,CON,Rainy,Abies religiosa
+122,122ACON12,CON_NTO_AAB_122ACON12,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228028,-99.93325,3040,Under conservation ,CON,Rainy,Abies religiosa
+123,123ACON13,CON_NTO_AAB_123ACON13,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228222,-99.93375,3046,Under conservation ,CON,Rainy,Abies religiosa
+124,124ACON14,CON_NTO_AAB_124ACON14,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228306,-99.934111,3049,Under conservation ,CON,Rainy,Abies religiosa
+125,125ACON15,CON_NTO_AAB_125ACON15,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228472,-99.9345,3057,Under conservation ,CON,Rainy,Abies religiosa
+126,126ACON16,CON_NTO_AAB_126ACON16,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228361,-99.935056,3052,Under conservation ,CON,Rainy,Abies religiosa
+127,127ACON17,CON_NTO_AAB_127ACON17,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228389,-99.935306,3054,Under conservation ,CON,Rainy,Abies religiosa
+128,128ACON18,CON_NTO_AAB_128ACON18,Agua Bendita,AAB,Amanalco,Estado de México,Nevado de Toluca,NTO,19.228306,-99.935694,3051,Under conservation ,CON,Rainy,Abies religiosa

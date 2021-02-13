@@ -85,21 +85,21 @@ Contais spatial data as follows:
 ### `/meta`
 `ConservationForestNevadoToluca.csv` contains metadata for each of the samples sequenced in a lane Miseq. Each column names refer to:
 
-* `ID`: sample number ID 
-* `Code`: ID of the sequencing run 
- * `Label_Metabarcoding`: sample name of each library: e.g. `CON_NTO_TLC_31TCONS1`: `CON` Conservation (Treatment), `NTO`Nevado de Toluca (Mountain), `TLC`Tlacotepec (locality), `31TCONS1` ID of the sequencing sample run.    
- * `Locality`: Locality of the sampling 
-* `key`: Abbreviation of the sampling location
-* `Municipality`: Municipality of the sampling
-* `State`: State of the sampling
-* `Natural_Protected_Area`: Natural Protected Area of the sampling
-* `key`: Abbreviation of the Natural Protected Area
-* `Latitude`: Latitude of the sampling 
-* `Longitude`: Longitude of the sampling 
-* `Samplig_Altitude`: Meter above level seal of each the sampling point.
-* `Treatment`: Name of the treatment 
-* `Key`: Abbreviation of the treatment
-* `Season`: Name of season in the sampling
-* `Forest_type`: Name of the tree specie in the forest.
+* `id`: sample number ID 
+* `code`: ID of the sequencing run 
+ * `label_metabarcoding`: sample name of each library: e.g. `CON_NTO_TLC_31TCONS1`: `CON` Conservation (Treatment), `NTO`Nevado de Toluca (Mountain), `TLC`Tlacotepec (locality), `31TCONS1` ID of the sequencing sample run.    
+ * `locality`: Locality of the sampling 
+* `key_locality`: Abbreviation of the sampling location
+* `municipality`: Municipality of the sampling
+* `state`: State of the sampling
+* `natural_protected_area`: Natural Protected Area of the sampling
+* `key_natural_protected_area`: Abbreviation of the Natural Protected Area
+* `latitude`: Latitude of the sampling 
+* `longitude`: Longitude of the sampling 
+* `samplig_altitude`: Meter above level seal of each the sampling point.
+* `treatment`: Name of the treatment 
+* `key_treatment`: Abbreviation of the treatment
+* `season`: Name of season in the sampling
+* `forest_type`: Name of the tree specie in the forest.
 
 **END**

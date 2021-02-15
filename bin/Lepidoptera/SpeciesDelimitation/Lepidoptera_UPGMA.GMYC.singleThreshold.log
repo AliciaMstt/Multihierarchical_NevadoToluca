@@ -1,0 +1,12 @@
+Result of GMYC species delimitation
+
+	method:	single
+	likelihood of null model:	302.8055
+	maximum likelihood of GMYC model:	307.2394
+	likelihood ratio:	8.867693
+	result of LR test:	0.03110269*
+
+	number of ML clusters:	7
+	number of ML entities:	52
+	threshold time:	-0.002997824
+

@@ -1,0 +1,86 @@
+
+setwd("~/Documents/NancyTesis/1dNancyTesisDelimitacionSpecies/3GMYCyLimites/3Myriapoda60readsReali")
+
+#PARTE 1. Matriz de distancias y UPGMA
+
+#abrir paquetes necesarios ya instalados 
+
+#install.packages("ape")
+library(ape)
+#install.packages("phangorn")
+library(phangorn)
+#install.packages("seqinr")
+library(seqinr)
+
+
+Myriapoda <- read.FASTA("3Myriapoda60.fasta")  #leer fasta
+dist.dna(Myriapoda, model = "F84", as.matrix = T)->dist_Myriapoda  #calcular matriz distancias por pares
+Myriapoda_UPGMA <- upgma(dist_Myriapoda)  #hacer ?rbol
+plot(Myriapoda_UPGMA)
+
+#PARTE 2: GMYC
+
+#abrir paquetes necesarios 
+#splits debe instalarse desde source, usando: 
+
+#install.packages("geiger")
+#install.packages("igraph")
+#install.packages("vegan")
+#install.packages("gtools")
+#install.packages("paran")
+
+#install.packages("splits", repos="http://r-forge.r-project.org",type="source", dependencies=F)
+
+
+
+library(geiger)
+library(phangorn)
+library(igraph)
+library(lattice)
+library(permute)
+library(vegan)
+library(ape)
+library(MASS)
+library(paran)
+library(splits)
+library(spam)
+library(dotCall64)
+library(grid)
+library(fields)
+
+#Funciones que he puesto en el directorio de trabajo
+source("gmyc.pkg.0.9.6.R")
+source("Powell_supplemental_script.R")
+
+##############################################single gmyc threshold 
+Myriapoda_UPGMA.GMYC.singleThreshold<-gmyc.edit(Myriapoda_UPGMA, method="s") #hacer GMYC
+#resumen de los resultados
+summary(Myriapoda_UPGMA.GMYC.singleThreshold) #Mostrar resumen GMYC
+
+sink("Myriapoda_UPGMA.GMYC.singleThreshold.log", type=c("output","message"), split=TRUE) #guardar resultado del GMYC (resumen)
+#MIT.test.s o MIT.test.m para ver todos los datos
+summary(Myriapoda_UPGMA.GMYC.singleThreshold)
+sink()
+
+
+#Parte 3: Correr funci?n para obtener subtrees a multiples niveles
+
+
+#library("stringr")
+#Funcion que he puesto en el directorio de trabajo
+#source("NODE.MIN_Get_trees_multiple.R")
+
+
+##################### ACARI ################################
+
+#read.table ("COLEOPTERA_TEN_RUN1_zotus_Nostops.fasta", header=FALSE)->coleoptera.fasta
+#read.tree("ACARI_All_s2_sinSTOPS_revised.newick")->acari_SHORT2.tree
+#GMYC.thershold<-0.015
+
+
+#NODE.MIN(coleoptera.fasta,COLEOPTERA_TEN1_UPGMA,0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.075, 0.1, 0.13, GMYC.thershold, print.subtrees = "NO", print.subtrees.fasta = "NO")
+
+
+
+
+

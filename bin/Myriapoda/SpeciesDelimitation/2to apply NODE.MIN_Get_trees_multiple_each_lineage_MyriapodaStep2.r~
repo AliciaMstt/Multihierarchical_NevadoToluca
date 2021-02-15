@@ -1,0 +1,35 @@
+setwd("~/Documents/NancyTesis/1dNancyTesisDelimitacionSpecies/3GMYCyLimites/3Myriapoda60readsReali")
+
+#PARTE 1. Matriz de distancias y UPGMA
+
+#abrir paquetes necesarios ya instalados 
+library(ape)
+library(phangorn)
+library(seqinr) 
+
+Myriapoda <- read.FASTA("3Myriapoda60.fasta")  #leer fasta
+dist.dna(Myriapoda, model = "F84", as.matrix = T)->dist_Myriapoda  #calcular matriz distancias por pares
+Myriapoda_UPGMA <- upgma(dist_Myriapoda)  #hacer ?rbol
+plot(Myriapoda_UPGMA)
+
+#Parte 3: Correr funci?n para obtener subtrees a multiples niveles
+
+
+library("stringr")
+#Funcion que he puesto en el directorio de trabajo
+source("NODE.MIN_Get_trees_multiple.R")
+
+
+##################### Myriapoda ################################
+
+read.table ("3Myriapoda60.fasta", header=FALSE)->Myriapoda.fasta
+#read.tree("Myriapoda_All_s2_sinSTOPS_revised.newick")->Myriapoda_SHORT2.tree
+GMYC.thershold<-0.01529633
+
+
+NODE.MIN(Myriapoda.fasta,Myriapoda_UPGMA,0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.075, 0.075, 0.075, GMYC.thershold, print.subtrees = "NO", print.subtrees.fasta = "NO")
+
+
+
+
+

@@ -17,7 +17,7 @@ library(permute)
 library(lattice)
 
 #####open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep= ",", header=TRUE)
 dim(s2_raw_all)
 
 #**Table Haplotipos**
@@ -172,8 +172,8 @@ as.data.frame(richness_singletons_Site_h)->richness_singletons_Site_h
 #**ACCUMULATION CURVES AND EXTRAPOLATED RICHNESS by SITE**
 ##Collembola by SITE
 ##General
-specaccum(community_Collembola_Site_h,"random", permutations=1000)->cum_Site_h
-plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3)
+specaccum(community_Collembola_Site_h, method = "random", permutations=1000)->cum_Site_h
+plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, xvar = "sites")
 specpool(community_Collembola_Site_h)->specpool_Site_h
 specpool_Site_h$Species/specpool_Site_h$chao*100
 text(x=38, y=5, labels="91.05%", cex=1.5)

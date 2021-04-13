@@ -191,7 +191,6 @@ beta.multi(community_Diptera_Site_h, index.family="sorensen")
 beta.pair(community_Diptera_Site_h, index.family="sorensen")->beta.pair  ##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 metaMDS (beta.pair$beta.sim)->MDSbetasim_h ##NMDS
 
-
 plot (MDSbetasim_h, main="Diptera_Site_h") 
 x<- MDSbetasim_h$points[,1]
 y<- MDSbetasim_h$points[,2]

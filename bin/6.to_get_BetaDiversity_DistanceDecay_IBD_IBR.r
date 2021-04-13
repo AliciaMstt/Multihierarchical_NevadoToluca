@@ -43,6 +43,16 @@ source("Diptera/multilevel_distance_decay_Diptera_IBResistAltB_East.R")
 source("Diptera/multilevel_distance_decay_Diptera_IBResistAltB_West.R")
 #                
 
+#**Showed scripts of the analyzes in FigureS7_DistanceDecay_Sites.png**
+##**We get the *Beta diversity* vs *Flat* distances analysis from haplotype levels to 7.5% CL at large scale**
+##Source to scripts Arachnida, Coleoptera, Hemiptera and Hymenoptera genetic data.
+
+source("Arachnida/multilevel_distance_decay_Arachnida_IBResistFlat_Site.R")
+source("Coleoptera/multilevel_distance_decay_Coleoptera_IBResistFlat_Site.R")
+source("Hemiptera/multilevel_distance_decay_Hemiptera_IBResistFlat_Site.R")
+source("Hymenoptera/multilevel_distance_decay_Hymenoptera_IBResistFlat_Site.R")
+#
+
 #**Showed scripts of Results in Table S3, S4 and S5 of Distance decay in Collembola and Diptera. Also, values of fractal pattern by a log–log Pearson correlation in Table S6** 
 ##**We get the *Beta diversity* vs *Flat*, *Altitude*, *slope*, and *vegetation types* distances analysis from haplotype levels to 7.5% CL at large scale**
 

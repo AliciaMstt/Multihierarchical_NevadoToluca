@@ -60,6 +60,9 @@ community_Myriapoda_h[which(str_extract (row.names(community_Myriapoda_h), "_NTO
 dim(community_Myriapoda_Site_h)
 community_Myriapoda_Site_h[,which(colSums(community_Myriapoda_Site_h)!=0)]->community_Myriapoda_Site_h ##to remove no data colums
 dim(community_Myriapoda_Site_h)
+write.table (community_Myriapoda_Site_h, file="../genetic/Data_out/Myriapoda/Myriapoda_Haplotypes/community_Myriapoda_Site_h.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Myriapoda/Myriapoda_Haplotypes/community_Myriapoda_Site_h.txt")->community_Myriapoda_Site_h
+
 
 ##**Generating a general table with names and habitat parameters.**
 ##**BY SITE****

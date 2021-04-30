@@ -78,7 +78,10 @@ community_Lepidoptera0.03[which(str_extract (row.names(community_Lepidoptera0.03
 dim(community_Lepidoptera_Site0.03)
 community_Lepidoptera_Site0.03[,which(colSums(community_Lepidoptera_Site0.03)!=0)]->community_Lepidoptera_Site0.03 ##to remove no data colums
 dim(community_Lepidoptera_Site0.03)
+write.table (community_Lepidoptera_Site0.03, file="../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera_Site0.03.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera_Site0.03.txt")->community_Lepidoptera_Site0.03
 #
+
 ##**Generating a general table with names and habitat parameters.**
 ##**BY SITE**
 row.names(community_Lepidoptera_Site0.03)->sample_names_Mountain1_0.03

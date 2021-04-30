@@ -3,9 +3,22 @@ require(gridExtra)
 library(sp)
 library(ggplot2)
 library(patchwork)
+library(devtools)
 library(easypackages)
+library(stats)
+library(base)
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(PMCMR)
+library(rcdd) 
+library(vegan)
+library(betapart) 
+library(stringr)
+library(permute)
+library(lattice)
 
-#**Community diversity and composition at the haplotype, 3% and 5% Clustering levels for each of the eight taxonomic orders studied**
+#**Community diversity and composition at the haplotype, 3% and 5% lineages for each of the eight taxonomic orders studied**
 
 #####This script gets all scripts of diversity using 8 arthropods order at multi-hierarchical levels 
 #####We used 8 groups: Arachnda, Coleoptera, Collembola, Diptera, Hemiptera, Hymenoptera, Lepidoptera, and Myriapoda. 
@@ -16,7 +29,7 @@ png(filename="../figures/Figure3_RelativeSpeciesRichness.png", width=920 , heigh
 par(mfrow=c(8,3), mar = c(3, 2.5, 2, 2), omi=c(0.5, 0.5, 0.5, 0.5)) #the number of rows and columns the figure would have
 
 ##**Creating plot**
-##**Community diversity and composition at the haplotype, 3% and 5% Clustering levels for each of the eight taxonomic orders studied**
+##**Community diversity and composition at the haplotype, 3% and 5% lineages for each of the eight taxonomic orders studied**
 
 #####This script gets all scripts of diversity using 8 arthropods order at multi-hierarchical levels 
 #####We used 8 groups: Arachnda, Coleoptera, Collembola, Diptera, Hemiptera, Hymenoptera, Lepidoptera, and Myriapoda. 
@@ -32,7 +45,7 @@ posthoc.kruskal.nemenyi.test(x=richness_Site_h_Diptera$sample_richness_Site_h, g
 axis(1, at=NULL, label=F, tick=TRUE, lwd=1.3)
 text(x=c(1,2,3,4), y=(169), labels=c("a","a","ab","b"), cex=2)
 text(x=4.5, y=169, labels="*", cex=3)
-mtext(c("Haplotypes"), side = 3, col = "black", line = 1, cex=2)
+mtext(c("haplotypes"), side = 3, col = "black", line = 1, cex=2)
 
 read.table("../genetic/Data_out/Diptera/Diptera3P/richness_Site0.03_Diptera.txt",header=TRUE)->richness_Site0.03_Diptera
 
@@ -43,7 +56,7 @@ posthoc.kruskal.nemenyi.test(x=richness_Site0.03_Diptera$sample_richness_Site0.0
 axis(1, at=NULL, label=F, tick=TRUE, lwd=1.3)
 text(x=c(1,2,3,4), y=(49), labels=c("ab","a","ab","b"), cex=2)
 text(x=4.5, y=49, labels="*", cex=3)
-mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex=2)
+mtext(c("3% lineages"), side = 3, col = "black", line = 1, cex=2)
 
 read.table("../genetic/Data_out/Diptera/Diptera5P/richness_Site0.05_Diptera.txt",header=TRUE)->richness_Site0.05_Diptera
 
@@ -54,7 +67,7 @@ posthoc.kruskal.nemenyi.test(x=richness_Site0.05_Diptera$sample_richness_Site0.0
 axis(1, at=NULL, label=F, tick=TRUE, lwd=1.3)
 text(x=c(1,2,3,4), y=(49), labels=c("ab","a","ab","b"), cex=2)
 text(x=4.5, y=49, labels="*", cex=3)
-mtext(c("Clustering 5%"), side = 3, col = "black", line = 1, cex=2)
+mtext(c("5% lineages"), side = 3, col = "black", line = 1, cex=2)
 mtext(c("Diptera"), side = 4, col = "black", line = 2, cex=2)
 #
 
@@ -305,7 +318,7 @@ par(mfrow=c(8,3), mar = c(1.8, 1.8, 1.8, 1.8), omi=c(0.3, 0.3, 0.3, 3.5)) #the n
 
 #**Creating plot**
 #**Diptera**
-read.table ("../genetic/Data_out/Diptera/Diptera_Haplotypes/community_Diptera_h.txt")->community_Diptera_h
+read.table ("../genetic/Data_out/Diptera/Diptera_Haplotypes/community_Diptera_Site_h.txt")->community_Diptera_Site_h
 read.table("../genetic/Data_out/Diptera/Diptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Diptera_Site_h, index.family="sorensen")
@@ -318,9 +331,9 @@ with(general_sample_Mountain1Site_h,ordispider(MDSbetasim_h, Site, cex.lab=1, co
 mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.595 ***", cex=2)
-mtext(c("Haplotypes"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("haplotypes"), side = 3, col = "black", line = 1, cex = 2)
 
-read.table ("../genetic/Data_out/Diptera/Diptera3P/community_Diptera0.03.txt")->community_Diptera0.03
+read.table ("../genetic/Data_out/Diptera/Diptera3P/community_Diptera_Site0.03.txt")->community_Diptera_Site0.03
 read.table("../genetic/Data_out/Diptera/Diptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 beta.multi(community_Diptera_Site0.03, index.family="sorensen")
@@ -333,9 +346,9 @@ with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, cex.lab=1
 mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.372 ***", cex=2)
-mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("3% lineages"), side = 3, col = "black", line = 1, cex = 2)
 
-read.table ("../genetic/Data_out/Diptera/Diptera5P/community_Diptera0.05.txt")->community_Diptera0.05
+read.table ("../genetic/Data_out/Diptera/Diptera5P/community_Diptera_Site0.05.txt")->community_Diptera_Site0.05
 read.table("../genetic/Data_out/Diptera/Diptera5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
 
 beta.multi(community_Diptera_Site0.05, index.family="sorensen")
@@ -348,12 +361,12 @@ with(general_sample_Mountain1Site0.05,ordispider(MDSbetasim0.05, Site, cex.lab=1
 mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.369 ***", cex=2)
-mtext(c("Clustering 5%"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("5% lineages"), side = 3, col = "black", line = 1, cex = 2)
 mtext(c("Diptera"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Collembola**
-read.table ("../genetic/Data_out/Collembola/Collembola_Haplotypes/community_Collembola_h.txt")->community_Collembola_h
+read.table ("../genetic/Data_out/Collembola/Collembola_Haplotypes/community_Collembola_Site_h.txt")->community_Collembola_Site_h
 read.table("../genetic/Data_out/Collembola/Collembola_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Collembola_Site_h, index.family="sorensen")
@@ -367,7 +380,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.914 ***", cex=2)
 
-read.table ("../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt")->community_Collembola0.03
+read.table ("../genetic/Data_out/Collembola/Collembola3P/community_Collembola_Site0.03.txt")->community_Collembola_Site0.03
 read.table("../genetic/Data_out/Collembola/Collembola3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 beta.multi(community_Collembola_Site0.03, index.family="sorensen")
@@ -381,7 +394,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.826 ***", cex=2)
 
-read.table ("../genetic/Data_out/Collembola/Collembola5P/community_Collembola0.05.txt")->community_Collembola0.05
+read.table ("../genetic/Data_out/Collembola/Collembola5P/community_Collembola_Site0.05.txt")->community_Collembola_Site0.05
 read.table("../genetic/Data_out/Collembola/Collembola5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
 
 beta.multi(community_Collembola_Site0.05, index.family="sorensen")
@@ -398,7 +411,7 @@ mtext(c("Collembola"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Arachnida**
-read.table ("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_h.txt")->community_Arachnida_h
+read.table ("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_Site_h.txt")->community_Arachnida_Site_h
 read.table("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Arachnida_Site_h, index.family="sorensen")
@@ -412,7 +425,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.569 ***", cex=2)
 
-read.table ("../genetic/Data_out/Arachnida/Arachnida3P/community_Arachnida0.03.txt")->community_Arachnida0.03
+read.table ("../genetic/Data_out/Arachnida/Arachnida3P/community_Arachnida_Site0.03.txt")->community_Arachnida_Site0.03
 read.table("../genetic/Data_out/Arachnida/Arachnida3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 beta.multi(community_Arachnida_Site0.03, index.family="sorensen")
@@ -426,7 +439,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.452 ***", cex=2)
 
-read.table ("../genetic/Data_out/Arachnida/Arachnida5P/community_Arachnida0.05.txt")->community_Arachnida0.05
+read.table ("../genetic/Data_out/Arachnida/Arachnida5P/community_Arachnida_Site0.05.txt")->community_Arachnida_Site0.05
 read.table("../genetic/Data_out/Arachnida/Arachnida5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
 
 beta.multi(community_Arachnida_Site0.05, index.family="sorensen")
@@ -443,7 +456,7 @@ mtext(c("Arachnida"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Hempitera**
-read.table ("../genetic/Data_out/Hemiptera/Hemiptera_Haplotypes/community_Hemiptera_h.txt")->community_Hemiptera_h
+read.table ("../genetic/Data_out/Hemiptera/Hemiptera_Haplotypes/community_Hemiptera_Site_h.txt")->community_Hemiptera_Site_h
 read.table("../genetic/Data_out/Hemiptera/Hemiptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Hemiptera_Site_h, index.family="sorensen")
@@ -465,7 +478,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.12, y=-0.45, labels = mylabel, cex=2)
 text(x=0.38, y=-0.45, labels="=0.418 ***", cex=2)
 
-read.table ("../genetic/Data_out/Hemiptera/Hemiptera3P/community_Hemiptera0.03.txt")->community_Hemiptera0.03
+read.table ("../genetic/Data_out/Hemiptera/Hemiptera3P/community_Hemiptera_Site0.03.txt")->community_Hemiptera_Site0.03
 read.table("../genetic/Data_out/Hemiptera/Hemiptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 beta.multi(community_Hemiptera_Site0.03, index.family="sorensen")
@@ -485,7 +498,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.430 ***", cex=2)
 
-read.table ("../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera0.05.txt")->community_Hemiptera0.05
+read.table ("../genetic/Data_out/Hemiptera/Hemiptera5P/community_Hemiptera_Site0.05.txt")->community_Hemiptera_Site0.05
 read.table("../genetic/Data_out/Hemiptera/Hemiptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
 
 beta.multi(community_Hemiptera_Site0.05, index.family="sorensen")
@@ -508,7 +521,7 @@ mtext(c("Hemiptera"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Hymenoptera**
-read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/community_Hymenoptera_h.txt")->community_Hymenoptera_h
+read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/community_Hymenoptera_Site_h.txt")->community_Hymenoptera_Site_h
 read.table("../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Hymenoptera_Site_h, index.family="sorensen")
@@ -531,7 +544,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.297 ***", cex=2)
 
-read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera3P/community_Hymenoptera0.03.txt")->community_Hymenoptera0.03
+read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera3P/community_Hymenoptera_Site0.03.txt")->community_Hymenoptera_Site0.03
 read.table("../genetic/Data_out/Hymenoptera/Hymenoptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 beta.multi(community_Hymenoptera_Site0.03, index.family="sorensen")
@@ -551,7 +564,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.192 ***", cex=2)
 
-read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera5P/community_Hymenoptera0.05.txt")->community_Hymenoptera0.05
+read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera5P/community_Hymenoptera_Site0.05.txt")->community_Hymenoptera_Site0.05
 read.table("../genetic/Data_out/Hymenoptera/Hymenoptera5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
 
 beta.multi(community_Hymenoptera_Site0.05, index.family="sorensen")
@@ -574,7 +587,7 @@ mtext(c("Hymenoptera"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Coleoptera**
-read.table ("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_h.txt")->community_Coleoptera_h
+read.table ("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_Site_h.txt")->community_Coleoptera_Site_h
 read.table("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Coleoptera_Site_h, index.family="sorensen")
@@ -598,7 +611,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.422 ***", cex=2)
 
-read.table ("../genetic/Data_out/Coleoptera/Coleoptera3P/community_Coleoptera0.03.txt")->community_Coleoptera0.03
+read.table ("../genetic/Data_out/Coleoptera/Coleoptera3P/community_Coleoptera_Site0.03.txt")->community_Coleoptera_Site0.03
 read.table("../genetic/Data_out/Coleoptera/Coleoptera3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 
 beta.multi(community_Coleoptera_Site0.03, index.family="sorensen")
@@ -621,7 +634,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.360 ***", cex=2)
 
-read.table ("../genetic/Data_out/Coleoptera/Coleoptera5P/community_Coleoptera0.05.txt")->community_Coleoptera0.05
+read.table ("../genetic/Data_out/Coleoptera/Coleoptera5P/community_Coleoptera_Site0.05.txt")->community_Coleoptera_Site0.05
 read.table("../genetic/Data_out/Coleoptera/Coleoptera5P/general_sample_Mountain1Site0.05.txt",header=TRUE)->general_sample_Mountain1Site0.05
 
 beta.multi(community_Coleoptera_Site0.05, index.family="sorensen")
@@ -647,7 +660,7 @@ mtext(c("Coleoptera"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Myriapoda**
-read.table ("../genetic/Data_out/Myriapoda/Myriapoda_Haplotypes/community_Myriapoda_h.txt")->community_Myriapoda_h
+read.table ("../genetic/Data_out/Myriapoda/Myriapoda_Haplotypes/community_Myriapoda_Site_h.txt")->community_Myriapoda_Site_h
 read.table("../genetic/Data_out/Myriapoda/Myriapoda_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Myriapoda_Site_h, index.family="sorensen")
@@ -667,7 +680,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.45, labels = mylabel, cex=2)
 text(x=0.36, y=-0.45, labels="=0.096 ns", cex=2)
 
-read.table ("../genetic/Data_out/Myriapoda/Myriapoda3P/community_Myriapoda0.03.txt")->community_Myriapoda0.03
+read.table ("../genetic/Data_out/Myriapoda/Myriapoda3P/community_Myriapoda_Site0.03.txt")->community_Myriapoda_Site0.03
 read.table("../genetic/Data_out/Myriapoda/Myriapoda3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.0
 
 beta.multi(community_Myriapoda_Site0.03, index.family="sorensen")
@@ -685,7 +698,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.46, labels = mylabel, cex=2)
 text(x=0.36, y=-0.46, labels="=0.034 ns", cex=2)
 
-read.table ("../genetic/Data_out/Myriapoda/Myriapoda5P/community_Myriapoda0.05.txt")->community_Myriapoda0.05
+read.table ("../genetic/Data_out/Myriapoda/Myriapoda5P/community_Myriapoda_Site0.05.txt")->community_Myriapoda_Site0.05
 read.table("../genetic/Data_out/Myriapoda/Myriapoda5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
 
 beta.multi(community_Myriapoda_Site0.05, index.family="sorensen")
@@ -702,7 +715,7 @@ mtext(c("Myriapoda"), side = 4, col = "black", line = 2, cex = 2)
 #
 
 #**Lepidoptera**
-read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera_Haplotypes/community_Lepidoptera_h.txt")->community_Lepidoptera_h
+read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera_Haplotypes/community_Lepidoptera_Site_h.txt")->community_Lepidoptera_Site_h
 read.table("../genetic/Data_out/Lepidoptera/Lepidoptera_Haplotypes/general_sample_Mountain1Site_h.txt",header=TRUE)->general_sample_Mountain1Site_h
 
 beta.multi(community_Lepidoptera_Site_h, index.family="sorensen")
@@ -724,7 +737,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.43, labels = mylabel, cex=2)
 text(x=0.36, y=-0.43, labels="=0.322 *", cex=2)
 
-read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera0.03.txt")->community_Lepidoptera0.03
+read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera3P/community_Lepidoptera_Site0.03.txt")->community_Lepidoptera_Site0.03
 read.table("../genetic/Data_out/Lepidoptera/Lepidoptera3P/sample_names_Mountain1_0.03.txt",header=TRUE)->sample_names_Mountain1_0.03
 
 beta.multi(community_Lepidoptera_Site0.03, index.family="sorensen")
@@ -748,7 +761,7 @@ mylabel = bquote(italic(r)^2)
 text(x=0.10, y=-0.42, labels = mylabel, cex=2)
 text(x=0.36, y=-0.42, labels="=0.174 *", cex=2)
 
-read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera5P/community_Lepidoptera0.05.txt")->community_Lepidoptera0.05
+read.table ("../genetic/Data_out/Lepidoptera/Lepidoptera5P/community_Lepidoptera_Site0.05.txt")->community_Lepidoptera_Site0.05
 read.table("../genetic/Data_out/Lepidoptera/Lepidoptera5P/general_sample_Mountain1Site_0.05.txt",header=TRUE)->general_sample_Mountain1Site_0.05
 
 beta.multi(community_Lepidoptera_Site0.05, index.family="sorensen")
@@ -792,7 +805,7 @@ plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, xlim=c(0,42))
 specpool(community_Diptera_Site_h)->specpool_Site_h
 specpool_Site_h$Species/specpool_Site_h$chao*100
 text(x=39, y=3, labels="87.66%", cex=2)
-mtext(c("Haplotypes"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("haplotypes"), side = 3, col = "black", line = 1, cex = 2)
 
 read.table("../genetic/Data_out/Diptera/Diptera3P/community_Diptera_Site0.03.txt")->community_Diptera_Site0.03
 
@@ -801,7 +814,7 @@ plot(cum_Site0.03, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,180), xli
 specpool(community_Diptera_Site0.03)->specpool_Site0.03
 specpool_Site0.03$Species/specpool_Site0.03$chao*100
 text(x=39, y=3, labels="80.66%", cex=2)
-mtext(c("Clustering 3%"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("3% lineages"), side = 3, col = "black", line = 1, cex = 2)
 
 read.table("../genetic/Data_out/Diptera/Diptera5P/community_Diptera_Site0.05.txt")->community_Diptera_Site0.05
 
@@ -810,7 +823,7 @@ plot(cum_Site0.05, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,180), xli
 specpool(community_Diptera_Site0.05)->specpool_Site0.05
 specpool_Site0.05$Species/specpool_Site0.05$chao*100
 text(x=39, y=3, labels="82.84%", cex=2)
-mtext(c("Clustering 5%"), side = 3, col = "black", line = 1, cex = 2)
+mtext(c("5% lineages"), side = 3, col = "black", line = 1, cex = 2)
 mtext(c("Diptera"), side = 4, col = "black", line = 2, cex = 2)
 #
 

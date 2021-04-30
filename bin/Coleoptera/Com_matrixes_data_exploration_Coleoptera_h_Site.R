@@ -61,6 +61,9 @@ community_Coleoptera_h[which(str_extract (row.names(community_Coleoptera_h), "_N
 dim(community_Coleoptera_Site_h)
 community_Coleoptera_Site_h[,which(colSums(community_Coleoptera_Site_h)!=0)]->community_Coleoptera_Site_h ##to remove no data colums
 dim(community_Coleoptera_Site_h)
+write.table (community_Coleoptera_Site_h, file="../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_Site_h.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Coleoptera/Coleoptera_Haplotypes/community_Coleoptera_Site_h.txt")->community_Coleoptera_Site_h
+
 
 ##**Generating a general table with names and habitat parameters.**
 ##**BY SITE**

@@ -77,6 +77,9 @@ community_Arachnida0.05[which(str_extract (row.names(community_Arachnida0.05), "
 dim(community_Arachnida_Site0.05)
 community_Arachnida_Site0.05[,which(colSums(community_Arachnida_Site0.05)!=0)]->community_Arachnida_Site0.05 ##to remove no data colums
 dim(community_Arachnida_Site0.05)
+write.table (community_Arachnida_Site0.05, file="../genetic/Data_out/Arachnida/Arachnida5P/community_Arachnida_Site0.05.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Arachnida/Arachnida5P/community_Arachnida_Site0.05.txt")->community_Arachnida_Site0.05
+
 #
 ##**BY SITE**
 ##**Generating a general table with names and habitat parameters**

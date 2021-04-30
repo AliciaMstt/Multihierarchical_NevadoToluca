@@ -19,7 +19,7 @@ library(lattice)
 
 #**TABLES AND COMMUNITY MATRIXES**
 #####Open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep = ",", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep = ",", header=TRUE)
 dim(s2_raw_all)
 
 #####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -70,8 +70,8 @@ as.data.frame(community_Collembola_limite0.03)->community_Collembola0.03 ##trasp
 ####community_Acari[-49,]->community_Collembola ##removing neg
 dim(community_Collembola0.03)
 community_Collembola0.03[order(row.names(community_Collembola0.03)),]->community_Collembola0.03 ##order samples
-write.table (community_Collembola0.03, file="../../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt") ##this is necessary for the format, not able to solve in other way
-read.table ("../../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt")->community_Collembola0.03
+write.table (community_Collembola0.03, file="../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt")->community_Collembola0.03
 
 ####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Collembola0.03)
@@ -79,6 +79,8 @@ community_Collembola0.03[which(str_extract (row.names(community_Collembola0.03),
 dim(community_Collembola_Site0.03)
 community_Collembola_Site0.03[,which(colSums(community_Collembola_Site0.03)!=0)]->community_Collembola_Site0.03 ##to remove no data colums
 dim(community_Collembola_Site0.03)
+write.table (community_Collembola_Site0.03, file="../genetic/Data_out/Collembola/Collembola3P/community_Collembola_Site0.03.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Collembola/Collembola3P/community_Collembola_Site0.03.txt")->community_Collembola_Site0.03
 
 #**Generating a general table with names and habitat parameters BY SITE**
 ##Generating a general table with names and habitat parameters
@@ -88,8 +90,8 @@ sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conserv
 general_sample_Mountain1Site0.03
 general_sample_Mountain1Site0.03 %>% unite(Mountain1andSite, Mountain1,Site, sep="_",remove=FALSE)->general_sample_Mountain1Site0.03 ##generating a variable combining layer and habitat
 general_sample_Mountain1Site0.03
-write.table(general_sample_Mountain1Site0.03, file="../../genetic/Data_out/Collembola/Collembola3P/general_sample_Mountain1Site0.03.txt") ##this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Collembola/Collembola3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
+write.table(general_sample_Mountain1Site0.03, file="../genetic/Data_out/Collembola/Collembola3P/general_sample_Mountain1Site0.03.txt") ##this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Collembola/Collembola3P/general_sample_Mountain1Site0.03.txt",header=TRUE)->general_sample_Mountain1Site0.03
 #
 
 #**HAPLOTYPE RICHNESS TABLES, PLOTS AND ANALYSES by SITES** 
@@ -118,12 +120,12 @@ richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_"
 richness_SiteC
 
 ##**BY SITE**
-write.table(richness_Site0.03_Collembola, file="../../genetic/Data_out/Collembola/Collembola3P/richness_Site_Collembola0.03.txt") ##this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Collembola/Collembola3P/richness_Site_Collembola0.03.txt",header=TRUE)->richness_Site0.03_Collembola
+write.table(richness_Site0.03_Collembola, file="../genetic/Data_out/Collembola/Collembola3P/richness_Site_Collembola0.03.txt") ##this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Collembola/Collembola3P/richness_Site_Collembola0.03.txt",header=TRUE)->richness_Site0.03_Collembola
 
 ##**BY SITE_C general**
-write.table(richness_SiteC, file="../../genetic/Data_out/Collembola/Collembola3P/richness_SiteC_Collembola.txt") ##this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Collembola/Collembola3P/richness_SiteC_Collembola.txt",header=TRUE)->richness_SiteC
+write.table(richness_SiteC, file="../genetic/Data_out/Collembola/Collembola3P/richness_SiteC_Collembola.txt") ##this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Collembola/Collembola3P/richness_SiteC_Collembola.txt",header=TRUE)->richness_SiteC
 
 ##**General plot of richness by sample in SITE**
 barplot(richness_Site0.03_Collembola$sample_richness_Site0.03,col=richness_Site0.03_Collembola$Mountain1Site,names.arg= richness_Site0.03_Collembola$sample_names_Site0.03,las=2,cex.names=0.5, ylab="richness_Site0.03_Collembola", main="H richness_Site0.03 Collembola_0.03")
@@ -161,8 +163,8 @@ rbind(h_names_Site0.03,h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 t(h_ocurrence_Site0.03)->h_ocurrence_Site0.03
 colnames(h_ocurrence_Site0.03)<-c("h_names_Site0.03","h_ocurrence_Site0.03")
 dim(h_ocurrence_Site0.03)
-write.table(h_ocurrence_Site0.03, file="../../genetic/Data_out/Collembola/Collembola3P/h_ocurrence_Site_Collembola0.03.txt") ##this is the only way I found to be able to work later
-read.table("../../genetic/Data_out/Collembola/Collembola3P/h_ocurrence_Site_Collembola0.03.txt",header=TRUE)->h_ocurrence_Site0.03
+write.table(h_ocurrence_Site0.03, file="../genetic/Data_out/Collembola/Collembola3P/h_ocurrence_Site_Collembola0.03.txt") ##this is the only way I found to be able to work later
+read.table("../genetic/Data_out/Collembola/Collembola3P/h_ocurrence_Site_Collembola0.03.txt",header=TRUE)->h_ocurrence_Site0.03
 
 ##**percentege of singletons by sample**
 h_ocurrence_Site0.03

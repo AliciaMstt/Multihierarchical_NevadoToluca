@@ -54,19 +54,15 @@ community_Hymenoptera_h[order(row.names(community_Hymenoptera_h)),]->community_H
 write.table (community_Hymenoptera_h, file="../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/community_Hymenoptera_h.txt") ##this is necessary for the format, not able to solve in other way
 read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/community_Hymenoptera_h.txt")->community_Hymenoptera_h
 
-##**submatrixes by MOUNTAIN** 
-dim(community_Hymenoptera_h)
-community_Hymenoptera_h[which(str_extract (row.names(community_Hymenoptera_h), "_M_") %in% "_M_"),]->community_Hymenoptera_Mountain_h
-dim(community_Hymenoptera_Mountain_h)
-community_Hymenoptera_Mountain_h[,which(colSums(community_Hymenoptera_Mountain_h)!=0)]->community_Hymenoptera_Mountain_h ##to remove no data colums
-dim(community_Hymenoptera_Mountain_h)
-
 ##**submatrixes by SITE in Nevado Toluca**
 dim(community_Hymenoptera_h)
 community_Hymenoptera_h[which(str_extract (row.names(community_Hymenoptera_h), "_NTO_") %in% "_NTO_"),]->community_Hymenoptera_Site_h
 dim(community_Hymenoptera_Site_h)
 community_Hymenoptera_Site_h[,which(colSums(community_Hymenoptera_Site_h)!=0)]->community_Hymenoptera_Site_h ##to remove no data colums
 dim(community_Hymenoptera_Site_h)
+write.table (community_Hymenoptera_Site_h, file="../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/community_Hymenoptera_Site_h.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Hymenoptera/Hymenoptera_Haplotypes/community_Hymenoptera_Site_h.txt")->community_Hymenoptera_Site_h
+
 #
 
 ##**Generating a general table with names and habitat parameters.**

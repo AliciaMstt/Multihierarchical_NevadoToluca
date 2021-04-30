@@ -18,23 +18,23 @@ library(permute)
 library(lattice)
 
 #**TABLES AND COMMUNITY MATRIXES**
-##Open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", header=TRUE)
+#####Open table with names including Region and habitat parameters
+s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep = ",", header=TRUE)
 dim(s2_raw_all)
 
-##remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
+#####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
 s2_raw_all[,c(1:66,68)]->s2_raw
 dim(s2_raw) ##49 samples = 48 plus 1 neg (the second neg from DOM_REPS is not there because all 0)
 colnames(s2_raw)
 
-##Applying the conservative threshold (this is a binary column)
+#####Applying the conservative threshold (this is a binary column)
 s2_raw[which(s2_raw$conservative_threshold == "1"),]->s2_raw_threshold 
 s2_raw_threshold [,1:66]->s2_raw_threshold ##remove threshold col
 dim(s2_raw_threshold)
 colnames(s2_raw_threshold)
 
-##loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
-##Collembola
+####loop to create the new matrix combining haplotype by otu pertenency, i.e. submatrix by limit
+##**Collembola**
 unique (s2_raw_threshold$limite0.03)->levels_limite0.03
 
 data.frame()->s2_raw_Collembola_limite0.03
@@ -51,34 +51,36 @@ for (i in 1:length(unique (s2_raw_threshold$limite0.03)))
   rbind(s2_raw_Collembola_limite0.03,subcom_level0.03)->s2_raw_Collembola_limite0.03
 }
 #
-##Transform in present/absence table
+##**Transform in present/absence table**
 s2_raw_Collembola_limite0.03->s2_raw_Collembola_limite0.03
 s2_raw_Collembola_limite0.03[s2_raw_Collembola_limite0.03>1]<-1 ##transform in present/absence table 
 
-##Checking if there is any row with no presence
+##**Checking if there is any row with no presence**
 s2_raw_Collembola_limite0.03[,1:51]->data0.03 
 rowSums(data0.03)
 length(which(rowSums(data0.03)!=0))
 length(which(rowSums(data0.03)==0))
 
-##Community matrixes (samples in rows and h in cols)
+##**Community matrixes (samples in rows and h in cols)**
 ##Collembola
 t(s2_raw_Collembola_limite0.03)->t_s2_f4_Collembola_limite0.03 ##trasp
 t_s2_f4_Collembola_limite0.03[1:51,]->community_Collembola_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data".
 colnames(t_s2_f4_Collembola_limite0.03)<- community_Collembola_limite0.03[1,]   
 as.data.frame(community_Collembola_limite0.03)->community_Collembola0.03 ##trasp including col and row names
-##community_Acari[-49,]->community_Collembola ##removing neg
+####community_Acari[-49,]->community_Collembola ##removing neg
 dim(community_Collembola0.03)
 community_Collembola0.03[order(row.names(community_Collembola0.03)),]->community_Collembola0.03 ##order samples
 write.table (community_Collembola0.03, file="../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt") ##this is necessary for the format, not able to solve in other way
 read.table ("../genetic/Data_out/Collembola/Collembola3P/community_Collembola0.03.txt")->community_Collembola0.03
 
-##submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
+####submatrixes by SITE in Nevado Toluca. NOTA_Nancy: Quiero hacer tablas que incluyan datos de una montañas en la epoca de lluvida con localidades dentro del Nevado de Toluca.
 dim(community_Collembola0.03)
 community_Collembola0.03[which(str_extract (row.names(community_Collembola0.03), "_NTO_") %in% "_NTO_"),]->community_Collembola_Site0.03
 dim(community_Collembola_Site0.03)
 community_Collembola_Site0.03[,which(colSums(community_Collembola_Site0.03)!=0)]->community_Collembola_Site0.03 ##to remove no data colums
 dim(community_Collembola_Site0.03)
+write.table (community_Collembola_Site0.03, file="../genetic/Data_out/Collembola/Collembola3P/community_Collembola_Site0.03.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Collembola/Collembola3P/community_Collembola_Site0.03.txt")->community_Collembola_Site0.03
 
 #**Generating a general table with names and habitat parameters BY SITE**
 ##Generating a general table with names and habitat parameters
@@ -105,42 +107,42 @@ colnames(richness_Site0.03_Collembola)<-c("sample_names_Site0.03","sample_richne
 richness_Site0.03_Collembola
 as.data.frame(richness_Site0.03_Collembola)->richness_Site0.03_Collembola
 
-##Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio. 
+##**Generating variables with SITE. En la tabla rishnees. Generar variable de montana y sitio.** 
 richness_Site0.03_Collembola %>% separate(sample_names_Site0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_Site0.03_Collembola
 richness_Site0.03_Collembola
 richness_Site0.03_Collembola %>% unite(Mountain1Site, Mountain1, Site, sep="_",remove=FALSE)->richness_Site0.03_Collembola ##generating a variable combining layer and habitat
 richness_Site0.03_Collembola
 
-##Generating variables with in total SITE_C.
+##**Generating variables with in total SITE_C.**
 richness_Site0.03_Collembola %>% separate(sample_names_Site0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->richness_SiteC
 richness_SiteC
 richness_SiteC %>% unite(ConservationMountain1, Conservation, Mountain1, sep="_",remove=FALSE)->richness_SiteC ##generating a variable combining layer and habitat
 richness_SiteC
 
-##BY SITE
+##**BY SITE**
 write.table(richness_Site0.03_Collembola, file="../genetic/Data_out/Collembola/Collembola3P/richness_Site_Collembola0.03.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Collembola/Collembola3P/richness_Site_Collembola0.03.txt",header=TRUE)->richness_Site0.03_Collembola
 
-##BY SITE_C general
+##**BY SITE_C general**
 write.table(richness_SiteC, file="../genetic/Data_out/Collembola/Collembola3P/richness_SiteC_Collembola.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Collembola/Collembola3P/richness_SiteC_Collembola.txt",header=TRUE)->richness_SiteC
 
-##General plot of richness by sample in SITE
+##**General plot of richness by sample in SITE**
 barplot(richness_Site0.03_Collembola$sample_richness_Site0.03,col=richness_Site0.03_Collembola$Mountain1Site,names.arg= richness_Site0.03_Collembola$sample_names_Site0.03,las=2,cex.names=0.5, ylab="richness_Site0.03_Collembola", main="H richness_Site0.03 Collembola_0.03")
 richness_Site0.03_Collembola %>% group_by(Mountain1Site) %>% summarise(mean(sample_richness_Site0.03))
 
-##min, max, ds Summarise
+##**min, max, ds Summarise**
 richness_Site0.03_Collembola %>% group_by(Mountain1Site) %>% summarise(min(sample_richness_Site0.03))
 richness_Site0.03_Collembola %>% group_by(Mountain1Site) %>% summarise(max(sample_richness_Site0.03))
 richness_Site0.03_Collembola %>% group_by(Mountain1Site) %>% summarise(sd(sample_richness_Site0.03))
 
-##General mean, min, max, ds by sample in SITE_richness_SiteC
+##**General mean, min, max, ds by sample in SITE_richness_SiteC**
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(mean(sample_richness_Site0.03))
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(min(sample_richness_Site0.03))
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(max(sample_richness_Site0.03))
 richness_SiteC %>% group_by(ConservationMountain1) %>% summarise(sd(sample_richness_Site0.03))
 
-##Global richness by SITE.  
+##**Global richness by SITE.**  
 plot(richness_Site0.03_Collembola$Mountain1Site,richness_Site0.03_Collembola$sample_richness_Site0.03,ylab="richness_Site0.03_Collembola", ylim=c(0,25), cex=1.4, cex.axis=2.3, lwd=2.5)
 kruskal.test(sample_richness_Site0.03 ~ Mountain1Site, data = richness_Site0.03_Collembola)
 posthoc.kruskal.nemenyi.test(x=richness_Site0.03_Collembola$sample_richness_Site0.03, g=richness_Site0.03_Collembola$Mountain1Site, method="Bonferroni")
@@ -164,19 +166,19 @@ dim(h_ocurrence_Site0.03)
 write.table(h_ocurrence_Site0.03, file="../genetic/Data_out/Collembola/Collembola3P/h_ocurrence_Site_Collembola0.03.txt") ##this is the only way I found to be able to work later
 read.table("../genetic/Data_out/Collembola/Collembola3P/h_ocurrence_Site_Collembola0.03.txt",header=TRUE)->h_ocurrence_Site0.03
 
-##percentege of singletons by sample
+##**percentege of singletons by sample**
 h_ocurrence_Site0.03
 which(h_ocurrence_Site0.03$h_ocurrence_Site0.03==1)->singletons_Site0.03
 length(singletons_Site0.03)
 length(singletons_Site0.03)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
 
-##percentege of h in more than 2 samples
+##**percentege of h in more than 2 samples**
 which(h_ocurrence_Site0.03$h_ocurrence_Site0.03>2)->more2_Site0.03
 more2_Site0.03
 length(more2_Site0.03)
 length(more2_Site0.03)/length(h_ocurrence_Site0.03$h_ocurrence_Site0.03)*100
 
-##number of singletons by SITE
+##**number of singletons by SITE**
 ##community_Collembola_Site0.03
 ##singletons
 community_Collembola_Site0.03[,singletons_Site0.03]->community_Collembola_singletons_Site0.03
@@ -199,13 +201,20 @@ specpool(community_Collembola_Site0.03)->specpool_Site0.03
 specpool_Site0.03$Species/specpool_Site0.03$chao*100
 text(x=38, y=5, labels="85.00%", cex=1.5)
 
+##Collembola by samples
+specaccum(community_Collembola_Site0.03, method = "rarefaction", permutations=1000)->cum_Site0.03
+plot(cum_Site0.03, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, ylim=c(0,100), xvar = "individuals")
+specpool(community_Collembola_Site0.03)->specpool_Site0.03
+specpool_Site0.03$Species/specpool_Site0.03$chao*100
+text(x=600, y=5, labels="85.00%", cex=1.5)
+
 #**BETADIVERSITY ORDINATIONS by Sites** 
 ##Collembola
 ##beta general
 
 beta.multi(community_Collembola_Site0.03, index.family="sorensen")
 
-##turnover by pairs, nmds, anosim
+##**turnover by pairs, nmds, anosim**
 beta.pair(community_Collembola_Site0.03, index.family="sorensen")->beta.pair  ##betadiversity by pair of communities using sorensen on the precense/absence data, with estimation of turnover and nestedness datamatrixes simultaneously
 metaMDS (beta.pair$beta.sim)->MDSbetasim0.03 ##NMDS
 plot (MDSbetasim0.03, main="Collembola_Site_0.03") 
@@ -219,7 +228,7 @@ with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, label=T, 
 plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.4, 0.4), cex.axis=1.4, cex=1.2, cex.lab=1.4, main="Collembola_Site_0.03")
 with(general_sample_Mountain1Site0.03,ordispider(MDSbetasim0.03, Site, label=T, cex.lab=0.9, col= c("#153a7b", "#eaa22f", "#97518b", "#81b9d0")))
 
-##Anosim
+##**Anosim**
 anosim(beta.pair$beta.sim, general_sample_Mountain1Site0.03$Site, permutations=999)
 
 plot (MDSbetasim0.03, xlim=c(-0.5, 0.5), ylim=c(-0.4, 0.4), cex=2, cex.lab=1, cex.axis=2.3, lwd=4.5)
@@ -230,4 +239,3 @@ text(x=0.25, y=-0.35, labels = mylabel, cex=2)
 text(x=0.56, y=-0.35, labels="=0.826 ***", cex=2)
 
 #**END**
-

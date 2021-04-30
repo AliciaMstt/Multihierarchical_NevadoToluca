@@ -18,7 +18,7 @@ library(lattice)
 
 #**TABLES AND COMMUNITY MATRIXES**
 #####open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Diptera/s2_raw_all_Diptera_threshold.txt", sep= ",", header=TRUE)
 dim(s2_raw_all)
 
 #####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -78,6 +78,9 @@ community_Diptera0.03[which(str_extract (row.names(community_Diptera0.03), "_NTO
 dim(community_Diptera_Site0.03)
 community_Diptera_Site0.03[,which(colSums(community_Diptera_Site0.03)!=0)]->community_Diptera_Site0.03 ##to remove no data colums
 dim(community_Diptera_Site0.03)
+write.table (community_Diptera_Site0.03, file="../genetic/Data_out/Diptera/Diptera3P/community_Diptera_Site0.03.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Diptera/Diptera3P/community_Diptera_Site0.03.txt")->community_Diptera_Site0.03
+
 
 ##**Generating a general table with names and habitat parameters.**
 ##BY SITE

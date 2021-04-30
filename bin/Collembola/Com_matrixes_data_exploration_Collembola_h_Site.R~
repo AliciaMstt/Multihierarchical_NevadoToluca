@@ -17,7 +17,7 @@ library(permute)
 library(lattice)
 
 #####open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep= ",", header=TRUE)
 dim(s2_raw_all)
 
 #**Table Haplotipos**
@@ -59,6 +59,9 @@ community_Collembola_h[which(str_extract (row.names(community_Collembola_h), "_N
 dim(community_Collembola_Site_h)
 community_Collembola_Site_h[,which(colSums(community_Collembola_Site_h)!=0)]->community_Collembola_Site_h ##to remove no data colums
 dim(community_Collembola_Site_h)
+write.table (community_Collembola_Site_h, file="../genetic/Data_out/Collembola/Collembola_Haplotypes/community_Collembola_Site_h.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Collembola/Collembola_Haplotypes/community_Collembola_Site_h.txt")->community_Collembola_Site_h
+
 
 ##**BY SITE**
 ##**Generating a general table with names and habitat parameters**
@@ -172,8 +175,8 @@ as.data.frame(richness_singletons_Site_h)->richness_singletons_Site_h
 #**ACCUMULATION CURVES AND EXTRAPOLATED RICHNESS by SITE**
 ##Collembola by SITE
 ##General
-specaccum(community_Collembola_Site_h,"random", permutations=1000)->cum_Site_h
-plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3)
+specaccum(community_Collembola_Site_h, method = "random", permutations=1000)->cum_Site_h
+plot(cum_Site_h, cex=1.4, cex.lab=1.4, cex.axis=2.3, lwd=3, xvar = "sites")
 specpool(community_Collembola_Site_h)->specpool_Site_h
 specpool_Site_h$Species/specpool_Site_h$chao*100
 text(x=38, y=5, labels="91.05%", cex=1.5)

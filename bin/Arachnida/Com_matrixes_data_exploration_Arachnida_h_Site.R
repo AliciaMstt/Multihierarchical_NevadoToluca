@@ -61,6 +61,9 @@ community_Arachnida_h[which(str_extract (row.names(community_Arachnida_h), "_NTO
 dim(community_Arachnida_Site_h)
 community_Arachnida_Site_h[,which(colSums(community_Arachnida_Site_h)!=0)]->community_Arachnida_Site_h ##to remove no data colums
 dim(community_Arachnida_Site_h)
+write.table (community_Arachnida_Site_h, file="../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_Site_h.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Arachnida/Arachnida_Haplotypes/community_Arachnida_Site_h.txt")->community_Arachnida_Site_h
+
 #
 ##**BY SITE**
 ##**Generating a general table with names and habitat parameters**

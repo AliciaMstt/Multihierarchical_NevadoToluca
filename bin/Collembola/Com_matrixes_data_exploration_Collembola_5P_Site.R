@@ -18,7 +18,7 @@ library(lattice)
 
 #**TABLES AND COMMUNITY MATRIXES** 
 #####open table with names including Region and habitat parameters
-s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", header=TRUE)
+s2_raw_all <- read.table("../genetic/Data_in/Collembola/s2_raw_all_Collembola_threshold.txt", sep= ",", header=TRUE)
 dim(s2_raw_all)
 
 #####remove additional columns and leave only names (of haplotipes), samples and taxa (and threshold in this case)
@@ -79,6 +79,8 @@ community_Collembola0.05[which(str_extract (row.names(community_Collembola0.05),
 dim(community_Collembola_Site0.05)
 community_Collembola_Site0.05[,which(colSums(community_Collembola_Site0.05)!=0)]->community_Collembola_Site0.05 ##to remove no data colums
 dim(community_Collembola_Site0.05)
+write.table (community_Collembola_Site0.05, file="../genetic/Data_out/Collembola/Collembola5P/community_Collembola_Site0.05.txt") ##this is necessary for the format, not able to solve in other way
+read.table ("../genetic/Data_out/Collembola/Collembola5P/community_Collembola_Site0.05.txt")->community_Collembola_Site0.05
 
 #**Generating a general table with names and habitat parameters**
 ##**BY SITE**

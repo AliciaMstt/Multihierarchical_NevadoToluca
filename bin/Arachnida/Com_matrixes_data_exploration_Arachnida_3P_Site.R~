@@ -61,7 +61,7 @@ length(which(rowSums(data0.03)!=0))
 length(which(rowSums(data0.03)==0))
 
 ##**Community matrixes (samples in rows and h in cols)**
-##Arachnida
+##**Arachnida**
 t(s2_raw_Arachnida_limite0.03)->t_s2_f4_Arachnida_limite0.03 ##trasp
 t_s2_f4_Arachnida_limite0.03[1:51,]->community_Arachnida_limite0.03 #NOTA_Nancy: Este numero es importante. Colocar exactamente el numero de "s2_f4[,2:52]->data0.03".
 colnames(t_s2_f4_Arachnida_limite0.03)<-community_Arachnida_limite0.03[1,] 
@@ -82,7 +82,6 @@ dim(community_Arachnida_Site0.03)
 
 #**Generating a general table with names and Site parameters**
 ##BY SITE
-##**Generating a general table with names and habitat parameters**
 row.names(community_Arachnida_Site0.03)->sample_names_Mountain1_0.03
 as.data.frame(sample_names_Mountain1_0.03)->sample_names_Mountain1_0.03
 sample_names_Mountain1_0.03 %>% separate(sample_names_Mountain1_0.03, c("Conservation","Mountain1","Site","ID"), sep="_",remove=FALSE)->general_sample_Mountain1Site0.03

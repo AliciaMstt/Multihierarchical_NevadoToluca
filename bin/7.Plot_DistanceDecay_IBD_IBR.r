@@ -17,14 +17,14 @@ library(ggplot2)
 library(patchwork)
 library(easypackages)
 
-##**We get the Beta diversity vs Geographic distances, flat, Altitude 3000 and Altitude B from haplotype levels to 7.5% CL for each of the two taxonomic orders studied**
+##**We get the Beta diversity vs Geographic distances, flat, Altitude 3000 and Altitude B from haplotype levels to lineages 7.5% for each of the two taxonomic orders studied**
 
 ###This script gets all scripts of diversity using 2 arthropods order at multi-hierarchical levels. We used 2 groups: Collembola and Diptera.
 
 #**plot Beta diversity vs conductace flat and Altitude**
 
 png(filename="../figures/Figure5_DistanceDecay_Flat_Altitude.png", width=787, height=467, units="px") # set size of the file to plot 
-par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2)) #the number of rows and columns the figure would have
+par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2.4)) #the number of rows and columns the figure would have
 
 #**Creating plot**
 ##Collembola Flat Site
@@ -133,7 +133,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(a)", cex=1.8)
+text(x=0.41, y=0.0, labels="(a)", cex=1.6)
 
 #**Creating plot**
 ##Collembola Altitude 3000 Site
@@ -243,8 +243,8 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff") 
-text(x=0.41, y=0.0, labels="(b)", cex=1.8)
-mtext(c("Collembola"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
+text(x=0.41, y=0.0, labels="(b)", cex=1.6)
+mtext(c("Collembola"), side = 4, adj = 0.5, col = "black", line = 2, cex=1.6)
 
 #**Creating plot**
 ##Diptera Flat Site
@@ -351,7 +351,7 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(c)", cex=1.8)
+text(x=0.41, y=0.0, labels="(c)", cex=1.6)
 mtext(c("Effective distance flat"), side = 1, col = "black", line = 2.5, cex=1.5)
 #
 #**Creating plot**
@@ -459,15 +459,15 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=1.31, y=0.0, labels="(d)", cex=1.8)
-mtext(c("Diptera"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
+text(x=1.31, y=0.0, labels="(d)", cex=1.6)
+mtext(c("Diptera"), side = 4, adj = 0.5, col = "black", line = 2, cex=1.6)
 mtext(c("Effective distance (Altitude rasters)"), side = 1, col = "black", line = 2.5, cex=1.5)
 par(xpd=TRUE)
 ###Legend
 legend(6.4, 1, xpd=NA,
-       legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"), 
+       legend=c("haplotypes", "0.5% lineages", "1.5% lineages", "GMYC", "3.0% lineages","5.0% lineages", "7.5% lineages"), 
        col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"), 
-       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.7, lwd=2.2) 
+       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.6, lwd=2.2) 
        
 ###Legend
 mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.6)
@@ -478,7 +478,7 @@ dev.off()
 #**Plot Beta diversity vs conductace flat in finer scale**
 
 png(filename="../figures/Figure6_DistanceDecay_FinerScaleFlat.png", width=787, height=467, units="px") # set size of the file to plot 
-par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2)) #the number of rows and columns the figure would have
+par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2.4)) #the number of rows and columns the figure would have
 
 #**Creating plot**
 ##Finer scale Collembola EAST Flat
@@ -587,7 +587,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(a)", cex=1.8)
+text(x=0.41, y=0.0, labels="(a)", cex=1.6)
 
 #**Creating plot**
 ##Finer scale Collembola WEST Flat
@@ -696,8 +696,8 @@ plot.decay(decay_0.029,add=T, pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.36, y=0.0, labels="(b)", cex=1.8)
-mtext(c("Collembola"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
+text(x=0.36, y=0.0, labels="(b)", cex=1.6)
+mtext(c("Collembola"), side = 4, adj = 0.5, col = "black", line = 2, cex=1.6)
 
 #**Creating plot**
 ##Finer scale Diptera EAST Flat
@@ -804,7 +804,7 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.41, y=0.0, labels="(c)", cex=1.8)
+text(x=0.41, y=0.0, labels="(c)", cex=1.6)
 mtext(c("Effective distance East flat"), side = 1, col = "black", line = 2.5, cex=1.5)
 
 #**Creating plot**
@@ -913,15 +913,15 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=0.36, y=0.0, labels="(d)", cex=1.8)
-mtext(c("Diptera"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
+text(x=0.36, y=0.0, labels="(d)", cex=1.6)
+mtext(c("Diptera"), side = 4, adj = 0.5, col = "black", line = 2, cex=1.6)
 mtext(c("Effective distance West flat"), side = 1, col = "black", line = 2.5, cex=1.5)
 par(xpd=TRUE)
 ###Legend
 legend(1.24, 1, xpd=NA,
-       legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"), 
+       legend=c("haplotypes", "0.5% lineages", "1.5% lineages", "GMYC", "3.0% lineages","5.0% lineages", "7.5% lineages"), 
        col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"), 
-       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.7, lwd=2.2) 
+       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.6, lwd=2.2) 
        
 ###Legend
 mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.6)
@@ -932,7 +932,7 @@ dev.off()
 #**Plot Beta diversity vs conductace Altitudes in finer scale**
 
 png(filename="../figures/FigureS6_DistanceDecay_FinerScaleAltitudes.png", width=787, height=467, units="px") # set size of the file to plot 
-par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2)) #the number of rows and columns the figure would have
+par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2.4)) #the number of rows and columns the figure would have
 
 #**Creating plot**
 ##Finer scale Collembola EAST Altitude
@@ -1041,7 +1041,7 @@ plot.decay(decay_0.029,add=T,pch=20,lwd=4,col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lty=3,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff") 
-text(x=0.41, y=0.0, labels="(a)", cex=1.8)
+text(x=0.41, y=0.0, labels="(a)", cex=1.6)
 
 #**Creating plot**
 #**Finer scale Collembola WEST Altitude**
@@ -1151,8 +1151,8 @@ plot.decay(decay_0.029,add=T, pch=20,lwd=4, col="#92000A")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,lty=3,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff") 
-text(x=0.41, y=0.0, labels="(b)", cex=1.8)
-mtext(c("Collembola"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
+text(x=0.41, y=0.0, labels="(b)", cex=1.6)
+mtext(c("Collembola"), side = 4, adj = 0.5, col = "black", line = 2, cex=1.6)
 
 #**Creating plot**
 ##Finer scale Diptera EAST Altitude B
@@ -1260,7 +1260,7 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=1.21, y=0.0, labels="(c)", cex=1.8)
+text(x=1.21, y=0.0, labels="(c)", cex=1.6)
 mtext(c("Effective distance (East altitude rasters)"), side = 1, col = "black", line = 2.5, cex=1.2)
 
 #**Creating plot**
@@ -1369,15 +1369,15 @@ plot.decay(decay_0.015,add=T,pch=20,lwd=4,col="#9d9cc6")
 plot.decay(decay_0.03,add=T,pch=20,lwd=4,col="#9cb15b")
 plot.decay(decay_0.05,add=T,pch=20,lwd=4,col="#fbd048")
 plot.decay(decay_0.075,add=T,pch=20,lwd=4,col="#93dfff")
-text(x=1.21, y=0.0, labels="(d)", cex=1.8)
-mtext(c("Diptera"), side = 4, adj = 0, col = "black", line = 2, cex=1.8)
+text(x=1.21, y=0.0, labels="(d)", cex=1.6)
+mtext(c("Diptera"), side = 4, adj = 0.5, col = "black", line = 2, cex=1.6)
 mtext(c("Effective distance (West altitude rasters)"), side = 1, col = "black", line = 2.5, cex=1.2)
 par(xpd=TRUE)
 ###Legend
 legend(4.75, 1, xpd=NA,
-       legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"), 
+       legend=c("haplotypes", "0.5% lineages", "1.5% lineages", "GMYC", "3.0% lineages","5.0% lineages", "7.5% lineages"), 
        col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"), 
-       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.7, lwd=2.2) 
+       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.6, lwd=2.2) 
 
 ###Legend
 mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.7, cex=1.6)
@@ -1389,7 +1389,7 @@ dev.off()
 #**Plot Beta diversity vs IBD large scale**
 
 png(filename="../figures/FigureS7_DistanceDecay.png", width=787, height=467, units="px") # set size of the file to plot 
-par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2)) #the number of rows and columns the figure would have
+par(mfrow=c(2,2), mar = c(1.5, 1.5, 1.5, 1.5), omi=c(0.5, 0.5, 0.5, 2.4)) #the number of rows and columns the figure would have
 
 #**Creating plot**
 ##IBD_Arachnida
@@ -1852,9 +1852,9 @@ mtext(c("Hymenoptera"), side = 3, adj = 1, col = "black", line = 0, cex=1.2)
 par(xpd=TRUE)
 ###Legend
 legend(1.6, 1, xpd=NA,
-       legend=c("Haplotype", "CL 0.5", "CL 1.5", "GMYC", "CL 3","CL 5", "CL 7.5"), 
+       legend=c("haplotypes", "0.5% lineages", "1.5% lineages", "GMYC", "3.0% lineages","5.0% lineages", "7.5% lineages"), 
        col=c("#003695", "#c997a9", "#9d9cc6", "#92000A", "#9cb15b", "#fbd048", "#93dfff"), 
-       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.7, lwd=2.2) 
+       pch=19,  bty="n", text.font=1.7, lty=1, cex=1.6, lwd=2.2) 
 
 ###Legend
 mtext("Similarity (Simpson's Index)", side=2, outer=TRUE, line=0.8, cex=1.6)

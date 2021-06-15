@@ -1,0 +1,89 @@
+##**Bioinformatic Steps after Filtering Reads **##
+
+##STEPS BEFORE BLAST TO MEGAN##
+
+###Juntar todos los zotus individuales con un `cat`. Nota: Este paso se hace por separado del proceso general. Elejí las 42 sopas de conservación, para procesar solo esas.
+
+`cd ./RELABEL`
+
+`cat *R1_R2.Ptrim.trimmo.Maxee1.LABEL.sorted420.uniques.zotus.relabel.fas > catConservacion42SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420.uniques.zotus.relabel.fas`
+
+###Juntar todos los reads de 418
+
+`cd ./LENGTH418`
+
+`cat *sorted418.fas > LENGTH420CatConservacion42Sopas.Ptrim.trimmo.Maxee1.LABEL.sorted420.fas`
+
+#
+
+###Nota: Tengo dos archivos: 
+
+* CatConservacion42SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420.uniques.zotus.relabel.fas
+* LENGTH420CatConservacion42SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420.fas   
+
+
+###Dejar solo los únicos
+`usearch100 -fastx_uniques all.ZOTUSbySAMPLE.ZONA.fas -fastaout all.ZOTUS_UNIQUES.ZONA.fas -sizeout &> all.ZOTUS_UNIQUES.ZONA.log`
+
+
+##BLAST TO MEGAN
+
+**`blastn`** Taxonomic identification of each read was done using BLAST against the nucleotide NCBI nt database (June 06 2018; blastn -outfmt 5 -evalue 0.001). 
+
+`blastn -db /db/Paula/nt_Sanger -query all.ZOTUS_UNIQUES.ZONA.fas -outfmt 5 -out nt_SangerVsall.ZOTUS_UNIQUES.ZONA.fas.xml -num_threads=4 -evalue 0.001 -max_target_seqs 100 &
+`
+#
+
+###Despues de BLAST tengo dos archivos. Recomiendo quitar los <;> de las etiquetas.
+* all.ZOTUS_UNIQUES_conservacionSINPuntoyComaFinal.fasta
+* nt_SangerVsall.ZOTUS_UNIQUES_conservacion.fas.xml
+
+
+###Extraer reads de grupos especificos en MEGAN
+
+**`MEGAN-6`** High-level taxonomic categories (order level) were then assigned to ASVs for each order using the lowest common ancestor (LCA) algorithm `(https://software-ab.informatik.uni-tuebingen.de/download/megan6/welcome.html)`. Nota: Importo desde MEGAN los archivos *.fasta y *.fas.xml
+
+##Se obtienen 8 ordenes de artropodos: Diptera, Collembola, Arachnida, Coleoptera, Hemiptera, Hymenoptera, Lepidoptera and Myriapoda.
+
+
+**`figtree-1.4.3`** The tree was exported, visualised and edited using figtree `(http://tree.bio.ed.ac.uk/software/figtree/)`.
+
+
+**`Geneious-8.0.2`** Each ASV dataset was aligned in Geneious with MAFFT, using the FFT-NS-1 algorithm, a scoring matrix of 200/PAM/K=2, GAP open penalty of 3, and the translation align option `(https://www.geneious.com/)`.
+
+
+#Preparar base de datos en GENEOUS
+Hago el alineamiento con MAFFT bajo los siguientes criterios
+-Algoritm: FFT-NS-1
+-Scoring matrix: 200PAM/K=2
+-GAP open Penalty: 3 (el maximo que tiene esta version)
+Buscar indels e inserciones (al ver segmentos en blanco), quitar TODA la secuencia
+
+Buscar CODONES STOPS bajo los siguientes criterios
+-Nucleotides
+-Translation
+-FRAME: frame 3 (Hay frame 1, 2, pero se pone hasta no obervar codones stop)
+-Genetic code: Invertebrados Mitochindrial (trans-table5)
+
+
+##################################
+
+#Lineas para quitar <;> de las etiquetas en datos de 2.6GB
+
+####all.ZOTUS_UNIQUES.ZONA.fas##########
+
+Primero
+sed -e 's/>\(.*\);\(.*\)/>\1_\2;/' LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420.fas > LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.MOD.fas
+
+Segundo
+####sobre el archivo que se genera
+
+sed -e 's/_;//' LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.MOD.fas > LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComaBUE.MOD2.fas
+
+
+**`usearch-10`** A community table was then generated with read-counts (haplotype abundance) of each retained ASV for the eight orders by matching ASVs against the complete collection of reads (i.e., reads before the dereplicating and denoising steps) using the -search_exact command `(https://www.drive5.com/usearch/manual10/)`.
+
+##Final step after preparing file in geneious
+`usearch100 -search_exact all.420.fas  -db All_s2_sinSTOPS_revised.fasta -strand plus -otutabout allele_table_All_s2_sinSTOPS_revised.txt`
+ 
+

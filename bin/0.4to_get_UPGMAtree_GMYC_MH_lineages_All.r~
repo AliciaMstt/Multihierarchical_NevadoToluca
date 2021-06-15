@@ -25,13 +25,13 @@ library(maps)
 library(fields)
 
 ##Source to scripts Diptera and data
-source("Arachnida/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_ArachnidaStep1.R") 
-source("Diptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_DipteraStep1.R")
-source("Collembola/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_CollembolaStep1.R") 
+source("Arachnida/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_ArachnidaStep1.R")
 source("Coleoptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_ColeopteraStep1.R")
-source("Hymenoptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_HymenopteraStep1.R")
+source("Collembola/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_CollembolaStep1.R")
+source("Diptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_DipteraStep1.R")
 source("Hemiptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_HemipteraStep1.R")
-source("Lepidoptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_LepidopteraStep1.R")
+source("Hymenoptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_HymenopteraStep1.R")
+source("Lepidoptera/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_LepidopteraStep1.R")                    
 source("Myriapoda/SpeciesDelimitation/1UPGMAtree_AND_GMYC_each_lineage_MyriapodaStep1.R")
 
 

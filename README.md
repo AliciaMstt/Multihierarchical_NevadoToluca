@@ -1,4 +1,4 @@
-**Local-scale dispersal constraints promote spatial structure and arthropod diversity within a tropical sky-island**
+**Dispersal limitations and long-term persistence drive differentiation from haplotypes to communities within a tropical sky-island: evidence from community metabarcoding**
 #
 The repository contains the pipeline to perform bioinformatics tools from metabarcoding data of the project *Local-scale dispersal constraints promote spatial structure and arthropod diversity within a tropical sky-island*. We focus on a single tropical sky-island, Nevado de Toluca of the Transmexican Volcanic Belt, where we sampled whole-communities of arthropods for eight orders with a comparable design at a spatial scale ranging from 50 m to 20 km, using 840 pitfall traps and whole community metabarcoding. These samples were then used to build metabarcoding libraries of arthropods using COI marker. 
 #
@@ -39,15 +39,15 @@ Scripts content:
 * `0.2Steps_afterProcessing.txt`well, not actually a script. Contains the steps for each library: Get unix, blast to MEGAN and visualised tree in figtree.
 * `0.3Searching_Stop_Codons.txt` not actually a script. Here, each ASV dataset was aligned in Geneious for searching codon stops. 
 * `0.4to_get_ASV_tables.sh` script for geting a community table then generated with read-counts (haplotype abundance) of each retained ASV for the eight orders by matching ASVs against the complete collection of reads.
-* `0.4to_get_UPGMAtree_GMYC_MH_lineages_All.r` This script gets all scripts for the first step (source) that obtained lineages at different clustering levels for each of the orders. STEP 1 and 2: We get analysis of the UPGMAtree and GMYC each lineages. Step 3: We get analysis to apply NODE.MIN get trees multiple each lineages (e.g. We went at "Arachnida/SpeciesDelimitation/2to apply NODE.MIN_Get_trees_multiple_each_lineage_ArachnidaStep2" and we ejecuted each script with differente order). 
+* `0.5to_get_UPGMAtree_GMYC_MH_lineages_All.r` This script gets all scripts for the first step (source) that obtained lineages at different clustering levels for each of the orders. STEP 1 and 2: We get analysis of the UPGMAtree and GMYC each lineages. Step 3: We get analysis to apply NODE.MIN get trees multiple each lineages (e.g. We went at "Arachnida/SpeciesDelimitation/2to apply NODE.MIN_Get_trees_multiple_each_lineage_ArachnidaStep2" and we ejecuted each script with differente order). 
 * `1.PrepareRastersNT.r` Script to reclassify altitude, slope, and vegetation types output rasters to desired values and to to create a flat lanscape.
 * `2.PlotRaster.R` Plots each resistance among with sampling points.
-* `2.Circuitscape_estimatingResDist.txt` well, not actually a script. Contains the settings used to run Circuitscape for each of the rasters.
 * `3.to_get_conservative_threhold_on_original_all.r` This script gets conservative thershold on origibale table OTUs/ZOTUs by artropods order. It is important to place the correct number of columns and rows, because this can change in each group. In this step, we can join all the groups or put them separately as in this case.
 * `4.to_get_Diversity_All.r`This script gets all scripts (source) of diversity using 8 arthropods order at multi-hierarchical levels.
 * `5.Plot_Diversity_All.r`This script plot "Community diversity and composition", "plot global Richness by sites", "Beta diversity", "Non-Metric Multidimensional scaling (NMDS) ordinations of community similarity", and "Accumulation Curves".
 * `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`This script gets all scripts (source) to estimate "Distance decay at the multihierchical leveles" and Isolation by resistence.
 * `7.Plot_DistanceDecay_IBD_IBR`This script plot "Distance decay" and Isolation by resistance at the figure 5, figure 6 and Figure S6.
+* `8.Circuitscape_estimatingResDist.txt` well, not actually a script. Contains the settings used to run Circuitscape for each of the rasters. EN proceso
 #
 
 These scripts use the data in `genetic`, `spatial` and `meta`.

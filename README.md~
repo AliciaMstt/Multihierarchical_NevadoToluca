@@ -34,9 +34,12 @@ The scripts in `/bin` should be run in the order they are numbered. R functions 
 
 Scripts content:
 
-* `0.install_allprograms.txt` well, not actually a script, but this fille contains many sugestions for installs packages for the first step that include the processing included quality checking, primer removal, pair merging, quality filtering, denoising, and clustering each library independently, into Arribas et al., 2020. The packages are *fastqc*, *fastx-toolkit*, *trimmomatic-0.36*, *pairfq-0.17*, *usearch-9.2*, and *usearch-10*. (EN PROCESO)
-* `0.Soup_processing_steps.sh` performs a filtering haplotypes analysis of each sample. (EN PROCESO)
-* `0.Steps_afterProcessing.txt`well, not actually a script. Contains the settings used to run afters steps for each library.  Here, realizar pasos dentro de las carpetas de resultados de la script anterior.  (EN PROCESO)
+* `0.0install_software.txt` well, not actually a script, but this fille contains packages for the `0.1Processing_Soup_metaMATE.sh` script into Arribas et al., 2020. The packages are *fastqc*, *fastx-toolkit*, *trimmomatic-0.36*, *pairfq-0.17*, *usearch-9.2*, and *usearch-10*.
+* `0.1Processing_Soup_metaMATE.sh` Paired-end reads of samples were quality filtered following procedures described by Arribas et al. (2020). Briefly, processing included quality checking, primer removal, pair merging, quality filtering, denoising, and clustering each library independently. 
+* `0.2Steps_afterProcessing.txt`well, not actually a script. Contains the steps for each library: Get unix, blast to MEGAN and visualised tree in figtree.
+* `0.3Searching_Stop_Codons.txt` not actually a script. Here, each ASV dataset was aligned in Geneious for searching codon stops. 
+* `0.4to_get_ASV_tables.sh` script for geting a community table then generated with read-counts (haplotype abundance) of each retained ASV for the eight orders by matching ASVs against the complete collection of reads.
+* `0.4to_get_UPGMAtree_GMYC_MH_lineages_All.r` This script gets all scripts for the first step (source) that obtained lineages at different clustering levels for each of the orders. STEP 1 and 2: We get analysis of the UPGMAtree and GMYC each lineages. Step 3: We get analysis to apply NODE.MIN get trees multiple each lineages (e.g. We went at "Arachnida/SpeciesDelimitation/2to apply NODE.MIN_Get_trees_multiple_each_lineage_ArachnidaStep2" and we ejecuted each script with differente order). 
 * `1.PrepareRastersNT.r` Script to reclassify altitude, slope, and vegetation types output rasters to desired values and to to create a flat lanscape.
 * `2.PlotRaster.R` Plots each resistance among with sampling points.
 * `2.Circuitscape_estimatingResDist.txt` well, not actually a script. Contains the settings used to run Circuitscape for each of the rasters.

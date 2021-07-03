@@ -34,4 +34,6 @@ vsearch --search_exact LENGTH420CatTratamientos137Sopas.Ptrim.trimmo.Maxee1.LABE
 
 #8Myriapoda57Reads_realigned.fasta
 
-vsearch --search_exact LENGTH420CatTratamientos137Sopas.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 8Myriapoda57Reads_realigned.fasta --otutabout allele_table_8Myriapoda57Reads_realigned.txt
+vsearch --search_exact LENGTH420CatTratamientos137Sopas.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 8Myriapoda57Reads_realigned.fasta --otutabout allele_table_8Myriapoda57Reads_realigned.txt 
+
+#

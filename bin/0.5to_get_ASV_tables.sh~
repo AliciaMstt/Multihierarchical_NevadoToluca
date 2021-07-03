@@ -1,0 +1,48 @@
+#SBATCH --mem=64000
+#SBATCH -n 10
+
+#1Diptera2059Reads_realigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 1Arthropoda5037ReadsRealigned.fasta --otutabout allele_table_1Arthropoda5037ReadsRealigned.txt
+
+
+#2aAcaros83ReadsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 2aAcaros83ReadsRealigned.fasta --otutabout allele_table_2aAcaros83ReadsRealigned.txt 
+
+#2bArachnida156ReadsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 2bArachnida156ReadsRealigned.fasta --otutabout allele_table_2bArachnida156ReadsRealigned.txt
+
+#2cOpilionides83ReadsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 2cOpilionides83ReadsRealigned.fasta --otutabout allele_table_2cOpilionides83ReadsRealigned.txt
+
+
+#3Myriapoda60readsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 3Myriapoda60readsRealigned.fasta --otutabout allele_table_3Myriapoda60readsRealigned.txt 
+
+
+#4aCollembola1061readsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 4aCollembola1061readsRealigned.fasta --otutabout allele_table_4aCollembola1061readsRealigned.txt 
+
+#5Lepidoptera60Realigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 5Lepidoptera60Realigned.fasta --otutabout allele_table_5Lepidoptera60Realigned.txt 
+
+
+#6Coleoptera209readsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 6Coleoptera209readsRealigned.fasta --otutabout allele_table_6Coleoptera209readsRealigned.txt 
+
+#7Diptera2031readsRealigned.fasta
+
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 7Diptera2031readsRealigned.fasta --otutabout allele_table_7Diptera2031readsRealigned.txt 
+
+#8Hymenoptera227Realigned.fasta
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 8Hymenoptera227Realigned.fasta --otutabout allele_table_8Hymenoptera227Realigned.txt 
+
+#10ParaneopteraHemiptera246Realigned.fasta
+vsearch --search_exact LENGTH420CatConservacion51SOPAS.Ptrim.trimmo.Maxee1.LABEL.sorted420NOPuntoComa.fas --db 10ParaneopteraHemiptera246Realigned.fasta --otutabout allele_table_10ParaneopteraHemiptera246Realigned.txt 

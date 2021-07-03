@@ -21,15 +21,4 @@ I searched CODON STOPS following the parameters:
 
 #
 Finally, I exported each arthropod group to fasta format to use in the next script: **`0.5to_get_ASV_tables.sh**` 
-#Examples#
-1Diptera2059Reads_realigned.fasta                
-2Collembola1220Reads_realigned.fasta             
-3Arachnida428Reads_realigned.fasta               
-4Hymenoptera304Reads_realigned.fasta             
-5Coleoptera227Reads_realigned.fasta              
-6Paraneoptera210Reads_realigned.fasta            
-7Lepidoptera59Reads_realigned.fasta              
-8Myriapoda57Reads_realigned.fasta                
-
 #
-

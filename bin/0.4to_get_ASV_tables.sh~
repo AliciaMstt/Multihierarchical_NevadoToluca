@@ -1,8 +1,0 @@
-##**ASVs Tables**##
-
-**`usearch-10`** A community table was then generated with read-counts (haplotype abundance) of each retained ASV for the eight orders by matching ASVs against the complete collection of reads (i.e., reads before the dereplicating and denoising steps) using the -search_exact command `(https://www.drive5.com/usearch/manual10/)`.
-
-##Final step after preparing file in geneious
-`usearch100 -search_exact all.420.fas  -db All_s2_sinSTOPS_revised.fasta -strand plus -otutabout allele_table_All_s2_sinSTOPS_revised.txt`
- 
-

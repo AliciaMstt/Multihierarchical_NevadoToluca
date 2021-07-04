@@ -34,8 +34,8 @@ The scripts in `/bin` should be run in the order they are numbered. R functions 
 
 Scripts content:
 
-* `0.0install_software.txt` well, not actually a script, but this fille contains packages for the `0.1Processing_Soup.sh` and `0.2Processing_Soup_metaMATE.sh` scripts into Arribas et al., 2020. The packages are *fastqc*, *fastx-toolkit*, *trimmomatic-0.36*, *pairfq-0.17*, *usearch-9.2*, and *usearch-10*.
-* `0.1Processing_Soup.sh` Paired-end reads of samples were quality filtered following procedures described by Arribas et al. (2020). Briefly, processing included quality checking, primer removal, pair merging, quality filtering, denoising, and clustering each library independently. Size COI = 418 bp. 
+* `0.0install_software.txt` well, not actually a script, but this fille contains packages for the `0.1Processing_BioSoup.sh` and `0.2Processing_Soup_metaMATE.sh` scripts into Arribas et al., 2020. The packages are *fastqc*, *fastx-toolkit*, *trimmomatic-0.36*, *pairfq-0.17*, *usearch-9.2*, and *usearch-10*.
+* `0.1Processing_BioSoup.sh` Paired-end reads of samples were quality filtered following procedures described by Arribas et al. (2020). Briefly, processing included quality checking, primer removal, pair merging, quality filtering, denoising, and clustering each library independently. Size COI = 418 bp. 
 * `0.2Processing_Soup_metaMATE.sh` Paired-end reads of samples were quality filtered following procedures described by Arribas et al. (2020).  Briefly, processing included quality checking, primer removal, pair merging, quality filtering, denoising, and clustering each library independently. Size COI = 416-420 bp. 
 * `0.3Steps_afterProcessing.txt`well, not actually a script. Contains the steps for each library: Get unix, blast to MEGAN and visualised tree in figtree.
 * `0.4Searching_Stop_Codons.txt` not actually a script. Here, each ASV dataset was aligned in Geneious for searching codon stops. 
@@ -57,7 +57,7 @@ These scripts use the data in `genetic`, `spatial` and `meta`.
 
 Contains genetic *data in* and *data out* for each order
 
-Genetic *data in* corresponds to `0.1Processing_Soup.sh` output using the subset of each order. 
+Genetic *data in* corresponds to `0.1Processing_BioSoup.sh` output using the subset of each order. 
 
 Genetic *data out* corresponds to `4.to_get_Diversity_All.r`using the subset of 8 orders and `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r` output using the subset of Diptera and Collembola order. 
 #

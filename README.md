@@ -43,12 +43,12 @@ Scripts content:
 * `0.6to_get_UPGMAtree_GMYC_MH_lineages_All.r` This script gets all scripts for the first step (source) that obtained lineages at different clustering levels for each of the orders. STEP 1 and 2: We get analysis of the UPGMAtree and GMYC each lineages. Step 3: We get analysis to apply NODE.MIN get trees multiple each lineages (e.g. We went at "Arachnida/SpeciesDelimitation/2to apply NODE.MIN_Get_trees_multiple_each_lineage_ArachnidaStep2" and we ejecuted each script with differente order). 
 * `1.PrepareRastersNT.r` Script to reclassify altitude, slope, and vegetation types output rasters to desired values and to to create a flat lanscape.
 * `2.PlotRaster.R` Plots each resistance among with sampling points.
-* `3.to_get_conservative_threhold_on_original_all.r` This script gets conservative thershold on origibale table OTUs/ZOTUs by artropods order. It is important to place the correct number of columns and rows, because this can change in each group. In this step, we can join all the groups or put them separately as in this case.
+* `3.to_get_conservative_threhold_on_original_all.r` This script gets conservative thershold on origibale table ASVs by artropods order. It is important to place the correct number of columns and rows, because this can change in each group. In this step, we can join all the groups or put them separately as in this case.
 * `4.to_get_Diversity_All.r`This script gets all scripts (source) of diversity using 8 arthropods order at multi-hierarchical levels.
 * `5.Plot_Diversity_All.r`This script plot "Community diversity and composition", "plot global Richness by sites", "Beta diversity", "Non-Metric Multidimensional scaling (NMDS) ordinations of community similarity", and "Accumulation Curves".
 * `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`This script gets all scripts (source) to estimate "Distance decay at the multihierchical leveles" and Isolation by resistence.
 * `7.Plot_DistanceDecay_IBD_IBR`This script plot "Distance decay" and Isolation by resistance at the figure 5, figure 6 and Figure S6.
-* `8.Circuitscape_estimatingResDist.txt` well, not actually a script. Contains the settings used to run Circuitscape for each of the rasters. EN proceso
+* `8.Circuitscape_Tutorial.md` well, not actually a script. Contains the settings used to run Circuitscape for each of the rasters.
 #
 
 These scripts use the data in `genetic`, `spatial` and `meta`.
@@ -57,7 +57,7 @@ These scripts use the data in `genetic`, `spatial` and `meta`.
 
 Contains genetic *data in* and *data out* for each order
 
-Genetic *data in* corresponds to `0.Soup_processing_steps.sh` output using the subset of each order. 
+Genetic *data in* corresponds to `0.1Processing_Soup.sh` output using the subset of each order. 
 
 Genetic *data out* corresponds to `4.to_get_Diversity_All.r`using the subset of 8 orders and `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r` output using the subset of Diptera and Collembola order. 
 #
@@ -84,7 +84,7 @@ Contais spatial data as follows:
 
 * `IBResitanceElevationMatrix` elevation output (`*.txt`) from Circuit scape used in to run `6.to_get_BetaDiversity_DistanceDecay_IBD_IBR.r`.
 
-* `Circuitscape` contains the focal points (`*_focalpoints.txt`) used to run Circuit scape and the output (`/out`). (EN CONTRUCCION).
+* `Circuitscape` contains the focal points (`*_FocalPoint.txt`) used to run Circuit scape and the output (`/out`).
 
 ### `/meta`
 `ConservationForestNevadoToluca.csv` contains metadata for each of the samples sequenced in a lane Miseq. Each column names refer to:

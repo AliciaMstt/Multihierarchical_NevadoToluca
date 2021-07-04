@@ -1,6 +1,6 @@
 ### Ignore data folders
 
-/spatial
+/genetic/Data_in/AlignedSeq
 
 ## ignore files
 .DS_Store

@@ -1,7 +1,7 @@
 ### Ignore data folders
 
 /genetic/Data_in/AlignedSeq
-
+/genetic/raw
 ## ignore files
 .DS_Store
 .Rhistory
